@@ -44,6 +44,9 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:$rootProject.rx_java_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    // Retrofit to RxJava CallAdapter Factory
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.retrofit_version"
+
     // For testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
