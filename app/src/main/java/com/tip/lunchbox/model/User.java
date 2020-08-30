@@ -27,6 +27,38 @@ public class User {
     @SerializedName("profile_image")
         private String profileImage;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setZomatoHandle(String zomatoHandle) {
+        this.zomatoHandle = zomatoHandle;
+    }
+
+    public void setFoodieLevel(String foodieLevel) {
+        this.foodieLevel = foodieLevel;
+    }
+
+    public void setFoodieLevelNum(String foodieLevelNum) {
+        this.foodieLevelNum = foodieLevelNum;
+    }
+
+    public void setFoodieColor(String foodieColor) {
+        this.foodieColor = foodieColor;
+    }
+
+    public void setProfileUrl(String profileUrl) {
+        this.profileUrl = profileUrl;
+    }
+
+    public void setProfileDeeplink(String profileDeeplink) {
+        this.profileDeeplink = profileDeeplink;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
     public String getName() {
         return name;
     }

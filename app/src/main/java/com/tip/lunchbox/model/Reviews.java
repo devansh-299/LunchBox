@@ -33,6 +33,46 @@ public class Reviews {
     @SerializedName("comments_count")
         private String commentsCount;
 
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setRatingColor(String ratingColor) {
+        this.ratingColor = ratingColor;
+    }
+
+    public void setReviewTimeFriendly(String reviewTimeFriendly) {
+        this.reviewTimeFriendly = reviewTimeFriendly;
+    }
+
+    public void setRatingText(String ratingText) {
+        this.ratingText = ratingText;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setLikes(String likes) {
+        this.likes = likes;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCommentsCount(String commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
     public String getRating() {
         return rating;
     }

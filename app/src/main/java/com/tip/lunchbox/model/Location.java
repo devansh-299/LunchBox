@@ -25,6 +25,34 @@ public class Location {
     @SerializedName("country_id")
         private String countryId;
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
+    }
+
     public String getAddress() {
         return address;
     }

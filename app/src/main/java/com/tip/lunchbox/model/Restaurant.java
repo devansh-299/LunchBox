@@ -73,6 +73,98 @@ public class Restaurant {
     @SerializedName("all_reviews")
         private List<Reviews> allReviews = null;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setAverageCostForTwo(String averageCostForTwo) {
+        this.averageCostForTwo = averageCostForTwo;
+    }
+
+    public void setPriceRange(String priceRange) {
+        this.priceRange = priceRange;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public void setFeaturedImage(String featuredImage) {
+        this.featuredImage = featuredImage;
+    }
+
+    public void setPhotosUrl(String photosUrl) {
+        this.photosUrl = photosUrl;
+    }
+
+    public void setMenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl;
+    }
+
+    public void setEventsUrl(String eventsUrl) {
+        this.eventsUrl = eventsUrl;
+    }
+
+    public void setUserRating(UserRating userRating) {
+        this.userRating = userRating;
+    }
+
+    public void setHasOnlineDelivery(String hasOnlineDelivery) {
+        this.hasOnlineDelivery = hasOnlineDelivery;
+    }
+
+    public void setIsDeliveringNow(String isDeliveringNow) {
+        this.isDeliveringNow = isDeliveringNow;
+    }
+
+    public void setHasTableBooking(String hasTableBooking) {
+        this.hasTableBooking = hasTableBooking;
+    }
+
+    public void setDeeplink(String deeplink) {
+        this.deeplink = deeplink;
+    }
+
+    public void setCuisines(String cuisines) {
+        this.cuisines = cuisines;
+    }
+
+    public void setAllReviewsCount(String allReviewsCount) {
+        this.allReviewsCount = allReviewsCount;
+    }
+
+    public void setPhotoCount(String photoCount) {
+        this.photoCount = photoCount;
+    }
+
+    public void setPhoneNumbers(String phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
+
+    public void setPhotos(List<RestaurantPhotos> photos) {
+        this.photos = photos;
+    }
+
+    public void setAllReviews(List<Reviews> allReviews) {
+        this.allReviews = allReviews;
+    }
+
     public String getId() {
         return id;
     }

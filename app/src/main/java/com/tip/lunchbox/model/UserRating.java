@@ -15,6 +15,22 @@ public class UserRating {
     @SerializedName("votes")
         private String votes;
 
+    public void setAggregateRating(String aggregateRating) {
+        this.aggregateRating = aggregateRating;
+    }
+
+    public void setRatingText(String ratingText) {
+        this.ratingText = ratingText;
+    }
+
+    public void setRatingColor(String ratingColor) {
+        this.ratingColor = ratingColor;
+    }
+
+    public void setVotes(String votes) {
+        this.votes = votes;
+    }
+
     public String getAggregateRating() {
         return aggregateRating;
     }
