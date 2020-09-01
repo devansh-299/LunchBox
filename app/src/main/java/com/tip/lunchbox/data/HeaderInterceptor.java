@@ -12,7 +12,7 @@ public class HeaderInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request.Builder request = chain.request().newBuilder();
         //TODO add APIKEY
-        request.addHeader("user-key","intertAPIKEY");
+        request.addHeader("user-key","insertAPIKEY");
         return chain.proceed(request.build());
 
     }

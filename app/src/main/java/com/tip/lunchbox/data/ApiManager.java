@@ -11,7 +11,7 @@ public class ApiManager {
 
     private static Retrofit retrofit;
 
-    public static Retrofit getRetrofitClient() {
+    private static Retrofit getRetrofitClient() {
         if (retrofit == null)
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASEURL)
