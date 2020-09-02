@@ -1,31 +1,41 @@
 package com.tip.lunchbox.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
+
     @SerializedName("name")
-        private String name;
+    @Expose
+    private String name;
 
     @SerializedName("zomato_handle")
-        private String zomatoHandle;
+    @Expose
+    private String zomatoHandle;
 
     @SerializedName("foodie_level")
-        private String foodieLevel;
+    @Expose
+    private String foodieLevel;
 
     @SerializedName("foodie_level_num")
-        private String foodieLevelNum;
+    @Expose
+    private String foodieLevelNum;
 
     @SerializedName("foodie_color")
-        private String foodieColor;
+    @Expose
+    private String foodieColor;
 
     @SerializedName("profile_url")
-        private String profileUrl;
+    @Expose
+    private String profileUrl;
 
     @SerializedName("profile_deeplink")
-        private String profileDeeplink;
+    @Expose
+    private String profileDeeplink;
 
     @SerializedName("profile_image")
-        private String profileImage;
+    @Expose
+    private String profileImage;
 
     public void setName(String name) {
         this.name = name;

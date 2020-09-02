@@ -1,19 +1,25 @@
 package com.tip.lunchbox.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class UserRating {
+
     @SerializedName("aggregate_rating")
-        private String aggregateRating;
+    @Expose
+    private String aggregateRating;
 
     @SerializedName("rating_text")
-        private String ratingText;
+    @Expose
+    private String ratingText;
 
     @SerializedName("rating_color")
-        private String ratingColor;
+    @Expose
+    private String ratingColor;
 
     @SerializedName("votes")
-        private String votes;
+    @Expose
+    private String votes;
 
     public void setAggregateRating(String aggregateRating) {
         this.aggregateRating = aggregateRating;

@@ -1,43 +1,57 @@
 package com.tip.lunchbox.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class RestaurantPhotos {
+
     @SerializedName("id")
-        private String id;
+    @Expose
+    private String id;
 
     @SerializedName("url")
-        private String url;
+    @Expose
+    private String url;
 
     @SerializedName("thumb_url")
-        private String thumbUrl;
+    @Expose
+    private String thumbUrl;
 
     @SerializedName("user")
-        private User user;
+    @Expose
+    private User user;
 
     @SerializedName("res_id")
-        private String resId;
+    @Expose
+    private String resId;
 
     @SerializedName("caption")
-        private String caption;
+    @Expose
+    private String caption;
 
     @SerializedName("timestamp")
-        private String timestamp;
+    @Expose
+    private String timestamp;
 
     @SerializedName("friendly_time")
-        private String friendlyTime;
+    @Expose
+    private String friendlyTime;
 
     @SerializedName("width")
-        private String width;
+    @Expose
+    private String width;
 
     @SerializedName("height")
-        private String height;
+    @Expose
+    private String height;
 
     @SerializedName("comments_count")
-        private String commentsCount;
+    @Expose
+    private String commentsCount;
 
     @SerializedName("likes_count")
-        private String likesCount;
+    @Expose
+    private String likesCount;
 
     public void setId(String id) {
         this.id = id;

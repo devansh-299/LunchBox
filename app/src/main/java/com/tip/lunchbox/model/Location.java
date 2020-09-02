@@ -1,29 +1,37 @@
 package com.tip.lunchbox.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Location {
 
     @SerializedName("address")
-        private String address;
+    @Expose
+    private String address;
     
     @SerializedName("locality")
-        private String locality;
+    @Expose
+    private String locality;
     
     @SerializedName("city")
-        private String city;
+    @Expose
+    private String city;
     
     @SerializedName("latitude")
-        private String latitude;
+    @Expose
+    private String latitude;
     
     @SerializedName("longitude")
-        private String longitude;
+    @Expose
+    private String longitude;
     
     @SerializedName("zipcode")
-        private String zipcode;
+    @Expose
+    private String zipcode;
     
     @SerializedName("country_id")
-        private String countryId;
+    @Expose
+    private String countryId;
 
     public void setAddress(String address) {
         this.address = address;

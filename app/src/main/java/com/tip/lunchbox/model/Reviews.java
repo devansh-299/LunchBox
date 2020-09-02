@@ -1,37 +1,48 @@
 package com.tip.lunchbox.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Reviews {
-    @SerializedName("rating") 
-        private String rating;
+    @SerializedName("rating")
+    @Expose
+    private String rating;
 
     @SerializedName("review_text")
-        private String reviewText;
+    @Expose
+    private String reviewText;
 
     @SerializedName("id")
-        private String id;
+    @Expose
+    private String id;
 
     @SerializedName("rating_color")
-        private String ratingColor;
+    @Expose
+    private String ratingColor;
 
     @SerializedName("review_time_friendly")
-        private String reviewTimeFriendly;
+    @Expose
+    private String reviewTimeFriendly;
 
     @SerializedName("rating_text")
-        private String ratingText;
+    @Expose
+    private String ratingText;
 
     @SerializedName("timestamp")
-        private String timestamp;
+    @Expose
+    private String timestamp;
 
     @SerializedName("likes")
-        private String likes;
+    @Expose
+    private String likes;
 
     @SerializedName("user")
-        private User user;
+    @Expose
+    private User user;
 
     @SerializedName("comments_count")
-        private String commentsCount;
+    @Expose
+    private String commentsCount;
 
     public void setRating(String rating) {
         this.rating = rating;

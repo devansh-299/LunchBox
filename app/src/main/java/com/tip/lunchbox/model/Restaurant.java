@@ -1,77 +1,101 @@
 package com.tip.lunchbox.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Restaurant {
     @SerializedName("id")
-        private String id;
+    @Expose
+    private String id;
 
     @SerializedName("name")
-        private String name;
+    @Expose
+    private String name;
 
     @SerializedName("url")
-        private String url;
+    @Expose
+    private String url;
 
     @SerializedName("location")
-        private Location location;
+    @Expose
+    private Location location;
 
     @SerializedName("average_cost_for_two")
-        private String averageCostForTwo;
+    @Expose
+    private String averageCostForTwo;
 
     @SerializedName("price_range")
-        private String priceRange;
+    @Expose
+    private String priceRange;
 
     @SerializedName("currency")
-        private String currency;
+    @Expose
+    private String currency;
 
     @SerializedName("thumb")
-        private String thumb;
+    @Expose
+    private String thumb;
 
     @SerializedName("featured_image")
-        private String featuredImage;
+    @Expose
+    private String featuredImage;
 
     @SerializedName("photos_url")
-        private String photosUrl;
+    @Expose
+    private String photosUrl;
 
     @SerializedName("menu_url")
-        private String menuUrl;
+    @Expose
+    private String menuUrl;
 
     @SerializedName("events_url")
-        private String eventsUrl;
+    @Expose
+    private String eventsUrl;
 
     @SerializedName("user_rating")
-        private UserRating userRating;
+    @Expose
+    private UserRating userRating;
 
     @SerializedName("has_online_delivery")
-        private String hasOnlineDelivery;
+    @Expose
+    private String hasOnlineDelivery;
 
     @SerializedName("is_delivering_now")
-        private String isDeliveringNow;
+    @Expose
+    private String isDeliveringNow;
 
     @SerializedName("has_table_booking")
-        private String hasTableBooking;
+    @Expose
+    private String hasTableBooking;
 
     @SerializedName("deeplink")
-        private String deeplink;
+    @Expose
+    private String deepLink;
 
     @SerializedName("cuisines")
-        private String cuisines;
+    @Expose
+    private String cuisines;
 
     @SerializedName("all_reviews_count")
-        private String allReviewsCount;
+    @Expose
+    private String allReviewsCount;
 
     @SerializedName("photo_count")
-        private String photoCount;
+    @Expose
+    private String photoCount;
 
     @SerializedName("phone_numbers")
-        private String phoneNumbers;
+    @Expose
+    private String phoneNumbers;
 
     @SerializedName("photos")
-        private List<RestaurantPhotos> photos = null;
+    @Expose
+    private List<RestaurantPhotos> photos = null;
 
     @SerializedName("all_reviews")
-        private List<Reviews> allReviews = null;
+    @Expose
+    private List<Reviews> allReviews = null;
 
     public void setId(String id) {
         this.id = id;
@@ -137,8 +161,8 @@ public class Restaurant {
         this.hasTableBooking = hasTableBooking;
     }
 
-    public void setDeeplink(String deeplink) {
-        this.deeplink = deeplink;
+    public void setDeepLink(String deepLink) {
+        this.deepLink = deepLink;
     }
 
     public void setCuisines(String cuisines) {
@@ -229,8 +253,8 @@ public class Restaurant {
         return hasTableBooking;
     }
 
-    public String getDeeplink() {
-        return deeplink;
+    public String getDeepLink() {
+        return deepLink;
     }
 
     public String getCuisines() {
