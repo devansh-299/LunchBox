@@ -1,5 +1,6 @@
 package com.tip.lunchbox.data;
 
+import com.tip.lunchbox.data.service.APIService;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
@@ -10,6 +11,8 @@ public class ApiManager {
     private static String BASEURL = "";
 
     private static Retrofit retrofit;
+
+    private static APIService apiService;
 
     private static Retrofit getRetrofitClient() {
         if (retrofit == null)
@@ -28,4 +31,9 @@ public class ApiManager {
                 .build();
     }
 
+    public static APIService getApiService() {
+        if (apiService == null)
+            apiService = getRetrofitClient().create(APIService.class);
+        return apiService;
+    }
 }
