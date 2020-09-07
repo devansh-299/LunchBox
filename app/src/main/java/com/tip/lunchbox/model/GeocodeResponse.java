@@ -19,7 +19,7 @@ public class GeocodeResponse {
     private String link;
     @SerializedName("nearby_restaurants")
     @Expose
-    private List<Restaurant> nearbyRestaurants = null;
+    private List<RestaurantContainer> nearbyRestaurantContainers = null;
 
     public Locality getLocality() {
         return locality;
@@ -45,12 +45,12 @@ public class GeocodeResponse {
         this.link = link;
     }
 
-    public List<Restaurant> getNearbyRestaurants() {
-        return nearbyRestaurants;
+    public List<RestaurantContainer> getNearbyRestaurantContainers() {
+        return nearbyRestaurantContainers;
     }
 
-    public void setNearbyRestaurants(List<Restaurant> nearbyRestaurants) {
-        this.nearbyRestaurants = nearbyRestaurants;
+    public void setNearbyRestaurantContainers(List<RestaurantContainer> nearbyRestaurantContainers) {
+        this.nearbyRestaurantContainers = nearbyRestaurantContainers;
     }
 
 }

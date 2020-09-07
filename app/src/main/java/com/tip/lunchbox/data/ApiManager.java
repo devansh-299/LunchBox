@@ -2,13 +2,14 @@ package com.tip.lunchbox.data;
 
 import com.tip.lunchbox.data.service.APIService;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiManager {
 
-    private static String BASEURL = "";
+    private static String BASEURL = "https://developers.zomato.com/api/v2.1/";
 
     private static Retrofit retrofit;
 
@@ -25,9 +26,13 @@ public class ApiManager {
     }
 
     private static OkHttpClient getOkHttpClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         return new OkHttpClient()
                 .newBuilder()
                 .addInterceptor(new HeaderInterceptor())
+                .addInterceptor(logging)
                 .build();
     }
 

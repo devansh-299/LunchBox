@@ -1,6 +1,6 @@
 # LunchBox
 
-LunchBox is a native Android application for finding nearby restaurants, their servings, and what not! The application follows MVVM architecture
+LunchBox is a native Android application for finding nearby restaurantContainers, their servings, and what not! The application follows MVVM architecture
 and is written in Java. This project comes under Technology Incubator Programme BITS Pilani Goa Campus
 
 
