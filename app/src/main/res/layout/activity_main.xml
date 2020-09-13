@@ -9,6 +9,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_activity_bn"
         android:layout_width="match_parent"
+        app:backgroundTint="@color/bnbg"
         android:layout_height="50dp"
         app:itemTextColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"

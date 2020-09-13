@@ -56,11 +56,12 @@ dependencies {
 
     // Retrofit to RxJava CallAdapter Factory
     implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.retrofit_version"
-    implementation 'com.google.android.material:material:1.2.1'
+
 
     //Navigation
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
+    implementation 'com.google.android.material:material:1.2.1'
 
     // For testing
     testImplementation 'junit:junit:4.13'
