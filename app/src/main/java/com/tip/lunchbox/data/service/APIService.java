@@ -1,11 +1,10 @@
 package com.tip.lunchbox.data.service;
 
 import com.tip.lunchbox.model.DailyMenuResponse;
-import com.tip.lunchbox.model.Restaurant;
-import com.tip.lunchbox.model.Reviews;
+import com.tip.lunchbox.model.RestaurantContainer;
+import com.tip.lunchbox.model.ReviewResponse;
 import com.tip.lunchbox.model.SearchResponse;
 
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -20,11 +19,11 @@ public interface APIService {
 
     @GET("dailymenu")
     Observable<DailyMenuResponse> getDailyMenuResponse(@Query("res_id") int restaurantID);
-
+    //TODO fix this
     @GET("reviews")
-    Observable<List<Reviews>> getReviewsResponse(@Query("res_id") int restaurantID);
+    Observable<ReviewResponse> getReviewsResponse(@Query("res_id") int restaurantID);
 
     @GET("restaurant")
-    Observable<Restaurant> getRestaurantResponse(@Query("res_id") int restaurantID);
+    Observable<RestaurantContainer> getRestaurantResponse(@Query("res_id") int restaurantID);
 
 }
