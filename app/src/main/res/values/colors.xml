@@ -3,7 +3,7 @@
     <!-- application colors-->
     <color name="colorPrimary"> #d93047 </color>
     <color name="colorPrimaryDark"> #c9253b </color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">@color/colorPrimary</color>
 
     <!-- general colors-->
     <color name="white">#ffffff</color>

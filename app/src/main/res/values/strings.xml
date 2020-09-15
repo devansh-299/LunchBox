@@ -5,5 +5,6 @@
     <string name="food">Food</string>
     <string name="home">Home</string>
     <string name="placeholder_highlights"><b>Highlights:</b> %1$s</string>
+    <string name="error_occurred">Error Occurred</string>
 
 </resources>

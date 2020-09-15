@@ -15,6 +15,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class HomeViewModel extends ViewModel {
+
     MutableLiveData<SearchResponse> restaurantLiveData = new MutableLiveData<>();
     CompositeDisposable disposableContainer = new CompositeDisposable();
 
@@ -25,15 +26,15 @@ public class HomeViewModel extends ViewModel {
         return restaurantLiveData;
     }
 
-    public void FetchRestaurantLiveData(){
+    public void FetchRestaurantLiveData() {
 
         Repository repository = new Repository();
         HashMap<String, String> queryParams = new HashMap<>();
         /*
             For now, using temporary query parameters
          */
-        queryParams.put("entity_id","5");
-        queryParams.put("entity_type","city");
+        queryParams.put("entity_id", "5");
+        queryParams.put("entity_type", "city");
 
         repository.getSearchResponseObservable(queryParams)
                 .subscribeOn(Schedulers.newThread())
@@ -52,7 +53,7 @@ public class HomeViewModel extends ViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        restaurantLiveData.setValue(null);
                     }
 
                     @Override

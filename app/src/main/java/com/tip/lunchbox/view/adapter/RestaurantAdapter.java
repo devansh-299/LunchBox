@@ -15,6 +15,7 @@ import com.tip.lunchbox.databinding.ItemRestaurantBinding;
 import com.tip.lunchbox.model.Restaurant;
 import com.tip.lunchbox.model.RestaurantContainer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantAdapter extends
@@ -23,9 +24,14 @@ public class RestaurantAdapter extends
     Context context;
     List<RestaurantContainer> restaurantsList;
 
-    public RestaurantAdapter(Context context , List<RestaurantContainer> restaurantContainers) {
+    public RestaurantAdapter(Context context) {
         this.context = context;
-        this.restaurantsList = restaurantContainers;
+        this.restaurantsList = new ArrayList<>();
+    }
+
+    public void setData(List<RestaurantContainer> restaurantsList) {
+        this.restaurantsList = restaurantsList;
+        notifyDataSetChanged();
     }
 
     @NonNull
