@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <!-- application colors-->
+    <color name="colorPrimary"> #d93047 </color>
+    <color name="colorPrimaryDark"> #c9253b </color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="background">#FFEB3B</color>
-    <color name="bnbg">#ffffff</color>
+
+    <!-- general colors-->
+    <color name="white">#ffffff</color>
+
+    <!-- for text-->
+    <color name="colorTextPrimary">#322e2e</color>
+    <color name="colorTextSecondary">#494647</color>
+
 </resources>

@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
         //Setting navController
-        NavController navController = Navigation.findNavController(this, R.id.navigation_host_fragment);
-        NavigationUI.setupWithNavController(mainBinding.mainActivityBn,navController);
+        NavController navController = Navigation.findNavController(this,
+                R.id.navigation_host_fragment);
+        NavigationUI.setupWithNavController(mainBinding.mainActivityBn, navController);
         NavigationUI.setupActionBarWithNavController(this,navController);
     }
 }

@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">LunchBox</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="search">Search</string>
     <string name="food">Food</string>
     <string name="home">Home</string>
+    <string name="placeholder_highlights"><b>Highlights:</b> %1$s</string>
+
 </resources>

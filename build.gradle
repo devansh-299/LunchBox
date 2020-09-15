@@ -24,10 +24,13 @@ task clean(type: Delete) {
 }
 
 ext {
-
+    material_library_version = '1.2.1'
     lifecycle_version = '2.2.0'
     retrofit_version = '2.9.0'
+    okhttp_version = '4.9.0'
     rx_android_version = '3.0.0'
     rx_java_version = '3.0.0'
+    glide_version = '4.11.0'
+    navigation_version = '2.3.0'
 
 }
