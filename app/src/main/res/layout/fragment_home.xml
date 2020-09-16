@@ -1,50 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map_view"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_gravity="center"
+        android:layout_height="match_parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_restaurant"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <ProgressBar
-        android:id="@+id/pb_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <LinearLayout
-        android:id="@+id/ll_error_occurred"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        android:layout_centerVertical="true">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:src="@drawable/ic_error"
-            android:layout_gravity="center"
-            android:layout_width="@dimen/value_100dp"
-            android:layout_height="@dimen/value_100dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_restaurant_list"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/value_20sp"
-            android:text="@string/error_occurred" />
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/value_5dp"
+            android:layout_marginEnd="@dimen/value_5dp"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="@dimen/value_175dp"
+            android:background="@drawable/background_bottom_sheet">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_marginTop="@dimen/value_20dp"
+                    android:layout_width="@dimen/value_100dp"
+                    android:layout_height="@dimen/value_2dp"
+                    android:background="@color/line_color" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/value_10dp"
+                    android:text="@string/nearby_restaurants"
+                    android:textSize="@dimen/value_20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="@dimen/value_10dp"
+                    android:id="@+id/rv_restaurant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ProgressBar
+                    android:id="@+id/pb_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:id="@+id/ll_error_occurred"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:src="@drawable/ic_error"
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/value_100dp"
+                        android:layout_height="@dimen/value_100dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/value_20sp"
+                        android:text="@string/error_occurred" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </RelativeLayout>
+
+

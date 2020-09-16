@@ -37,6 +37,10 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    // Google Play Services
+    implementation "com.google.android.gms:play-services:$rootProject.play_services_version"
+
+
     // Material Library
     implementation "com.google.android.material:material:$rootProject.material_library_version"
 

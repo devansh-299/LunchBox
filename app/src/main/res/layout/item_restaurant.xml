@@ -55,7 +55,7 @@
                 android:layout_height="0.5dp"
                 app:layout_constraintStart_toStartOf="@id/item_tv_locality"
                 android:layout_marginEnd="@dimen/value_10dp"
-                android:background="#c0c0c0"
+                android:background="@color/line_color"
                 app:layout_constraintTop_toBottomOf="@+id/item_tv_locality" />
 
             <TextView

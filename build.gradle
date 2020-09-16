@@ -25,6 +25,7 @@ task clean(type: Delete) {
 
 ext {
     material_library_version = '1.2.1'
+    play_services_version = '8.3.0'
     lifecycle_version = '2.2.0'
     retrofit_version = '2.9.0'
     okhttp_version = '4.9.0'
