@@ -2,6 +2,8 @@
 package com.tip.lunchbox.model;
 
 import java.util.List;
+
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -130,6 +132,8 @@ public class Restaurant {
     @SerializedName("establishment_types")
     @Expose
     private List<Object> establishmentTypes = null;
+
+    private Mapinfo mapinfo;
 
     public DiningOptions getDiningOptions() {
         return diningOptions;
@@ -457,6 +461,57 @@ public class Restaurant {
 
     public void setEstablishmentTypes(List<Object> establishmentTypes) {
         this.establishmentTypes = establishmentTypes;
+    }
+
+    public Mapinfo getMapinfo() {
+        if (this.mapinfo ==null)
+            setMapinfo();
+        return mapinfo;
+    }
+
+    public void setMapinfo (){
+        double latitude = Double.parseDouble(this.location.getLatitude());
+        double longitude = Double.parseDouble(this.location.getLongitude());
+        this.mapinfo = new Mapinfo(new LatLng(latitude,longitude),this.name,this.cuisines);
+    }
+
+
+
+    public class Mapinfo{
+
+        private LatLng latLng;
+        private String name;
+        private String desc;
+
+        public Mapinfo(LatLng latLng, String name,String desc) {
+            this.latLng = latLng;
+            this.name = name;
+            this.desc = desc;
+        }
+
+        public LatLng getLatLng() {
+            return latLng;
+        }
+
+        public void setLatLng(LatLng latLng) {
+            this.latLng = latLng;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
     }
 
 }
