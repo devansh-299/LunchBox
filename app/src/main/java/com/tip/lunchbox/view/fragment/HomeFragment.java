@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     HomeViewModel viewModel;
     FragmentHomeBinding homeBinding;
     RestaurantAdapter adapter;
-    ArrayList<Restaurant.Mapinfo> latlangs;
+    ArrayList<Restaurant.Mapinfo> mapinfoArrayList;
     SupportMapFragment supportMapFragment;
     private BottomSheetBehavior mBottomSheetBehavior;
 
@@ -97,8 +97,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         .position(location)
         .title("Pune")
         );
-        if ( latlangs != null )
-        for (Restaurant.Mapinfo latLng: this.latlangs){
+        if ( mapinfoArrayList != null )
+        for (Restaurant.Mapinfo latLng: this.mapinfoArrayList){
             googleMap.addMarker(new MarkerOptions().position(latLng.getLatLng()).title(latLng.getName()).snippet(latLng.getDesc()));
         }
 
@@ -107,13 +107,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     }
     private void setLatLangs (SearchResponse response){
-        latlangs = new ArrayList<>();
+        mapinfoArrayList = new ArrayList<>();
         for ( RestaurantContainer restaurantContainer: response.getRestaurantContainers() )  {
 
-            this.latlangs.add(restaurantContainer.getRestaurant().getMapinfo());
+            this.mapinfoArrayList.add(restaurantContainer.getRestaurant().getMapinfo());
         }
         supportMapFragment.getMapAsync(this);
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        homeBinding = null;
+    }
 }
