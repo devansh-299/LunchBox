@@ -27,4 +27,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(mainBinding.mainActivityBn, navController);
         NavigationUI.setupActionBarWithNavController(this,navController);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mainBinding = null;
+    }
 }
