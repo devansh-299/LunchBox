@@ -63,4 +63,10 @@ public class HomeViewModel extends ViewModel {
                 });
 
     }
+
+    @Override
+    protected void onCleared() {
+        disposableContainer.clear();
+        super.onCleared();
+    }
 }

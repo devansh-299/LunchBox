@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,18 +39,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private BottomSheetBehavior mBottomSheetBehavior;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-
+        //Getting Viewmodel From Backstack
+        NavController navController = NavHostFragment.findNavController(this);
+        NavBackStackEntry navBackStackEntry = navController.getBackStackEntry(R.id.homeFragment);
+        viewModel = new ViewModelProvider(navBackStackEntry).get(HomeViewModel.class);
         View view = homeBinding.getRoot();
-        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
         adapter = new RestaurantAdapter(getActivity());
         mBottomSheetBehavior = BottomSheetBehavior.from(homeBinding.nsvRestaurantList);
         homeBinding.rvRestaurant.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -113,7 +114,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             this.mapinfoArrayList.add(restaurantContainer.getRestaurant().getMapinfo());
         }
         supportMapFragment.getMapAsync(this);
-
     }
 
     @Override
