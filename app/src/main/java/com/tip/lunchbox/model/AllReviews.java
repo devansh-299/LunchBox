@@ -1,4 +1,3 @@
-
 package com.tip.lunchbox.model;
 
 import java.util.List;

@@ -12,9 +12,6 @@ public class Restaurant {
     @SerializedName("DiningOptions")
     @Expose
     private DiningOptions diningOptions;
-    @SerializedName("apikey")
-    @Expose
-    private String apikey;
     @SerializedName("id")
     @Expose
     private String id;
@@ -53,7 +50,7 @@ public class Restaurant {
     private List<Object> offers = null;
     @SerializedName("opentable_support")
     @Expose
-    private long opentableSupport;
+    private long openTableSupport;
     @SerializedName("is_zomato_book_res")
     @Expose
     private long isZomatoBookRes;
@@ -104,7 +101,7 @@ public class Restaurant {
     private boolean includeBogoOffers;
     @SerializedName("deeplink")
     @Expose
-    private String deeplink;
+    private String deepLink;
     @SerializedName("order_url")
     @Expose
     private String orderUrl;
@@ -133,7 +130,7 @@ public class Restaurant {
     @Expose
     private List<Object> establishmentTypes = null;
 
-    private Mapinfo mapinfo;
+    private MapInfo mapInfo;
 
     public DiningOptions getDiningOptions() {
         return diningOptions;
@@ -141,14 +138,6 @@ public class Restaurant {
 
     public void setDiningOptions(DiningOptions diningOptions) {
         this.diningOptions = diningOptions;
-    }
-
-    public String getApikey() {
-        return apikey;
-    }
-
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
     }
 
     public String getId() {
@@ -247,12 +236,12 @@ public class Restaurant {
         this.offers = offers;
     }
 
-    public long getOpentableSupport() {
-        return opentableSupport;
+    public long getOpenTableSupport() {
+        return openTableSupport;
     }
 
-    public void setOpentableSupport(long opentableSupport) {
-        this.opentableSupport = opentableSupport;
+    public void setOpenTableSupport(long openTableSupport) {
+        this.openTableSupport = openTableSupport;
     }
 
     public long getIsZomatoBookRes() {
@@ -383,12 +372,12 @@ public class Restaurant {
         this.includeBogoOffers = includeBogoOffers;
     }
 
-    public String getDeeplink() {
-        return deeplink;
+    public String getDeepLink() {
+        return deepLink;
     }
 
-    public void setDeeplink(String deeplink) {
-        this.deeplink = deeplink;
+    public void setDeepLink(String deepLink) {
+        this.deepLink = deepLink;
     }
 
     public String getOrderUrl() {
@@ -399,11 +388,11 @@ public class Restaurant {
         this.orderUrl = orderUrl;
     }
 
-    public String getOrderDeeplink() {
+    public String getOrderDeepLink() {
         return orderDeeplink;
     }
 
-    public void setOrderDeeplink(String orderDeeplink) {
+    public void setOrderDeepLink(String orderDeepLink) {
         this.orderDeeplink = orderDeeplink;
     }
 
@@ -463,27 +452,27 @@ public class Restaurant {
         this.establishmentTypes = establishmentTypes;
     }
 
-    public Mapinfo getMapinfo() {
-        if (this.mapinfo ==null)
-            setMapinfo();
-        return mapinfo;
+    public MapInfo getMapInfo() {
+        if (this.mapInfo == null) {
+            setMapInfo();
+        }
+        return mapInfo;
     }
 
-    public void setMapinfo (){
+    public void setMapInfo() {
         double latitude = Double.parseDouble(this.location.getLatitude());
         double longitude = Double.parseDouble(this.location.getLongitude());
-        this.mapinfo = new Mapinfo(new LatLng(latitude,longitude),this.name,this.cuisines);
+        this.mapInfo = new MapInfo(new LatLng(latitude,longitude),this.name,this.cuisines);
     }
 
 
-
-    public class Mapinfo{
+    public class MapInfo {
 
         private LatLng latLng;
         private String name;
         private String desc;
 
-        public Mapinfo(LatLng latLng, String name,String desc) {
+        public MapInfo(LatLng latLng, String name, String desc) {
             this.latLng = latLng;
             this.name = name;
             this.desc = desc;

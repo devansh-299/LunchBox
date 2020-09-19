@@ -31,7 +31,7 @@ public class User {
 
     @SerializedName("profile_deeplink")
     @Expose
-    private String profileDeeplink;
+    private String profileDeepLink;
 
     @SerializedName("profile_image")
     @Expose
@@ -61,8 +61,8 @@ public class User {
         this.profileUrl = profileUrl;
     }
 
-    public void setProfileDeeplink(String profileDeeplink) {
-        this.profileDeeplink = profileDeeplink;
+    public void setProfileDeepLink(String profileDeepLink) {
+        this.profileDeepLink = profileDeepLink;
     }
 
     public void setProfileImage(String profileImage) {
@@ -93,8 +93,8 @@ public class User {
         return profileUrl;
     }
 
-    public String getProfileDeeplink() {
-        return profileDeeplink;
+    public String getProfileDeepLink() {
+        return profileDeepLink;
     }
 
     public String getProfileImage() {

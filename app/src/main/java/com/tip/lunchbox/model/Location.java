@@ -1,4 +1,3 @@
-
 package com.tip.lunchbox.model;
 
 import com.google.gson.annotations.Expose;
@@ -26,7 +25,7 @@ public class Location {
     private String longitude;
     @SerializedName("zipcode")
     @Expose
-    private String zipcode;
+    private String zipCode;
     @SerializedName("country_id")
     @Expose
     private long countryId;
@@ -82,12 +81,12 @@ public class Location {
         this.longitude = longitude;
     }
 
-    public String getZipcode() {
-        return zipcode;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public long getCountryId() {

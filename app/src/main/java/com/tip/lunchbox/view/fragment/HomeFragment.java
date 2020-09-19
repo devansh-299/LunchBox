@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     HomeViewModel viewModel;
     FragmentHomeBinding homeBinding;
     RestaurantAdapter adapter;
-    ArrayList<Restaurant.Mapinfo> mapinfoArrayList;
+    ArrayList<Restaurant.MapInfo> mapInfoArrayList;
     SupportMapFragment supportMapFragment;
     private BottomSheetBehavior mBottomSheetBehavior;
 
@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         homeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        //Getting Viewmodel From Backstack
+        // Getting ViewModel From BackStack
         NavController navController = NavHostFragment.findNavController(this);
         NavBackStackEntry navBackStackEntry = navController.getBackStackEntry(R.id.homeFragment);
         viewModel = new ViewModelProvider(navBackStackEntry).get(HomeViewModel.class);
@@ -53,7 +53,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         mBottomSheetBehavior = BottomSheetBehavior.from(homeBinding.nsvRestaurantList);
         homeBinding.rvRestaurant.setLayoutManager(new LinearLayoutManager(getActivity()));
         homeBinding.rvRestaurant.setAdapter(adapter);
-        supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_view);
+        supportMapFragment =
+                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_view);
         supportMapFragment.getMapAsync(this);
         loadData();
         return view;
@@ -77,14 +78,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         homeBinding.rvRestaurant.setVisibility(View.VISIBLE);
     }
 
-
     private void loadData() {
         showLoadingView();
         viewModel.getRestaurantLiveData().observe(getViewLifecycleOwner(), searchResponse -> {
             if(searchResponse != null) {
                 adapter.setData(searchResponse.getRestaurantContainers());
                 showData();
-                setLatLangs(searchResponse);
+                setMapMarkers(searchResponse);
             } else {
                 showErrorView();
             }
@@ -93,25 +93,27 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        /*
+            Currently, using temporary values for testing. Ideally these values should have been
+            taken from the user while first launching the application
+         */
         LatLng location = new LatLng(18.5, 73.8);
-        googleMap.addMarker(new MarkerOptions()
-        .position(location)
-        .title("Pune")
-        );
-        if ( mapinfoArrayList != null )
-        for (Restaurant.Mapinfo latLng: this.mapinfoArrayList){
-            googleMap.addMarker(new MarkerOptions().position(latLng.getLatLng()).title(latLng.getName()).snippet(latLng.getDesc()));
+        googleMap.addMarker(new MarkerOptions().position(location).title("Pune"));
+
+        if (mapInfoArrayList != null)
+        for (Restaurant.MapInfo latLng: this.mapInfoArrayList) {
+            googleMap.addMarker(new MarkerOptions()
+                    .position(latLng.getLatLng())
+                    .title(latLng.getName())
+                    .snippet(latLng.getDesc()));
         }
-
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, (float) 15));
-
-
     }
-    private void setLatLangs (SearchResponse response){
-        mapinfoArrayList = new ArrayList<>();
-        for ( RestaurantContainer restaurantContainer: response.getRestaurantContainers() )  {
 
-            this.mapinfoArrayList.add(restaurantContainer.getRestaurant().getMapinfo());
+    private void setMapMarkers(SearchResponse response) {
+        mapInfoArrayList = new ArrayList<>();
+        for (RestaurantContainer restaurantContainer : response.getRestaurantContainers()) {
+            this.mapInfoArrayList.add(restaurantContainer.getRestaurant().getMapInfo());
         }
         supportMapFragment.getMapAsync(this);
     }

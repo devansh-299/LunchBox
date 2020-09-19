@@ -1,12 +1,11 @@
 # LunchBox
 
-LunchBox is a native Android application for finding nearby restaurantContainers, their servings, and what not! The application follows MVVM architecture
-and is written in Java. This project comes under Technology Incubator Programme BITS Pilani Goa Campus
+LunchBox is a native Android application for finding nearby restaurantContainers, their servings, and what not! The application follows MVVM architecture and is written in Java. This project comes under Technology Incubator Programme BITS Pilani Goa Campus.
 
 
 ## Building The Code
 
-1. Clone the repository using HTTP:`https://github.com/devansh-299/LunchBox.git`
+1. Clone the repository using HTTP: `https://github.com/devansh-299/LunchBox.git`
 2. Open Android Studio.
 3. Click on 'Open an existing Android Studio project'
 4. Browse to the directory where you cloned the project and click OK.
@@ -25,7 +24,9 @@ and is written in Java. This project comes under Technology Incubator Programme 
 
 1. Fork the project
 2. Make your changes and push the changes to **your** forked repository
-3. Send a pull-request **master** branch and ensure the pull request follows the template.
+3. Send a pull-request **dev** branch and ensure the pull request follows the template.
+4. At the moment we are adding all the new features to the **dev** branch, and pushing only fully features to our
+**master** branch.
 
 
 ## Maintainer

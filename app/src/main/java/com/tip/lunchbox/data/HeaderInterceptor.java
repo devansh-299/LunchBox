@@ -10,9 +10,8 @@ public class HeaderInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder request = chain.request().newBuilder();
-        //TODO add APIKEY
+        // TODO add API_KEY
         request.addHeader("user-key","API_KEY");
         return chain.proceed(request.build());
-
     }
 }

@@ -1,4 +1,3 @@
-
 package com.tip.lunchbox.model;
 
 import com.google.gson.annotations.Expose;
