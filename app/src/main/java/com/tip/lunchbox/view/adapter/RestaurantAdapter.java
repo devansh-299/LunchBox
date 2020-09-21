@@ -69,6 +69,7 @@ public class RestaurantAdapter extends
             restaurantItemBinding.itemTvRestaurantName.setText(restaurant.getName());
             Glide.with(restaurantItemBinding.getRoot())
                     .load(restaurant.getThumb())
+                    .centerCrop()
                     .into(restaurantItemBinding.itemIvRestaurant);
             restaurantItemBinding.itemTvRating.setText(
                     restaurant.getUserRating().getAggregateRating());
