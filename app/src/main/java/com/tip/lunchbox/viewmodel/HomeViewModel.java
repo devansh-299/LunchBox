@@ -17,7 +17,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class HomeViewModel extends ViewModel {
 
     MutableLiveData<SearchResponse> restaurantLiveData = new MutableLiveData<>();
-    CompositeDisposable disposableContainer = new CompositeDisposable();
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public LiveData<SearchResponse> getRestaurantLiveData() {
         if(restaurantLiveData.getValue() == null) {
@@ -43,7 +43,7 @@ public class HomeViewModel extends ViewModel {
 
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        disposableContainer.add(d);
+                        compositeDisposable.add(d);
                     }
 
                     @Override
@@ -66,7 +66,7 @@ public class HomeViewModel extends ViewModel {
 
     @Override
     protected void onCleared() {
-        disposableContainer.clear();
         super.onCleared();
+        compositeDisposable.clear();
     }
 }
