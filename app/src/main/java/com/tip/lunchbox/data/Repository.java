@@ -1,5 +1,6 @@
 package com.tip.lunchbox.data;
 
+import com.tip.lunchbox.model.CollectionsResponse;
 import com.tip.lunchbox.model.DailyMenuResponse;
 import com.tip.lunchbox.model.RestaurantContainer;
 import com.tip.lunchbox.model.ReviewResponse;
@@ -8,6 +9,7 @@ import com.tip.lunchbox.model.SearchResponse;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 
 public class Repository {
 
@@ -29,4 +31,7 @@ public class Repository {
         return ApiManager.getApiService().getRestaurantResponse(restaurantID);
     }
 
+    public Single<CollectionsResponse> getCollectionsResponseObservable(int cityID){
+        return ApiManager.getApiService().getCollectionsResponse(cityID);
+    }
 }

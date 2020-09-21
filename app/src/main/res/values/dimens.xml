@@ -9,4 +9,6 @@
     <dimen name="value_20sp">20sp</dimen>
     <dimen name="value_175dp">175dp</dimen>
     <dimen name="value_2dp">2dp</dimen>
+    <dimen name="value_30sp">30sp</dimen>
+    <dimen name="value_200dp">200dp</dimen>
 </resources>
