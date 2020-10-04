@@ -1,14 +1,18 @@
 package com.tip.lunchbox.data.service;
 
+import com.tip.lunchbox.model.CategoryResponse;
+import com.tip.lunchbox.model.CitiesResponse;
 import com.tip.lunchbox.model.CollectionsResponse;
+import com.tip.lunchbox.model.CuisineResponse;
 import com.tip.lunchbox.model.DailyMenuResponse;
+import com.tip.lunchbox.model.EstablishmentResponse;
+import com.tip.lunchbox.model.GeocodeResponse;
 import com.tip.lunchbox.model.RestaurantContainer;
 import com.tip.lunchbox.model.ReviewResponse;
 import com.tip.lunchbox.model.SearchResponse;
 
 import java.util.Map;
 
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -17,21 +21,46 @@ import retrofit2.http.QueryMap;
 public interface APIService {
 
     @GET("search")
-    Observable<SearchResponse> getSearchResponse(@QueryMap Map<String, String> searchParameters);
+    Single<SearchResponse> getSearchResponse(@QueryMap Map<String, String> searchParameters);
 
     @GET("dailymenu")
-    Observable<DailyMenuResponse> getDailyMenuResponse(@Query("res_id") int restaurantID);
+    Single<DailyMenuResponse> getDailyMenuResponse(@Query("res_id") int restaurantID);
     //TODO fix this
     @GET("reviews")
-    Observable<ReviewResponse> getReviewsResponse(@Query("res_id") int restaurantID);
+    Single<ReviewResponse> getReviewsResponse(@Query("res_id") int restaurantID);
 
     @GET("restaurant")
-    Observable<RestaurantContainer> getRestaurantResponse(@Query("res_id") int restaurantID);
+    Single<RestaurantContainer> getRestaurantResponse(@Query("res_id") int restaurantID);
 
     @GET("collections")
     Single<CollectionsResponse> getCollectionsResponse(@Query("city_id") int cityID);
 
     @GET("collections")
-    Single<CollectionsResponse> getCollectionsResponse(@Query("lat") int lat , @Query("long") int longitude);
+    Single<CollectionsResponse> getCollectionsResponse(@Query("lat") double lat , @Query("long") double longitude);
+
+    @GET("cities")
+    Single<CitiesResponse> getCitiesResponse(@Query("q") String cityname);
+
+    @GET("cities")
+    Single<CitiesResponse> getCitiesResponse(@Query("lat") double latitude,@Query("lon") double longitude);
+
+    @GET("categories")
+    Single<CategoryResponse> getCategoriesResponse();
+
+    @GET("cuisines")
+    Single<CuisineResponse> getCuisinesResponse(@Query("city_id") int cityID);
+
+    @GET("cuisines")
+    Single<CuisineResponse> getCuisinesResponse(@Query("lat") double latitude,@Query("lon") double longitude);
+
+
+    @GET("establishments")
+    Single<EstablishmentResponse> getEstablishmentsResponse(@Query("city_id") int cityID);
+
+    @GET("establishments")
+    Single<EstablishmentResponse> getEstablishmentsResponse(@Query("lat") double latitude,@Query("lon") double longitude);
+
+    @GET("geocode")
+    Single<GeocodeResponse> getGeocodeResponse(@Query("lat") double latitude,@Query("lon") double longitude);
 
 }
