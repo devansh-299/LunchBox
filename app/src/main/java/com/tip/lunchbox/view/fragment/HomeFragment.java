@@ -63,17 +63,17 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private void showLoadingView() {
         homeBinding.rvRestaurant.setVisibility(View.GONE);
         homeBinding.llErrorOccurred.setVisibility(View.GONE);
-        homeBinding.pbLoading.setVisibility(View.VISIBLE);
+        homeBinding.shimmerRecyclerView.setVisibility(View.VISIBLE);
     }
 
     private void showErrorView() {
         homeBinding.rvRestaurant.setVisibility(View.GONE);
-        homeBinding.pbLoading.setVisibility(View.GONE);
+        homeBinding.shimmerRecyclerView.setVisibility(View.GONE);
         homeBinding.llErrorOccurred.setVisibility(View.VISIBLE);
     }
 
     private void showData() {
-        homeBinding.pbLoading.setVisibility(View.GONE);
+        homeBinding.shimmerRecyclerView.setVisibility(View.GONE);
         homeBinding.llErrorOccurred.setVisibility(View.GONE);
         homeBinding.rvRestaurant.setVisibility(View.VISIBLE);
     }

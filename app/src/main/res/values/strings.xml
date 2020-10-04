@@ -7,5 +7,7 @@
     <string name="placeholder_highlights"><b>Highlights:</b> %1$s</string>
     <string name="error_occurred">Error Occurred</string>
     <string name="nearby_restaurants">Nearby Restaurants</string>
+    <string name="search_restaurants">Search Restaurants!</string>
+    <string name="discover_restaurants">Discover restaurants</string>
 
 </resources>

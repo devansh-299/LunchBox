@@ -66,7 +66,7 @@ dependencies {
     // Retrofit to RxJava CallAdapter Factory
     implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.retrofit_version"
 
-    //Navigation
+    // Navigation
     implementation "androidx.navigation:navigation-fragment:$rootProject.navigation_version"
     implementation "androidx.navigation:navigation-ui:$rootProject.navigation_version"
 
@@ -75,11 +75,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    //Glide
+    // Glide
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
-    //misc
-    implementation 'com.android.support:multidex:1.0.3'
+    // MultiDex Support
+    implementation "com.android.support:multidex:$rootProject.multi_dex_version"
+
+    // Shimmer Loading View
+    implementation "com.github.sharish:ShimmerRecyclerView:$rootProject.shimmer_loading_version"
 
 }

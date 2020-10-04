@@ -11,4 +11,7 @@
     <dimen name="value_2dp">2dp</dimen>
     <dimen name="value_200dp">200dp</dimen>
     <dimen name="value_25sp">25sp</dimen>
+    <dimen name="value_15dp">15dp</dimen>
+    <dimen name="value_150dp">150dp</dimen>
+    <dimen name="value_40dp">40dp</dimen>
 </resources>

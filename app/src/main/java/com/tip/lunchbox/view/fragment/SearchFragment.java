@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import com.tip.lunchbox.databinding.FragmentSearchBinding;
 import com.tip.lunchbox.view.adapter.CollectionsAdapter;
 import com.tip.lunchbox.view.adapter.RestaurantAdapter;
-import com.tip.lunchbox.viewmodel.SearchFragmentViewModel;
+import com.tip.lunchbox.viewmodel.SearchViewModel;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,8 +32,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     FragmentSearchBinding binding;
     CollectionsAdapter collectionsadapter;
-    RestaurantAdapter searchadapter;
-    SearchFragmentViewModel viewModel;
+    RestaurantAdapter searchAdapter;
+    SearchViewModel viewModel;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
@@ -41,10 +41,11 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
-        viewModel = new ViewModelProvider(this).get(SearchFragmentViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
         setUpRecyclerViews();
-        addObservabletoSearchView();
+        addObservableToSearchView();
         binding.searchView.setOnClickListener(this);
+
         // Observing data
         viewModel.getCollectionsLiveData().observe(
                 getViewLifecycleOwner(),
@@ -53,8 +54,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
         viewModel.getSearchResponseLivedata().observe(
                 getViewLifecycleOwner(),
-                searchResponse -> searchadapter.setData(searchResponse.getRestaurantContainers())
-        );
+                searchResponse -> {
+                        binding.llSearchRestaurants.setVisibility(View.GONE);
+                        searchAdapter.setData(searchResponse.getRestaurantContainers());
+                });
         return binding.getRoot();
     }
 
@@ -71,14 +74,15 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         pagerSnapHelper.attachToRecyclerView(binding.rvCollections);
 
         //Search rv
-        searchadapter = new RestaurantAdapter(requireActivity());
-        binding.rvSearch.setAdapter(searchadapter);
+        searchAdapter = new RestaurantAdapter(requireActivity());
+        binding.rvSearch.setAdapter(searchAdapter);
         binding.rvSearch.setLayoutManager(new LinearLayoutManager(requireActivity()));
     }
 
-    public void addObservabletoSearchView() {
+    public void addObservableToSearchView() {
         Observable.create((ObservableOnSubscribe<String>)
-                emitter -> binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                emitter -> binding.searchView.setOnQueryTextListener(
+                        new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
                         viewModel.FetchSearchResponseLiveData(query);
@@ -88,8 +92,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
-                        if (!emitter.isDisposed())
+                        if (!emitter.isDisposed()) {
                             emitter.onNext(newText);
+                        }
                         Log.d("http", "onTextSubmit: " + newText);
                         return false;
                     }
@@ -103,9 +108,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     }
 
                     @Override
-                    public void onNext(@NonNull String s) {
-                        if (!s.isEmpty())
-                            viewModel.FetchSearchResponseLiveData(s);
+                    public void onNext(@NonNull String query) {
+                        if (!query.isEmpty()) {
+                            viewModel.FetchSearchResponseLiveData(query);
+                        }
                     }
 
                     @Override
@@ -130,7 +136,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == binding.searchView) {
-            binding.getRoot().smoothScrollTo(v.getTop(), v.getLeft());
+            binding.nestedScrollView.smoothScrollTo(v.getTop(), v.getLeft());
         }
     }
 }

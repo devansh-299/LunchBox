@@ -18,7 +18,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchFragmentViewModel extends ViewModel {
+public class SearchViewModel extends ViewModel {
 
     MutableLiveData<CollectionsResponse> collectionsResponseLivedata    = new MutableLiveData<>();
     MutableLiveData<SearchResponse> searchResponseLiveData = new MutableLiveData<>();
@@ -59,7 +59,8 @@ public class SearchFragmentViewModel extends ViewModel {
     }
    public void FetchSearchResponseLiveData(String query) {
        Repository repository = new Repository();
-       repository.getSearchResponseObservable(new SearchQuery().addQuery("Pune")).subscribeOn(Schedulers.newThread())
+       repository.getSearchResponseObservable(
+               new SearchQuery().addQuery("Pune")).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SearchResponse>() {
 
