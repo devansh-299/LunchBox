@@ -28,6 +28,15 @@ LunchBox is a native Android application for finding nearby restaurantContainers
 4. At the moment we are adding all the new features to the **dev** branch, and pushing only fully features to our
 **master** branch.
 
+## Documentation
+
+- **Language**: Java
+- **Architecture**: Model View ViewModel (MVVM)
+- **Libraries**: [Retrofit](https://github.com/square/retrofit),
+[RxJava](https://github.com/ReactiveX/RxJava), LiveData, ViewModel, Navigation Components,
+[Material Components](https://github.com/material-components/material-components-android),
+[ShimmerRecyclerView](https://github.com/sharish/ShimmerRecyclerView),
+[Glide](https://github.com/bumptech/glide)
 
 ## Maintainer
 - [Devansh Aggarwal](https://github.com/devansh-299)
