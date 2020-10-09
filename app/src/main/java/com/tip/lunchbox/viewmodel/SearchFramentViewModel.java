@@ -3,10 +3,10 @@ package com.tip.lunchbox.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.tip.lunchbox.data.Repository;
-import com.tip.lunchbox.data.SearchQuery;
-import com.tip.lunchbox.model.SearchResponse;
-import java.util.HashMap;
+import com.tip.lunchbox.model.CollectionsResponse;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.SingleObserver;
@@ -14,54 +14,44 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
+public class SearchFramentViewModel extends ViewModel {
 
-public class HomeViewModel extends ViewModel {
-
-    MutableLiveData<SearchResponse> restaurantLiveData = new MutableLiveData<>();
+    MutableLiveData<CollectionsResponse> collectionsResponseLiveData = new MutableLiveData();
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public LiveData<SearchResponse> getRestaurantLiveData() {
-        if (restaurantLiveData.getValue() == null) {
-            fetchRestaurantLiveData();
+    public LiveData<CollectionsResponse> getCollectionsLiveData() {
+        if (collectionsResponseLiveData.getValue() == null) {
+            fetchCollectionsLiveData();
         }
-        return restaurantLiveData;
+        return collectionsResponseLiveData;
     }
 
-    public void fetchRestaurantLiveData() {
-
+    private void fetchCollectionsLiveData() {
         Repository repository = new Repository();
-        HashMap<String, String> queryParams = new HashMap<>();
-        /*
-            For now, using temporary query parameters
-         */
-        queryParams.put("entity_id", "5");
-        queryParams.put("entity_type", "city");
 
-        repository.getSearchResponseObservable(
-                new SearchQuery().addEntity(new SearchQuery.Entity().city(5)))
-                .subscribeOn(Schedulers.newThread())
+        repository.getCollectionsResponseObservable(5).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<SearchResponse>() {
+                .subscribe(new SingleObserver<CollectionsResponse>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable disposable) {
                         compositeDisposable.add(disposable);
                     }
 
                     @Override
-                    public void onSuccess(@NonNull SearchResponse searchResponse) {
-                        restaurantLiveData.setValue(searchResponse);
+                    public void onSuccess(@NonNull CollectionsResponse collectionsResponse) {
+                        collectionsResponseLiveData.setValue(collectionsResponse);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable throwable) {
-                        restaurantLiveData.setValue(null);
+                    //TODO add onError Body
                     }
                 });
     }
 
     @Override
     protected void onCleared() {
-        super.onCleared();
         compositeDisposable.clear();
+        super.onCleared();
     }
 }

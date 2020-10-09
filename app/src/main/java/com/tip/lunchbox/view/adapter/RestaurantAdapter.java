@@ -48,7 +48,7 @@ public class RestaurantAdapter extends
 
     @Override
     public int getItemCount() {
-       return restaurantsList == null? 0 : restaurantsList.size();
+        return restaurantsList == null ? 0 : restaurantsList.size();
     }
 
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
@@ -79,9 +79,10 @@ public class RestaurantAdapter extends
                     restaurant.getLocation().getLocalityVerbose());
 
             try {
-                restaurantItemBinding.itemTvHighlights.setText(
-                        context.getString(R.string.placeholder_highlights, restaurant.getHighlights().get(0)));
-            } catch (ArrayIndexOutOfBoundsException e) {
+                restaurantItemBinding.itemTvHighlights.setText(context.getString(
+                        R.string.placeholder_highlights,
+                        restaurant.getHighlights().get(0)));
+            } catch (ArrayIndexOutOfBoundsException exception) {
                 restaurantItemBinding.itemTvHighlights.setVisibility(View.GONE);
             }
         }

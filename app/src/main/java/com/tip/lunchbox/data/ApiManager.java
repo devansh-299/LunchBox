@@ -1,6 +1,6 @@
 package com.tip.lunchbox.data;
 
-import com.tip.lunchbox.data.service.APIService;
+import com.tip.lunchbox.data.service.ApiService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -13,15 +13,16 @@ public class ApiManager {
 
     private static Retrofit retrofit;
 
-    private static APIService apiService;
+    private static ApiService apiService;
 
     private static Retrofit getRetrofitClient() {
-        if (retrofit == null)
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASEURL)
                     .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create()).build();
+        }
         return retrofit;
     }
 
@@ -36,9 +37,10 @@ public class ApiManager {
                 .build();
     }
 
-    public static APIService getApiService() {
-        if (apiService == null)
-            apiService = getRetrofitClient().create(APIService.class);
+    public static ApiService getApiService() {
+        if (apiService == null) {
+            apiService = getRetrofitClient().create(ApiService.class);
+        }
         return apiService;
     }
 }

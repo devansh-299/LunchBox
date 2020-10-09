@@ -48,7 +48,8 @@ public class GeocodeResponse {
         return nearbyRestaurantContainers;
     }
 
-    public void setNearbyRestaurantContainers(List<RestaurantContainer> nearbyRestaurantContainers) {
+    public void setNearbyRestaurantContainers(
+            List<RestaurantContainer> nearbyRestaurantContainers) {
         this.nearbyRestaurantContainers = nearbyRestaurantContainers;
     }
 

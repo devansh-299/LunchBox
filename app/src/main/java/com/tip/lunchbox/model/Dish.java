@@ -15,8 +15,7 @@ public class Dish {
 
     @SerializedName("price")
     @Expose
-    private
-    String price;
+    private String price;
 
     public String getDishId() {
         return dishId;

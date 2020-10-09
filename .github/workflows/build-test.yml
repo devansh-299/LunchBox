@@ -21,9 +21,9 @@ jobs:
         with:
             java-version: 1.8
 
-      # Checking the code with Android linter
-      - name: Run Android Linter
-        run: ./gradlew lintStagingDebug
+      # Running CheckStyle
+      - name: Run Checkstyle
+        run: ./gradlew checkstyle
 
       # Running unit tests
       - name: Run Unit Tests

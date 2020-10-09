@@ -83,39 +83,39 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         Observable.create((ObservableOnSubscribe<String>)
                 emitter -> binding.searchView.setOnQueryTextListener(
                         new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        viewModel.FetchSearchResponseLiveData(query);
-                        Log.d("http", "onQueryTextSubmit: " + query);
-                        return false;
-                    }
+                            @Override
+                            public boolean onQueryTextSubmit(String query) {
+                            viewModel.fetchSearchResponseLiveData(query);
+                            Log.d("http", "onQueryTextSubmit: " + query);
+                            return false;
+                            }
 
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        if (!emitter.isDisposed()) {
-                            emitter.onNext(newText);
-                        }
-                        Log.d("http", "onTextSubmit: " + newText);
-                        return false;
-                    }
-                }))
+                            @Override
+                            public boolean onQueryTextChange(String newText) {
+                            if (!emitter.isDisposed()) {
+                                emitter.onNext(newText);
+                            }
+                            Log.d("http", "onTextSubmit: " + newText);
+                            return false;
+                            }
+                        }))
                 .debounce(1000, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(new Observer<String>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        compositeDisposable.add(d);
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        compositeDisposable.add(disposable);
                     }
 
                     @Override
                     public void onNext(@NonNull String query) {
                         if (!query.isEmpty()) {
-                            viewModel.FetchSearchResponseLiveData(query);
+                            viewModel.fetchSearchResponseLiveData(query);
                         }
                     }
 
                     @Override
-                    public void onError(@NonNull Throwable e) {
+                    public void onError(@NonNull Throwable throwable) {
 
                     }
 
@@ -134,9 +134,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
-        if (v == binding.searchView) {
-            binding.nestedScrollView.smoothScrollTo(v.getTop(), v.getLeft());
+    public void onClick(View view) {
+        if (view == binding.searchView) {
+            binding.nestedScrollView.smoothScrollTo(view.getTop(), view.getLeft());
         }
     }
 }

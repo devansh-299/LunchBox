@@ -9,6 +9,8 @@
 
 Please ensure the following and put a check accordingly
 
-- [ ] My code doesn't break/affect any unrelated part of the codebase
+- [ ] My code doesn't break/affect any unrelated part of the codebase. 
+
+- [ ] Ran `./gradlew checkstyle` 
 
 - [ ] Squashed multiple commits (_if irrelevant_) into one commit

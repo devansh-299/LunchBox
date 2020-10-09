@@ -21,20 +21,20 @@ public class Repository {
         return ApiManager.getApiService().getSearchResponse(searchQuery.getParams());
     }
 
-    public Single<DailyMenuResponse> getDailyMenuResponseObservable(int restaurantID) {
-        return ApiManager.getApiService().getDailyMenuResponse(restaurantID);
+    public Single<DailyMenuResponse> getDailyMenuResponseObservable(int restaurantId) {
+        return ApiManager.getApiService().getDailyMenuResponse(restaurantId);
     }
 
-    public Single<ReviewResponse> getReviewsResponseObservable(int restaurantID) {
-        return ApiManager.getApiService().getReviewsResponse(restaurantID);
+    public Single<ReviewResponse> getReviewsResponseObservable(int restaurantId) {
+        return ApiManager.getApiService().getReviewsResponse(restaurantId);
     }
 
-    public Single<RestaurantContainer> getRestaurantResponseObservable(int restaurantID) {
-        return ApiManager.getApiService().getRestaurantResponse(restaurantID);
+    public Single<RestaurantContainer> getRestaurantResponseObservable(int restaurantId) {
+        return ApiManager.getApiService().getRestaurantResponse(restaurantId);
     }
 
-    public Single<CollectionsResponse> getCollectionsResponseObservable(int cityID) {
-        return ApiManager.getApiService().getCollectionsResponse(cityID);
+    public Single<CollectionsResponse> getCollectionsResponseObservable(int cityId) {
+        return ApiManager.getApiService().getCollectionsResponse(cityId);
     }
 
     public Single<CollectionsResponse> getCollectionsResponseObservable(double lat, double lon) {
@@ -45,19 +45,20 @@ public class Repository {
         return ApiManager.getApiService().getCategoriesResponse();
     }
 
-    public Single<CuisineResponse> getCuisineResponseObservable(int cityID) {
-        return ApiManager.getApiService().getCuisinesResponse(cityID);
+    public Single<CuisineResponse> getCuisineResponseObservable(int cityId) {
+        return ApiManager.getApiService().getCuisinesResponse(cityId);
     }
 
     public Single<CuisineResponse> getCuisineResponseObservable(double lat, double lon) {
         return ApiManager.getApiService().getCuisinesResponse(lat, lon);
     }
 
-    public Single<EstablishmentResponse> getEstablishmentsResponseObservable(int cityID) {
-        return ApiManager.getApiService().getEstablishmentsResponse(cityID);
+    public Single<EstablishmentResponse> getEstablishmentsResponseObservable(int cityId) {
+        return ApiManager.getApiService().getEstablishmentsResponse(cityId);
     }
 
-    public Single<EstablishmentResponse> getEstablishmentsResponseObservable(double lat, double lon) {
+    public Single<EstablishmentResponse> getEstablishmentsResponseObservable(
+            double lat, double lon) {
         return ApiManager.getApiService().getEstablishmentsResponse(lat, lon);
     }
 

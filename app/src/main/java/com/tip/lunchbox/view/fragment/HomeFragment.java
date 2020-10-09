@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     RestaurantAdapter adapter;
     ArrayList<Restaurant.MapInfo> mapInfoArrayList;
     SupportMapFragment supportMapFragment;
-    private BottomSheetBehavior mBottomSheetBehavior;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -47,17 +47,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         NavController navController = NavHostFragment.findNavController(this);
         NavBackStackEntry navBackStackEntry = navController.getBackStackEntry(R.id.homeFragment);
         viewModel = new ViewModelProvider(navBackStackEntry).get(HomeViewModel.class);
-        View view = homeBinding.getRoot();
 
         adapter = new RestaurantAdapter(getActivity());
-        mBottomSheetBehavior = BottomSheetBehavior.from(homeBinding.nsvRestaurantList);
+        bottomSheetBehavior = BottomSheetBehavior.from(homeBinding.nsvRestaurantList);
         homeBinding.rvRestaurant.setLayoutManager(new LinearLayoutManager(getActivity()));
         homeBinding.rvRestaurant.setAdapter(adapter);
         supportMapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_view);
         supportMapFragment.getMapAsync(this);
         loadData();
-        return view;
+        return homeBinding.getRoot();
     }
 
     private void showLoadingView() {
@@ -81,7 +80,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private void loadData() {
         showLoadingView();
         viewModel.getRestaurantLiveData().observe(getViewLifecycleOwner(), searchResponse -> {
-            if(searchResponse != null) {
+            if (searchResponse != null) {
                 adapter.setData(searchResponse.getRestaurantContainers());
                 showData();
                 setMapMarkers(searchResponse);
@@ -100,12 +99,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         LatLng location = new LatLng(18.5, 73.8);
         googleMap.addMarker(new MarkerOptions().position(location).title("Pune"));
 
-        if (mapInfoArrayList != null)
-        for (Restaurant.MapInfo latLng: this.mapInfoArrayList) {
-            googleMap.addMarker(new MarkerOptions()
-                    .position(latLng.getLatLng())
-                    .title(latLng.getName())
-                    .snippet(latLng.getDesc()));
+        if (mapInfoArrayList != null) {
+            for (Restaurant.MapInfo latLng : this.mapInfoArrayList) {
+                googleMap.addMarker(new MarkerOptions()
+                        .position(latLng.getLatLng())
+                        .title(latLng.getName())
+                        .snippet(latLng.getDesc()));
+            }
         }
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, (float) 15));
     }
