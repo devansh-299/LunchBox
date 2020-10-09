@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/value_10dp"
+        app:iconifiedByDefault="false"
         app:queryHint="@string/discover_restaurants" />
 
     <androidx.core.widget.NestedScrollView
