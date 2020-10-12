@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.SetupActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/introduction_animation"
+        android:layout_width="@dimen/value_200dp"
+        android:layout_height="@dimen/value_200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="introduction_animation.json"
+        app:lottie_loop="true" />
+
+    <TextView
+        android:id="@+id/tv_introduction_message"
+        android:layout_marginTop="@dimen/value_20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorPrimary"
+        android:text="@string/give_us_a_sec"
+        android:textSize="@dimen/value_25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/introduction_animation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

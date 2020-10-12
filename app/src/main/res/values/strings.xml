@@ -9,5 +9,12 @@
     <string name="nearby_restaurants">Nearby Restaurants</string>
     <string name="search_restaurants">Search Restaurants!</string>
     <string name="discover_restaurants">Discover restaurants</string>
+    <string name="give_us_a_sec">Give Us a Sec...</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="what_should_we_call_you">What should we call you?</string>
+    <string name="your_city">Your City?</string>
+    <string name="your_mobile_number">Your Mobile Number?</string>
+    <string name="proceed">Proceed</string>
+    <string name="cannot_leave_blank">Cannot leave this blank</string>
 
 </resources>

@@ -90,4 +90,7 @@ dependencies {
     // Shimmer Loading View
     implementation "com.github.sharish:ShimmerRecyclerView:$rootProject.shimmer_loading_version"
 
+    // Lottie Animations
+    implementation "com.airbnb.android:lottie:$rootProject.lottie_version"
+
 }
