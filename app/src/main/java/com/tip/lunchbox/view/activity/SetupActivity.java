@@ -16,14 +16,14 @@ public class SetupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_information);
+        setContentView(R.layout.activity_setup);
 
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
-            // Launch SetupFragment after 3 seconds
+            // Launch SetupFragment after 4 seconds
             SetupFragment setupFragmentModalSheet = SetupFragment.newInstance();
             setupFragmentModalSheet.show(getSupportFragmentManager(), TAG);
-        }, 3000);
+        }, 4000);
 
     }
 

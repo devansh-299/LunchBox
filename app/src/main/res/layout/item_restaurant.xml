@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/value_10dp"
                 app:layout_constraintBottom_toBottomOf="@id/item_iv_restaurant"
-                android:text="highlights"
+                android:text="@string/placeholder_cuisines"
                 android:textColor="@color/colorTextSecondary"
                 app:layout_constraintStart_toEndOf="@+id/item_iv_restaurant"
                 app:layout_constraintTop_toBottomOf="@+id/item_tv_rating" />

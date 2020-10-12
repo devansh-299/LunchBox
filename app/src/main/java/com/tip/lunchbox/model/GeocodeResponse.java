@@ -7,7 +7,7 @@ import java.util.List;
 
 public class GeocodeResponse {
 
-    @SerializedName("locality")
+    @SerializedName("location")
     @Expose
     private Locality locality;
     @SerializedName("popularity")

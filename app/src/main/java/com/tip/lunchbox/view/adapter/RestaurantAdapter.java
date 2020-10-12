@@ -78,11 +78,14 @@ public class RestaurantAdapter extends
             restaurantItemBinding.itemTvLocality.setText(
                     restaurant.getLocation().getLocalityVerbose());
 
+
             try {
-                restaurantItemBinding.itemTvHighlights.setText(context.getString(
-                        R.string.placeholder_highlights,
-                        restaurant.getHighlights().get(0)));
-            } catch (ArrayIndexOutOfBoundsException exception) {
+                String cuisines = restaurant.getCuisines();
+                int last = restaurant.getCuisines().indexOf(',');
+                cuisines = last != -1 ? cuisines.substring(0, last) : cuisines;
+                restaurantItemBinding.itemTvHighlights.setText(
+                        context.getString(R.string.placeholder_cuisines, cuisines));
+            } catch (NullPointerException error) {
                 restaurantItemBinding.itemTvHighlights.setVisibility(View.GONE);
             }
         }
