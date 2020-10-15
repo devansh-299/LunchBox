@@ -2,19 +2,16 @@ package com.tip.lunchbox.view.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.ActivityRestaurantDetailsBinding;
 import com.tip.lunchbox.model.Restaurant;
 import com.tip.lunchbox.utilities.Constants;
 import com.tip.lunchbox.viewmodel.RestaurantDetailsViewModel;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class RestaurantDetails extends AppCompatActivity {
     RestaurantDetailsViewModel viewModel;
@@ -34,20 +31,28 @@ public class RestaurantDetails extends AppCompatActivity {
 
 
     private void setData(Restaurant restaurant) {
-        binding.tvResName.setText(restaurant.getName());
-        binding.tvResRating.setText(restaurant.getUserRating().getAggregateRating());
-        binding.tvResRating.setBackgroundColor(
-                Color.parseColor("#"
-                        + restaurant.getUserRating().getRatingColor()));
-        Glide.with(this).load(restaurant.getThumb()).into(binding.imgViewRes);
-        ArrayAdapter<String> cuisineAdapter =
-                listToArrayAdapter(Arrays.asList(restaurant.getCuisines().split(",")));
+        binding.tvRestaurantName.setText(restaurant.getName());
+        binding.tvRating.setText(restaurant.getUserRating().getAggregateRating());
+        setOurReviewText(Float.parseFloat(restaurant.getUserRating().getAggregateRating()));
 
-        binding.lvCuisine.setAdapter(listToArrayAdapter(restaurant.getHighlights()));
-        binding.lvHighlights.setAdapter(cuisineAdapter);
+        binding.tvRating.setBackgroundColor(
+                Color.parseColor("#" + restaurant.getUserRating().getRatingColor()));
+        binding.tvLocation.setText(restaurant.getLocation().getLocalityVerbose());
+        Glide.with(this)
+                .load(restaurant.getFeaturedImage())
+                .centerCrop()
+                .into(binding.ivRestaurant);
     }
 
-    private ArrayAdapter<String> listToArrayAdapter(List<String> list) {
-        return new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+    private void setOurReviewText(float aggregateRating) {
+        String ourReview;
+        if (aggregateRating >= 4) {
+            ourReview = getString(R.string.our_review_good);
+        } else if (aggregateRating < 4 && aggregateRating > 2) {
+            ourReview = getString(R.string.our_review_average);
+        } else {
+            ourReview = getString(R.string.our_review_bad);
+        }
+        binding.tvOurReview.setText(ourReview);
     }
 }

@@ -5,4 +5,9 @@
         android:endColor="@color/gradient_end"
         android:angle="270"
         android:dither="true" />
+
+    <corners
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp" />
+
 </shape>

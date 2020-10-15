@@ -1,5 +1,6 @@
 package com.tip.lunchbox.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,8 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.tip.lunchbox.databinding.FragmentSearchBinding;
+import com.tip.lunchbox.utilities.Constants;
+import com.tip.lunchbox.view.activity.RestaurantDetails;
 import com.tip.lunchbox.view.adapter.CollectionsAdapter;
 import com.tip.lunchbox.view.adapter.RestaurantAdapter;
+import com.tip.lunchbox.view.listeners.RecyclerTouchListener;
 import com.tip.lunchbox.viewmodel.SearchViewModel;
 
 import java.util.concurrent.TimeUnit;
@@ -63,7 +67,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
     public void setUpRecyclerViews() {
 
-        //Collections RV
+        // Collections RecyclerView
         collectionsadapter = new CollectionsAdapter(requireActivity());
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         binding.rvCollections.setLayoutManager(
@@ -73,10 +77,18 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         binding.rvCollections.setAdapter(collectionsadapter);
         pagerSnapHelper.attachToRecyclerView(binding.rvCollections);
 
-        //Search rv
+        // Search RecyclerView
         searchAdapter = new RestaurantAdapter(requireActivity());
         binding.rvSearch.setAdapter(searchAdapter);
         binding.rvSearch.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+        // Setting up on item click action
+        new RecyclerTouchListener(getActivity(), binding.rvSearch, (view, position) -> {
+            Intent intent = new Intent(getContext(), RestaurantDetails.class);
+            intent.putExtra(Constants.INTENT_RES_ID, searchAdapter.getData().get(position)
+                    .getRestaurant().getId());
+            requireActivity().startActivity(intent);
+        });
     }
 
     public void addObservableToSearchView() {

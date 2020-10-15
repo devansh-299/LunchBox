@@ -14,7 +14,7 @@
         android:id="@+id/tv_collections"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_black"
+        android:background="@drawable/gradient_black_curved"
         android:layout_marginEnd="@dimen/value_5dp"
         android:ellipsize="end"
         android:maxLines="1"

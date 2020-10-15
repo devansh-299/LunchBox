@@ -42,7 +42,8 @@
             android:name=".view.activity.MainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".view.activity.RestaurantDetails" />
+            android:name=".view.activity.RestaurantDetails"
+            android:theme="@style/NoActionBarTheme"/>
     </application>
 
 </manifest>

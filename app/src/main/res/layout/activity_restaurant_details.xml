@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,49 +8,96 @@
     android:orientation="vertical"
     tools:context=".view.activity.RestaurantDetails">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_res_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/value_15dp"
-        android:text="Restaurant Name"
-        android:textSize="@dimen/value_25sp"
-        android:textStyle="bold" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_weight="1"
+        android:layout_height="0dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_view_Res"
-            android:layout_width="@dimen/value_200dp"
+        <ImageView
+            android:id="@+id/iv_restaurant"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/value_300dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/value_20dp"
-            android:layout_marginTop="@dimen/value_20dp" />
+            android:background="@drawable/gradient_black"
+            android:padding="@dimen/value_10dp"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_res_rating"
+            <TextView
+                android:id="@+id/tv_restaurant_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/value_25sp" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/value_14sp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/value_20dp"
-            android:layout_marginEnd="@dimen/value_20dp"
-            android:text="4.5"
-            android:textSize="@dimen/value_25sp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:text="@string/rating"
+            android:textColor="@color/colorHeading"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/value_10dp"
+            android:textSize="@dimen/value_20sp" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ListView
-            android:id="@+id/lv_highlights"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-        <ListView
-            android:id="@+id/lv_cuisine"
-            android:layout_weight="0.5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/value_10dp"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:layout_marginEnd="@dimen/value_10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_rating"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:padding="@dimen/value_2dp"
+                android:textSize="@dimen/value_14sp" />
+
+            <TextView
+                android:id="@+id/tv_our_review"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/value_10dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginEnd="@dimen/value_5dp"
+            android:layout_marginStart="@dimen/value_5dp"
+            android:background="@color/line_color" />
+
+    </LinearLayout>
+
+</LinearLayout>
