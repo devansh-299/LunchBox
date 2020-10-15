@@ -41,6 +41,8 @@
         <activity
             android:name=".view.activity.MainActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".view.activity.RestaurantDetails" />
     </application>
 
 </manifest>

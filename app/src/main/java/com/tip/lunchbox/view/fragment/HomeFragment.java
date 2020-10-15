@@ -1,5 +1,6 @@
 package com.tip.lunchbox.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,10 @@ import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.FragmentHomeBinding;
 import com.tip.lunchbox.model.Restaurant;
 import com.tip.lunchbox.model.RestaurantContainer;
+import com.tip.lunchbox.utilities.Constants;
+import com.tip.lunchbox.view.activity.RestaurantDetails;
 import com.tip.lunchbox.view.adapter.RestaurantAdapter;
+import com.tip.lunchbox.view.listeners.RecyclerTouchListener;
 import com.tip.lunchbox.viewmodel.HomeViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -52,6 +56,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         viewModel = new ViewModelProvider(navBackStackEntry).get(HomeViewModel.class);
 
         adapter = new RestaurantAdapter(getActivity());
+
+        new RecyclerTouchListener(getActivity(), homeBinding.rvRestaurant, (view, position) -> {
+            Intent intent = new Intent(getContext(), RestaurantDetails.class);
+            intent.putExtra(Constants.INTENT_RES_ID, adapter.getData().get(position)
+                    .getRestaurant().getId());
+            requireActivity().startActivity(intent);
+        });
+
         BottomSheetBehavior.from(homeBinding.nsvRestaurantList);
         homeBinding.rvRestaurant.setLayoutManager(new LinearLayoutManager(getActivity()));
         homeBinding.rvRestaurant.setAdapter(adapter);

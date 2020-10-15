@@ -2,7 +2,9 @@ package com.tip.lunchbox.view.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -32,6 +34,10 @@ public class RestaurantAdapter extends
     public void setData(List<RestaurantContainer> restaurantsList) {
         this.restaurantsList = restaurantsList;
         notifyDataSetChanged();
+    }
+
+    public List<RestaurantContainer> getData() {
+        return restaurantsList;
     }
 
     @NonNull
@@ -91,5 +97,6 @@ public class RestaurantAdapter extends
         }
     }
 }
+
 
 

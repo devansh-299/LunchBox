@@ -7,6 +7,7 @@ import com.tip.lunchbox.model.CuisineResponse;
 import com.tip.lunchbox.model.DailyMenuResponse;
 import com.tip.lunchbox.model.EstablishmentResponse;
 import com.tip.lunchbox.model.GeocodeResponse;
+import com.tip.lunchbox.model.Restaurant;
 import com.tip.lunchbox.model.RestaurantContainer;
 import com.tip.lunchbox.model.ReviewResponse;
 import com.tip.lunchbox.model.SearchResponse;
@@ -29,7 +30,7 @@ public class Repository {
         return ApiManager.getApiService().getReviewsResponse(restaurantId);
     }
 
-    public Single<RestaurantContainer> getRestaurantResponseObservable(int restaurantId) {
+    public Single<Restaurant> getRestaurantResponseObservable(int restaurantId) {
         return ApiManager.getApiService().getRestaurantResponse(restaurantId);
     }
 

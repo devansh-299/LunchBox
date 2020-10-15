@@ -7,6 +7,7 @@ import com.tip.lunchbox.model.CuisineResponse;
 import com.tip.lunchbox.model.DailyMenuResponse;
 import com.tip.lunchbox.model.EstablishmentResponse;
 import com.tip.lunchbox.model.GeocodeResponse;
+import com.tip.lunchbox.model.Restaurant;
 import com.tip.lunchbox.model.RestaurantContainer;
 import com.tip.lunchbox.model.ReviewResponse;
 import com.tip.lunchbox.model.SearchResponse;
@@ -31,7 +32,7 @@ public interface ApiService {
     Single<ReviewResponse> getReviewsResponse(@Query("res_id") int restaurantId);
 
     @GET("restaurant")
-    Single<RestaurantContainer> getRestaurantResponse(@Query("res_id") int restaurantId);
+    Single<Restaurant> getRestaurantResponse(@Query("res_id") int restaurantId);
 
     @GET("collections")
     Single<CollectionsResponse> getCollectionsResponse(@Query("city_id") int cityId);
