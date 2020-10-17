@@ -1,6 +1,8 @@
 package com.tip.lunchbox.view.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +33,7 @@ public class RestaurantDetails extends AppCompatActivity {
 
 
     private void setData(Restaurant restaurant) {
-        binding.tvRestaurantName.setText(restaurant.getName());
+        binding.toolbar.setTitle(restaurant.getName());
         binding.tvRating.setText(restaurant.getUserRating().getAggregateRating());
         setOurReviewText(Float.parseFloat(restaurant.getUserRating().getAggregateRating()));
 
@@ -42,7 +44,35 @@ public class RestaurantDetails extends AppCompatActivity {
                 .load(restaurant.getFeaturedImage())
                 .centerCrop()
                 .into(binding.ivRestaurant);
+        binding.chipDirections.setOnClickListener(view -> getDirections(restaurant));
     }
+
+
+    /**
+        This function is used to create an Intent for Google Maps to get the directions to the
+        restaurant.
+
+        @param restaurant the restaurant whose coordinates are to be passed to the intent
+     */
+    private void getDirections(Restaurant restaurant) {
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("https")
+                .authority("www.google.com")
+                .appendPath("maps")
+                .appendPath("dir")
+                .appendPath("")
+                .appendQueryParameter("api", "1")
+                .appendQueryParameter(
+                        "destination",
+                        restaurant.getLocation().getLatitude()
+                                + ","
+                                + restaurant.getLocation().getLongitude());
+        String url = builder.build().toString();
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+        mapIntent.setData(Uri.parse(url));
+        startActivity(mapIntent);
+    }
+
 
     private void setOurReviewText(float aggregateRating) {
         String ourReview;

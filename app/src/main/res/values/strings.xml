@@ -21,5 +21,7 @@
     <string name="our_review_good">Go ahead! We totally recommend this restaurant.\nHave a nice time</string>
     <string name="our_review_average">Decent place!\nSome of our users did have a great time here</string>
     <string name="our_review_bad">Uuh! this is probably not the best restaurant according to our users</string>
+    <string name="get_directions">Get Directions</string>
+    <string name="location">Location</string>
 
 </resources>
