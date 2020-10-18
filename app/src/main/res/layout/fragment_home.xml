@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map_view"
@@ -11,9 +12,44 @@
         android:layout_gravity="center"
         android:layout_height="match_parent" />
 
+    <HorizontalScrollView
+        android:id="@+id/chip_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/filter_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/value_5dp"
+            app:chipSpacingHorizontal="@dimen/value_10dp"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            style="@style/Widget.MaterialComponents.ChipGroup"
+            app:singleLine="true" />
+
+    </HorizontalScrollView>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/clear_filter_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/value_10dp"
+            android:visibility="invisible"
+            style="@style/Widget.MaterialComponents.Chip.Action"
+            app:layout_behavior="com.tip.lunchbox.utilities.FloatingButtonBehaviour"
+            android:text="@string/clear_filter"
+            app:rippleColor="@color/colorPrimary_0.4"
+            app:chipBackgroundColor="@color/white"
+            app:chipStrokeColor="@color/colorPrimary"
+            app:chipStrokeWidth="1dp" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nsv_restaurant_list"

@@ -18,19 +18,19 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchViewModel extends ViewModel {
 
-    MutableLiveData<CollectionsResponse> collectionsResponseLivedata = new MutableLiveData<>();
+    MutableLiveData<CollectionsResponse> collectionsResponseLiveData = new MutableLiveData<>();
     MutableLiveData<SearchResponse> searchResponseLiveData = new MutableLiveData<>();
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
     public LiveData<CollectionsResponse> getCollectionsLiveData() {
-        if (collectionsResponseLivedata.getValue() == null) {
+        if (collectionsResponseLiveData.getValue() == null) {
             fetchCollectionsLiveData();
         }
-        return collectionsResponseLivedata;
+        return collectionsResponseLiveData;
     }
 
-    public LiveData<SearchResponse> getSearchResponseLivedata() {
+    public LiveData<SearchResponse> getSearchResponseLiveData() {
         return searchResponseLiveData;
     }
 
@@ -47,7 +47,7 @@ public class SearchViewModel extends ViewModel {
 
                     @Override
                     public void onSuccess(@NonNull CollectionsResponse collectionsResponse) {
-                        collectionsResponseLivedata.setValue(collectionsResponse);
+                        collectionsResponseLiveData.setValue(collectionsResponse);
                     }
 
                     @Override
@@ -59,8 +59,9 @@ public class SearchViewModel extends ViewModel {
 
     public void fetchSearchResponseLiveData(String query) {
         Repository repository = new Repository();
-        repository.getSearchResponseObservable(
-                new SearchQuery().addQuery("Pune")).subscribeOn(Schedulers.newThread())
+        repository.getSearchResponseObservable(new SearchQuery()
+                .addEntity(new SearchQuery.Entity().city(5)).addQuery(query))
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SearchResponse>() {
 

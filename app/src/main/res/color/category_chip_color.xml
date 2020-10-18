@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Custom state-based colors for the category filter chips-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/colorPrimary_0.4" android:state_checked="true"/>
+    <item android:color="@color/white"/>
+</selector>

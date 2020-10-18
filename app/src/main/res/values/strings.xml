@@ -23,5 +23,6 @@
     <string name="our_review_bad">Uuh! this is probably not the best restaurant according to our users</string>
     <string name="get_directions">Get Directions</string>
     <string name="location">Location</string>
+    <string name="clear_filter">Clear Filter</string>
 
 </resources>

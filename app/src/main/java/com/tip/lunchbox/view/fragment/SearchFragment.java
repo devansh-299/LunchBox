@@ -21,6 +21,8 @@ import com.tip.lunchbox.view.adapter.RestaurantAdapter;
 import com.tip.lunchbox.view.listeners.RecyclerTouchListener;
 import com.tip.lunchbox.viewmodel.SearchViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -41,7 +43,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
+    public View onCreateView(@NotNull LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
@@ -56,7 +58,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                 collectionsResponse -> collectionsadapter.setData(
                         collectionsResponse.getCollectionsContainer()));
 
-        viewModel.getSearchResponseLivedata().observe(
+        viewModel.getSearchResponseLiveData().observe(
                 getViewLifecycleOwner(),
                 searchResponse -> {
                         binding.llSearchRestaurants.setVisibility(View.GONE);

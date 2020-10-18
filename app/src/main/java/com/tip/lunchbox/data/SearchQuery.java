@@ -59,8 +59,8 @@ public class SearchQuery {
     }
 
     // Data will be fetched by api call
-    public SearchQuery addCategory(List<Integer> ids) {
-        params.put("category", ids.toString());
+    public SearchQuery addCategory(Integer id) {
+        params.put("category", id.toString());
         return this;
     }
 

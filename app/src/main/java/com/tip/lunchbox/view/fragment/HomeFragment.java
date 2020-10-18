@@ -1,10 +1,12 @@
 package com.tip.lunchbox.view.fragment;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -21,12 +23,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.chip.Chip;
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.FragmentHomeBinding;
+import com.tip.lunchbox.model.CategoryContainer;
 import com.tip.lunchbox.model.Restaurant;
 import com.tip.lunchbox.model.RestaurantContainer;
 import com.tip.lunchbox.utilities.Constants;
 import com.tip.lunchbox.view.activity.RestaurantDetails;
+import com.tip.lunchbox.view.listeners.CategoryChangeListener;
 import com.tip.lunchbox.view.adapter.RestaurantAdapter;
 import com.tip.lunchbox.view.listeners.RecyclerTouchListener;
 import com.tip.lunchbox.viewmodel.HomeViewModel;
@@ -36,6 +41,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
@@ -44,6 +59,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     RestaurantAdapter adapter;
     ArrayList<Restaurant.MapInfo> mapInfoArrayList;
     SupportMapFragment supportMapFragment;
+    CategoryChangeListener categoryChangeListener;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater,
@@ -71,7 +88,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_view);
         assert supportMapFragment != null;
         supportMapFragment.getMapAsync(this);
+        addObservableForCategoryFilter();
         loadData();
+        clearFilterAction();
         return homeBinding.getRoot();
     }
 
@@ -95,6 +114,60 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     private void loadData() {
         showLoadingView();
+        viewModel.getCategoriesLiveData().observe(getViewLifecycleOwner(), categoryResponse -> {
+            if (categoryResponse != null) {
+                List<CategoryContainer> categories = categoryResponse.getCategories();
+                for (CategoryContainer categoryContainer : categories) {
+                    Chip categoryChip = (Chip)(getLayoutInflater()
+                            .inflate(R.layout.item_chip_category, homeBinding.filterChipGroup,
+                                    false));
+                    categoryChip.setText(categoryContainer.getCategories().getName());
+                    categoryChip.setTag(categoryContainer.getCategories().getId());
+                    categoryChip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                        if (isChecked) {
+                            categoryChangeListener.onFilterChanged((Integer) categoryChip.getTag());
+                        }
+                    });
+                    homeBinding.filterChipGroup.addView(categoryChip);
+                }
+                // Trigger appearance and disappearance of the 'Clear Filter' chip
+                homeBinding.filterChipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+                    if (checkedId != -1 && homeBinding.clearFilterChip.getVisibility()
+                            == View.INVISIBLE) {
+                        homeBinding.clearFilterChip.setAlpha(0f);
+                        homeBinding.clearFilterChip.setVisibility(View.VISIBLE);
+                        homeBinding.clearFilterChip.animate().alpha(1f).setListener(null);
+                    } else if (checkedId == -1) {
+                        homeBinding.clearFilterChip.animate().alpha(0f)
+                                .setListener(new Animator.AnimatorListener() {
+                                    /* Simple animation for the appearing and disappearing of the
+                                    'Clear Filter' chip
+                                    */
+                                    @Override
+                                    public void onAnimationStart(Animator animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        homeBinding.clearFilterChip.setVisibility(View.INVISIBLE);
+                                    }
+
+                                    @Override
+                                    public void onAnimationCancel(Animator animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animator animation) {
+
+                                    }
+                                });
+                    }
+                });
+            }
+        });
+
         viewModel.getRestaurantLiveData().observe(getViewLifecycleOwner(), geoCodeResponse -> {
             if (geoCodeResponse != null) {
                 adapter.setData(geoCodeResponse.getNearbyRestaurantContainers());
@@ -111,6 +184,56 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 showErrorView();
             }
         });
+
+        viewModel.getFilteredLiveData().observe(getViewLifecycleOwner(), searchResponse -> {
+            if (searchResponse != null) {
+                adapter.setData(searchResponse.getRestaurantContainers());
+                showData();
+
+                setMapMarkers(searchResponse.getRestaurantContainers());
+            } else {
+                showErrorView();
+            }
+        });
+    }
+
+    // Emits an integer (categoryId) whenever any category filter chip is selected
+    private void addObservableForCategoryFilter() {
+        Observable.create((ObservableOnSubscribe<Integer>) emitter ->
+                categoryChangeListener = emitter::onNext)
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        compositeDisposable.add(disposable);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Integer id) {
+                        showLoadingView();
+                        viewModel.fetchFilteredRestaurantData(id);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable error) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    // This methods clears the selected filter and fetches the unfiltered nearby restaurant data
+    private void clearFilterAction() {
+        homeBinding.clearFilterChip.setOnClickListener(v -> {
+            homeBinding.filterChipGroup.clearCheck();
+            viewModel.fetchRestaurantLiveData(18.5, 73.8);
+        });
     }
 
     @Override
@@ -119,18 +242,37 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             Currently, using temporary values for testing. Ideally these values should have been
             taken from the user while first launching the application
          */
+
+        // Clears the existing markers every time a new filter is selected or cleared
+        googleMap.clear();
+
         LatLng location = new LatLng(18.5, 73.8);
         googleMap.addMarker(new MarkerOptions().position(location).title("Pune"));
 
-        if (mapInfoArrayList != null) {
+        // If the mapInfoArrayList has entries, the google maps camera is zoomed to an average of
+        // the latitude and longitude coordinates of the locations
+        double latSum = 0;
+        double longSum = 0;
+        double latAvg;
+        double longAvg;
+
+        if (mapInfoArrayList != null && mapInfoArrayList.size() != 0) {
             for (Restaurant.MapInfo latLng : this.mapInfoArrayList) {
+                latSum += latLng.getLatLng().latitude;
+                longSum += latLng.getLatLng().longitude;
                 googleMap.addMarker(new MarkerOptions()
                         .position(latLng.getLatLng())
                         .title(latLng.getName())
                         .snippet(latLng.getDesc()));
             }
+            latAvg = latSum / (this.mapInfoArrayList.size());
+            longAvg = longSum / (this.mapInfoArrayList.size());
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latAvg, longAvg),
+                    (float) 12));
+        } else {
+            Toast.makeText(requireContext(), "No Results Found", Toast.LENGTH_SHORT).show();
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, (float) 15));
         }
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, (float) 15));
     }
 
     private void setMapMarkers(List<RestaurantContainer> restaurantContainerList) {
@@ -145,5 +287,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onDestroy() {
         super.onDestroy();
         homeBinding = null;
+        compositeDisposable.clear();
     }
 }
