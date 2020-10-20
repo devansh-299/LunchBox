@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -49,28 +50,23 @@ public class RestaurantDetails extends AppCompatActivity {
 
 
     /**
-        This function is used to create an Intent for Google Maps to get the directions to the
-        restaurant.
-
-        @param restaurant the restaurant whose coordinates are to be passed to the intent
+     * This function is used to create an Intent for Google Maps to get the directions to the
+     * restaurant.
+     *
+     * @param restaurant the restaurant whose coordinates are to be passed to the intent
      */
     private void getDirections(Restaurant restaurant) {
-        Uri.Builder builder = new Uri.Builder();
-        builder.scheme("https")
-                .authority("www.google.com")
-                .appendPath("maps")
-                .appendPath("dir")
-                .appendPath("")
-                .appendQueryParameter("api", "1")
-                .appendQueryParameter(
-                        "destination",
-                        restaurant.getLocation().getLatitude()
-                                + ","
-                                + restaurant.getLocation().getLongitude());
-        String url = builder.build().toString();
+        Uri url = Uri.parse(String.format("geo:%s,%s?q=%s",
+                restaurant.getLocation().getLatitude(),
+                restaurant.getLocation().getLatitude(),
+                restaurant.getName()));
         Intent mapIntent = new Intent(Intent.ACTION_VIEW);
-        mapIntent.setData(Uri.parse(url));
-        startActivity(mapIntent);
+        mapIntent.setData(url);
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            Toast.makeText(this, getString(R.string.maps_not_found), Toast.LENGTH_LONG).show();
+        }
     }
 
 

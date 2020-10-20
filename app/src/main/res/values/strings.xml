@@ -24,5 +24,6 @@
     <string name="get_directions">Get Directions</string>
     <string name="location">Location</string>
     <string name="clear_filter">Clear Filter</string>
+    <string name="maps_not_found">Please install a map application</string>
 
 </resources>
