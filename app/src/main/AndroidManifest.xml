@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tip.lunchbox">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,40 +13,50 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.CollectionDetails"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" /> <!-- for google maps -->
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
+            android:resource="@array/preloaded_fonts" />
 
+        <!-- for google maps -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="MAP_API_KEY" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <activity
             android:name=".view.activity.Splash"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.activity.SetupActivity"
             android:theme="@style/NoActionBarTheme" />
+
         <activity
             android:name=".view.activity.MainActivity"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".view.activity.RestaurantDetails"
             android:theme="@style/NoActionBarTheme" />
+
+        <activity
+            android:name=".view.activity.MenuActivity"
+            android:theme="@style/NoActionBarTheme" />
+
+        <activity
+            android:name=".view.activity.CollectionDetails" />
+
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@
     tools:context=".view.activity.RestaurantDetails">
     
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
@@ -46,6 +47,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -208,5 +210,19 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/value_10dp"
+        android:layout_gravity="center_horizontal|bottom"
+        app:icon="@drawable/ic_restaurant_menu"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/colorPrimaryDark"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/colorPrimary"
+        android:textAllCaps="false"
+        android:text="@string/menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

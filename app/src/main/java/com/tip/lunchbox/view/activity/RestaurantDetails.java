@@ -34,6 +34,7 @@ public class RestaurantDetails extends AppCompatActivity {
     private ActivityRestaurantDetailsBinding binding;
     private PhoneNumberAdapter phoneNumberAdapter;
     private HighlightsAdapter highlightsAdapter;
+    private static final String TAG = "Restaurant Details";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,16 @@ public class RestaurantDetails extends AppCompatActivity {
         phoneNumberAdapter = new PhoneNumberAdapter(this);
         highlightsAdapter = new HighlightsAdapter(this);
         setupRecyclerViews();
+
+        binding.appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (Math.abs(verticalOffset) - appBarLayout.getTotalScrollRange() == 0) {
+                // Collapsed State
+                binding.fabMenu.show();
+            } else {
+                // Expanded State
+                binding.fabMenu.hide();
+            }
+        });
         viewModel.getRestaurantLiveData(Integer.parseInt(resId)).observe(this, this::setData);
     }
 
@@ -118,6 +129,16 @@ public class RestaurantDetails extends AppCompatActivity {
         binding.chipDirections.setOnClickListener(view -> getDirections(restaurant));
         addPhoneNumbers(restaurant.getPhoneNumbers());
         highlightsAdapter.setData(restaurant.getHighlights());
+
+        // onClickListener for opening up the MenuActivity
+        binding.fabMenu.setOnClickListener(
+                view -> {
+                    Intent menuIntent = new Intent(this, MenuActivity.class);
+                    menuIntent.putExtra(Constants.INTENT_RESTAURANT_NAME, restaurant.getName());
+                    menuIntent.putExtra(Constants.INTENT_MENU_URL, restaurant.getMenuUrl());
+                    startActivity(menuIntent);
+                }
+        );
     }
 
     private void addPhoneNumbers(String phoneNumbers) {

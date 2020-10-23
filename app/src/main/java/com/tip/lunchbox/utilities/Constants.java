@@ -9,4 +9,6 @@ public class Constants {
     public static final String INTENT_RES_ID = "intent_res_id";
     public static final String INTENT_COLLECTION_ID = "intent_coll_id";
     public static final String INTENT_COLLECTION_NAME = "intent_coll_name";
+    public static final String INTENT_RESTAURANT_NAME = "intent_restaurant_name";
+    public static final String INTENT_MENU_URL = "intent_menu_url";
 }

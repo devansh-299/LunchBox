@@ -29,5 +29,6 @@
     <string name="highlights">Highlights</string>
     <string name="dialer_app_not_found">Please install a dialer application</string>
     <string name="permission_rationale_call">Permission Denied: Please go to device settings and grant Telephone permission to make the call</string>
+    <string name="menu">Menu</string>
 
 </resources>
