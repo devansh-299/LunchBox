@@ -1,14 +1,13 @@
 package com.tip.lunchbox.view.adapter;
 
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -33,6 +32,10 @@ public class CollectionsAdapter extends
     public void setData(List<CollectionsContainer> collectionsContainers) {
         this.collectionsContainers = collectionsContainers;
         notifyDataSetChanged();
+    }
+
+    public List<CollectionsContainer> getData() {
+        return collectionsContainers;
     }
 
     @NonNull

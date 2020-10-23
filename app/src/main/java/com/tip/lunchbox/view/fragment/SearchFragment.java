@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.tip.lunchbox.databinding.FragmentSearchBinding;
 import com.tip.lunchbox.utilities.Constants;
+import com.tip.lunchbox.view.activity.CollectionDetails;
 import com.tip.lunchbox.view.activity.RestaurantDetails;
 import com.tip.lunchbox.view.adapter.CollectionsAdapter;
 import com.tip.lunchbox.view.adapter.RestaurantAdapter;
@@ -37,7 +38,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class SearchFragment extends Fragment implements View.OnClickListener {
 
     FragmentSearchBinding binding;
-    CollectionsAdapter collectionsadapter;
+    CollectionsAdapter collectionsAdapter;
     RestaurantAdapter searchAdapter;
     SearchViewModel viewModel;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -55,14 +56,14 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         // Observing data
         viewModel.getCollectionsLiveData().observe(
                 getViewLifecycleOwner(),
-                collectionsResponse -> collectionsadapter.setData(
+                collectionsResponse -> collectionsAdapter.setData(
                         collectionsResponse.getCollectionsContainer()));
 
         viewModel.getSearchResponseLiveData().observe(
                 getViewLifecycleOwner(),
                 searchResponse -> {
-                        binding.llSearchRestaurants.setVisibility(View.GONE);
-                        searchAdapter.setData(searchResponse.getRestaurantContainers());
+                    binding.llSearchRestaurants.setVisibility(View.GONE);
+                    searchAdapter.setData(searchResponse.getRestaurantContainers());
                 });
         return binding.getRoot();
     }
@@ -70,13 +71,13 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     public void setUpRecyclerViews() {
 
         // Collections RecyclerView
-        collectionsadapter = new CollectionsAdapter(requireActivity());
+        collectionsAdapter = new CollectionsAdapter(requireActivity());
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         binding.rvCollections.setLayoutManager(
                 new LinearLayoutManager(
                         getActivity(),
                         LinearLayoutManager.HORIZONTAL, false));
-        binding.rvCollections.setAdapter(collectionsadapter);
+        binding.rvCollections.setAdapter(collectionsAdapter);
         pagerSnapHelper.attachToRecyclerView(binding.rvCollections);
 
         // Search RecyclerView
@@ -91,6 +92,17 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     .getRestaurant().getId());
             requireActivity().startActivity(intent);
         });
+
+        new RecyclerTouchListener(getActivity(), binding.rvCollections, (view, position) -> {
+            Intent intent = new Intent(getActivity(), CollectionDetails.class);
+            intent.putExtra(Constants.INTENT_COLLECTION_ID,
+                    collectionsAdapter.getData()
+                            .get(position).getCollection().getCollectionId());
+
+            intent.putExtra(Constants.INTENT_COLLECTION_NAME, collectionsAdapter.getData()
+                    .get(position).getCollection().getTitle());
+            requireActivity().startActivity(intent);
+        });
     }
 
     public void addObservableToSearchView() {
@@ -99,18 +111,18 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                         new SearchView.OnQueryTextListener() {
                             @Override
                             public boolean onQueryTextSubmit(String query) {
-                            viewModel.fetchSearchResponseLiveData(query);
-                            Log.d("http", "onQueryTextSubmit: " + query);
-                            return false;
+                                viewModel.fetchSearchResponseLiveData(query);
+                                Log.d("http", "onQueryTextSubmit: " + query);
+                                return false;
                             }
 
                             @Override
                             public boolean onQueryTextChange(String newText) {
-                            if (!emitter.isDisposed()) {
-                                emitter.onNext(newText);
-                            }
-                            Log.d("http", "onTextSubmit: " + newText);
-                            return false;
+                                if (!emitter.isDisposed()) {
+                                    emitter.onNext(newText);
+                                }
+                                Log.d("http", "onTextSubmit: " + newText);
+                                return false;
                             }
                         }))
                 .debounce(1000, TimeUnit.MILLISECONDS)
