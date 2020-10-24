@@ -16,7 +16,9 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class CollectionDetailsViewModel extends ViewModel {
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private Repository repository = new Repository();
     private MutableLiveData<SearchResponse> searchResponseLiveData = new MutableLiveData<>();
 
     public LiveData<SearchResponse> getSearchResponseLiveData(int categoryId) {
@@ -25,7 +27,6 @@ public class CollectionDetailsViewModel extends ViewModel {
     }
 
     public void fetchSearchResponseLiveData(int categoryId) {
-        Repository repository = new Repository();
         repository.getSearchResponseObservable(new SearchQuery()
                 .addEntity(new SearchQuery.Entity().city(5)).addCollection(categoryId))
                 .subscribeOn(Schedulers.newThread())

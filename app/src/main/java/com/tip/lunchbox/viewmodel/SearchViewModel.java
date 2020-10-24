@@ -21,7 +21,7 @@ public class SearchViewModel extends ViewModel {
     MutableLiveData<CollectionsResponse> collectionsResponseLiveData = new MutableLiveData<>();
     MutableLiveData<SearchResponse> searchResponseLiveData = new MutableLiveData<>();
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+    Repository repository = new Repository();
 
     public LiveData<CollectionsResponse> getCollectionsLiveData() {
         if (collectionsResponseLiveData.getValue() == null) {
@@ -35,8 +35,6 @@ public class SearchViewModel extends ViewModel {
     }
 
     private void fetchCollectionsLiveData() {
-        Repository repository = new Repository();
-
         repository.getCollectionsResponseObservable(5).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<CollectionsResponse>() {
@@ -58,7 +56,6 @@ public class SearchViewModel extends ViewModel {
     }
 
     public void fetchSearchResponseLiveData(String query) {
-        Repository repository = new Repository();
         repository.getSearchResponseObservable(new SearchQuery()
                 .addEntity(new SearchQuery.Entity().city(5)).addQuery(query))
                 .subscribeOn(Schedulers.newThread())
