@@ -33,7 +33,7 @@ public class SetupFragment extends BottomSheetDialogFragment implements View.OnC
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSetupBinding.inflate(inflater, container, false);
-        binding.btnProceed.setOnClickListener(this);
+        binding.chipProceed.setOnClickListener(this);
         return binding.getRoot();
     }
 

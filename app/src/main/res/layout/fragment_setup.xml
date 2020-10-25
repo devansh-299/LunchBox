@@ -4,9 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/value_10dp"
     android:orientation="vertical"
     tools:context=".view.fragment.SetupFragment">
+
+    <View
+        android:layout_marginTop="@dimen/value_20dp"
+        android:layout_marginBottom="@dimen/value_20dp"
+        android:layout_width="@dimen/value_100dp"
+        android:layout_height="@dimen/value_2dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -56,13 +65,16 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_proceed"
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_proceed"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:text="@string/proceed"
-        android:layout_marginTop="@dimen/value_10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/value_20dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+        app:chipSurfaceColor="@color/colorPrimary"
         android:textColor="@color/white"
-        android:layout_height="wrap_content" />
+        app:chipIcon="@drawable/ic_arrow" />
 
 </LinearLayout>

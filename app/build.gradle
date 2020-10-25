@@ -81,10 +81,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
-    // MultiDex Support
-    implementation "com.android.support:multidex:$rootProject.multi_dex_version"
-
-    // Java 8+ API Desugaring
+    // Java 8+ API De-sugaring
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
 
     // Shimmer Loading View

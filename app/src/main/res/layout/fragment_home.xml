@@ -72,11 +72,12 @@
                     android:layout_marginTop="@dimen/value_20dp"
                     android:layout_width="@dimen/value_100dp"
                     android:layout_height="@dimen/value_2dp"
-                    android:background="@color/line_color" />
+                    android:background="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
                     android:layout_marginTop="@dimen/value_10dp"
                     android:text="@string/nearby_restaurants"
                     android:textSize="@dimen/value_20sp" />

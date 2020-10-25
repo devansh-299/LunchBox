@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/colorItemDark"
         app:cardCornerRadius="@dimen/value_5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,22 +31,20 @@
                 android:id="@+id/item_tv_restaurant_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Restaurant Name here"
                 android:layout_margin="@dimen/value_10dp"
-                android:textColor="@color/colorTextPrimary"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/value_18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/item_iv_restaurant"
-                app:layout_constraintTop_toTopOf="parent"
-                android:maxLines="1"
-                android:ellipsize="end" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/item_tv_locality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/value_10dp"
-                android:text="Locality"
                 android:textColor="@color/colorTextSecondary"
                 app:layout_constraintStart_toEndOf="@+id/item_iv_restaurant"
                 app:layout_constraintTop_toBottomOf="@+id/item_tv_restaurant_name" />
@@ -53,17 +52,17 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="0.5dp"
-                app:layout_constraintStart_toStartOf="@id/item_tv_locality"
                 android:layout_marginEnd="@dimen/value_10dp"
                 android:background="@color/line_color"
+                app:layout_constraintStart_toStartOf="@id/item_tv_locality"
                 app:layout_constraintTop_toBottomOf="@+id/item_tv_locality" />
 
             <TextView
                 android:id="@+id/item_tv_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/value_2dp"
                 android:layout_margin="@dimen/value_10dp"
+                android:padding="@dimen/value_2dp"
                 android:text="Rating"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/item_iv_restaurant"
@@ -74,9 +73,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/value_10dp"
-                app:layout_constraintBottom_toBottomOf="@id/item_iv_restaurant"
                 android:text="@string/placeholder_cuisines"
                 android:textColor="@color/colorTextSecondary"
+                app:layout_constraintBottom_toBottomOf="@id/item_iv_restaurant"
                 app:layout_constraintStart_toEndOf="@+id/item_iv_restaurant"
                 app:layout_constraintTop_toBottomOf="@+id/item_tv_rating" />
 

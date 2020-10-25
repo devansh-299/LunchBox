@@ -29,7 +29,7 @@
         android:text="@string/introduction_message"
         android:textSize="@dimen/value_20sp"
         app:layout_constraintTop_toBottomOf="@id/tv_app_name"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/introduction_animation"
@@ -43,16 +43,14 @@
         app:lottie_fileName="introduction_animation.json"
         app:lottie_loop="true" />
 
-    <TextView
+    <ProgressBar
         android:id="@+id/tv_waiting_text"
-        android:layout_marginTop="@dimen/value_20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/give_us_a_sec"
-        android:textSize="@dimen/value_25sp"
+        android:layout_marginBottom="@dimen/value_40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introduction_animation" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
