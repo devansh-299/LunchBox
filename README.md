@@ -1,6 +1,23 @@
-# LunchBox
+<img src="https://user-images.githubusercontent.com/46667021/97115713-2d377900-171e-11eb-8e97-06a56d2b566f.jpg" width="1000" height="300" />
 
-LunchBox is a native Android application for finding nearby restaurantContainers, their servings, and what not! The application follows MVVM architecture and is written in Java. This project comes under Technology Incubator Programme BITS Pilani Goa Campus.
+|Build Status|
+|------------|
+|![badge](https://action-badges.now.sh/devansh-299/LunchBox)|
+
+LunchBox is a native Android application for exploring eateries. LunchBox provides all the details about restaurants ranging from their location to their menu and what not! The application follows MVVM architecture, written in Java and fetches data from **Zomato** APIs ([_documentation_](https://developers.zomato.com/documentation)). 
+<br />
+This project is being worked under the Technology Incubator Programme BITS Pilani Goa Campus.
+
+## Gallery
+
+|Setup Screen|Home Screen|Restaurant - Gallery|
+|------|------|------|
+|<img src="https://user-images.githubusercontent.com/46667021/97115909-bbf8c580-171f-11eb-84cd-cd24db5284ce.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97115979-4ccfa100-1720-11eb-84f6-a6cb54407b44.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97115999-6670e880-1720-11eb-8bdd-ff078a1435c8.jpg" width="280" height="480" />|
+
+
+|Restaurant - Details|WebView - Menu|Search Screen|
+|------|------|------|
+|<img src="https://user-images.githubusercontent.com/46667021/97115939-17c34e80-1720-11eb-83fa-2df221fd3bda.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97116033-9ae4a480-1720-11eb-99c7-2ee6ca1e329b.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97116085-d41d1480-1720-11eb-9ab1-176a1026eee6.jpg" width="280" height="480" />|
 
 
 ## Building The Code
@@ -36,7 +53,7 @@ LunchBox is a native Android application for finding nearby restaurantContainers
 [RxJava](https://github.com/ReactiveX/RxJava), LiveData, ViewModel, Navigation Components,
 [Material Components](https://github.com/material-components/material-components-android),
 [ShimmerRecyclerView](https://github.com/sharish/ShimmerRecyclerView),
-[Glide](https://github.com/bumptech/glide)
+[Glide](https://github.com/bumptech/glide), [Lottie-Android](https://github.com/airbnb/lottie-android)
 
 ## Maintainer
 - [Devansh Aggarwal](https://github.com/devansh-299)
