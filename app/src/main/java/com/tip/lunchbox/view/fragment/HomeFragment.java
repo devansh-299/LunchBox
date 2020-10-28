@@ -86,8 +86,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         homeBinding.rvRestaurant.setAdapter(adapter);
         supportMapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_view);
-        assert supportMapFragment != null;
-        supportMapFragment.getMapAsync(this);
         addObservableForCategoryFilter();
         loadData();
         clearFilterAction();
