@@ -54,9 +54,13 @@ public class RestaurantDetails extends AppCompatActivity {
             if (Math.abs(verticalOffset) - appBarLayout.getTotalScrollRange() == 0) {
                 // Collapsed State
                 binding.fabMenu.show();
+                binding.toolbar.setBackgroundColor(getColor(R.color.white));
+                binding.toolbar.setTitleTextColor(getColor(R.color.colorPrimary));
+
             } else {
                 // Expanded State
                 binding.fabMenu.hide();
+                binding.toolbar.setBackgroundColor(getColor(R.color.colorTransparent));
             }
         });
         viewModel.getRestaurantLiveData(Integer.parseInt(resId)).observe(this, this::setData);

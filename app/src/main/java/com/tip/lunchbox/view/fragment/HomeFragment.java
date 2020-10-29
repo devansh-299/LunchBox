@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
@@ -171,12 +170,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 adapter.setData(geoCodeResponse.getNearbyRestaurantContainers());
                 showData();
 
-                Objects.requireNonNull(((AppCompatActivity) requireActivity())
-                        .getSupportActionBar())
-                        .setSubtitle(geoCodeResponse.getLocality().getTitle()
+                homeBinding.appBarTvLocation.setText(geoCodeResponse.getLocality().getTitle()
                                 + ", "
                                 + geoCodeResponse.getLocality().getCityName());
-
                 setMapMarkers(geoCodeResponse.getNearbyRestaurantContainers());
             } else {
                 showErrorView();

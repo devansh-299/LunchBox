@@ -14,10 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
         <!-- for google maps -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
@@ -40,7 +36,7 @@
 
         <activity
             android:name=".view.activity.SetupActivity"
-            android:theme="@style/NoActionBarTheme" />
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".view.activity.MainActivity"
@@ -48,11 +44,11 @@
 
         <activity
             android:name=".view.activity.RestaurantDetails"
-            android:theme="@style/NoActionBarTheme" />
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".view.activity.MenuActivity"
-            android:theme="@style/NoActionBarTheme" />
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".view.activity.CollectionDetails" />

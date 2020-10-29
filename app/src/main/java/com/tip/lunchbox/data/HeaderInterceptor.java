@@ -11,7 +11,7 @@ public class HeaderInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request.Builder request = chain.request().newBuilder();
         // TODO add API_KEY
-        request.addHeader("user-key","API_KEY");
+        request.addHeader("user-key","ZOMATO_API_KEY");
         return chain.proceed(request.build());
     }
 }

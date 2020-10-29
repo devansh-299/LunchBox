@@ -28,7 +28,7 @@ public class CollectionDetails extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(CollectionDetailsViewModel.class);
         int collectionId = getIntent().getIntExtra(Constants.INTENT_COLLECTION_ID, 0);
         String collectionName = getIntent().getStringExtra(Constants.INTENT_COLLECTION_NAME);
-        getSupportActionBar().setTitle(collectionName);
+        binding.appBarTvLocation.setText(collectionName);
         viewModel.getSearchResponseLiveData(collectionId).observe(this, searchResponse ->
                 adapter.setData(searchResponse.getRestaurantContainers()));
     }

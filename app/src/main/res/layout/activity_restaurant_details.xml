@@ -13,8 +13,8 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
         
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -35,13 +35,13 @@
                 android:layout_height="@dimen/value_100dp"
                 android:layout_gravity="bottom"
                 android:background="@drawable/gradient_black"/>
-            
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
-            
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/rating"
-                    android:textColor="@color/colorHeading"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:layout_margin="@dimen/value_10dp"
                     android:textSize="@dimen/value_20sp" />
@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/location"
-                    android:textColor="@color/colorHeading"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:layout_margin="@dimen/value_10dp"
                     android:textSize="@dimen/value_20sp" />
@@ -143,6 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/get_directions"
+                        android:textAppearance="@style/chipText"
                         app:chipSurfaceColor="@color/colorPrimary"
                         android:textColor="@color/white"
                         app:chipIcon="@drawable/ic_directions" />
@@ -162,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contact"
-                android:textColor="@color/colorHeading"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:layout_margin="@dimen/value_10dp"
                 android:textSize="@dimen/value_20sp" />
@@ -173,6 +174,7 @@
                 android:layout_marginBottom="@dimen/value_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:overScrollMode="never"
                 android:orientation="vertical" />
 
             <View
@@ -186,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/highlights"
-                android:textColor="@color/colorHeading"
+                android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:layout_margin="@dimen/value_10dp"
                 android:textSize="@dimen/value_20sp" />
@@ -198,6 +200,7 @@
                 android:layout_marginBottom="@dimen/value_20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:overScrollMode="never"
                 android:orientation="horizontal" />
 
             <View

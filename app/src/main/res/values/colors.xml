@@ -9,6 +9,7 @@
     <!-- general colors-->
     <color name="white">#ffffff</color>
     <color name="colorPrimary_0.4">#66D93047</color>
+    <color name="colorTransparent">#00000000</color>
 
     <!-- for text-->
     <color name="colorTextPrimary">#322e2e</color>
@@ -16,7 +17,5 @@
     <color name="line_color">#c0c0c0</color>
     <color name="gradient_start">#00000000</color>
     <color name="gradient_end">#80000000</color>
-    <color name="colorHeading">#515151</color>
-    <color name="colorItemDark">#d2f9ee</color>
 
 </resources>
