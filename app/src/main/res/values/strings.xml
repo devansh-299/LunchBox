@@ -11,7 +11,7 @@
     <string name="discover_restaurants">Discover restaurants</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="what_should_we_call_you">What should we call you?</string>
-    <string name="your_city">Your City?</string>
+    <string name="your_email">Your Email Id?</string>
     <string name="your_mobile_number">Your Mobile Number?</string>
     <string name="proceed">Proceed</string>
     <string name="cannot_leave_blank">Cannot leave this blank</string>
@@ -27,7 +27,16 @@
     <string name="contact">Contact</string>
     <string name="highlights">Highlights</string>
     <string name="dialer_app_not_found">Please install a dialer application</string>
-    <string name="permission_rationale_call">Permission Denied: Please go to device settings and grant Telephone permission to make the call</string>
     <string name="menu">Menu</string>
+    <string name="need_information_text">We need this information in order to serve you!</string>
+    <string name="error_location">Error Occurred, may be the GPS is off!</string>
+    <string name="cancel">Cancel</string>
+    <string name="permission_needed_title">Permission needed</string>
+    <string name="permission_needed_message">Cannot complete your request without this permission</string>
+    <string name="open_settings">Open Setting</string>
+    <string name="cannot_proceed_permission">Can\'t proceed without acquiring required permissions</string>
+    <string name="no_results_found">No Results Found</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_phone">Invalid phone number</string>
 
 </resources>

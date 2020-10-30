@@ -84,6 +84,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/value_10dp"
             android:visibility="invisible"
+            android:textAppearance="@style/chipText"
             style="@style/Widget.MaterialComponents.Chip.Action"
             app:layout_behavior="com.tip.lunchbox.utilities.FloatingButtonBehaviour"
             android:text="@string/clear_filter"

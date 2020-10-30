@@ -3,6 +3,7 @@ package com.tip.lunchbox.view.fragment;
 import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import com.tip.lunchbox.model.CategoryContainer;
 import com.tip.lunchbox.model.Restaurant;
 import com.tip.lunchbox.model.RestaurantContainer;
 import com.tip.lunchbox.utilities.Constants;
+import com.tip.lunchbox.utilities.LocationHelper;
+import com.tip.lunchbox.utilities.SharedPreferencesUtil;
 import com.tip.lunchbox.view.activity.RestaurantDetails;
 import com.tip.lunchbox.view.listeners.CategoryChangeListener;
 import com.tip.lunchbox.view.adapter.RestaurantAdapter;
@@ -37,9 +40,9 @@ import com.tip.lunchbox.viewmodel.HomeViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -53,6 +56,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
+    private double userLocationLatitude;
+    private double userLocationLongitude;
     HomeViewModel viewModel;
     FragmentHomeBinding homeBinding;
     RestaurantAdapter adapter;
@@ -79,6 +84,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     .getRestaurant().getId());
             requireActivity().startActivity(intent);
         });
+
+        String latitudeString = SharedPreferencesUtil.getStringPreference(
+                getActivity(), Constants.PREF_USER_LATITUDE);
+        String longitudeString = SharedPreferencesUtil.getStringPreference(
+                getActivity(), Constants.PREF_USER_LONGITUDE);
+
+        if (!TextUtils.isEmpty(latitudeString) && !TextUtils.isEmpty(longitudeString)) {
+            userLocationLatitude = Double.parseDouble(latitudeString);
+            userLocationLongitude = Double.parseDouble(longitudeString);
+        }
 
         BottomSheetBehavior.from(homeBinding.nsvRestaurantList);
         homeBinding.rvRestaurant.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -137,7 +152,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     } else if (checkedId == -1) {
                         homeBinding.clearFilterChip.animate().alpha(0f)
                                 .setListener(new Animator.AnimatorListener() {
-                                    /* Simple animation for the appearing and disappearing of the
+                                    /*
+                                    Simple animation for the appearing and disappearing of the
                                     'Clear Filter' chip
                                     */
                                     @Override
@@ -165,19 +181,19 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        viewModel.getRestaurantLiveData().observe(getViewLifecycleOwner(), geoCodeResponse -> {
-            if (geoCodeResponse != null) {
-                adapter.setData(geoCodeResponse.getNearbyRestaurantContainers());
-                showData();
-
-                homeBinding.appBarTvLocation.setText(geoCodeResponse.getLocality().getTitle()
-                                + ", "
-                                + geoCodeResponse.getLocality().getCityName());
-                setMapMarkers(geoCodeResponse.getNearbyRestaurantContainers());
-            } else {
-                showErrorView();
-            }
-        });
+        viewModel.getRestaurantLiveData(userLocationLatitude, userLocationLongitude)
+                .observe(getViewLifecycleOwner(), geoCodeResponse -> {
+                    if (geoCodeResponse != null) {
+                        adapter.setData(geoCodeResponse.getNearbyRestaurantContainers());
+                        showData();
+                        homeBinding.appBarTvLocation.setText(
+                                geoCodeResponse.getLocality().getTitle()
+                                        + ", " + geoCodeResponse.getLocality().getCityName());
+                        setMapMarkers(geoCodeResponse.getNearbyRestaurantContainers());
+                    } else {
+                        showErrorView();
+                    }
+                });
 
         viewModel.getFilteredLiveData().observe(getViewLifecycleOwner(), searchResponse -> {
             if (searchResponse != null) {
@@ -207,7 +223,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     @Override
                     public void onNext(@NonNull Integer id) {
                         showLoadingView();
-                        viewModel.fetchFilteredRestaurantData(id);
+                        viewModel.fetchFilteredRestaurantData(
+                                id, userLocationLatitude, userLocationLongitude);
                     }
 
                     @Override
@@ -226,22 +243,27 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private void clearFilterAction() {
         homeBinding.clearFilterChip.setOnClickListener(v -> {
             homeBinding.filterChipGroup.clearCheck();
-            viewModel.fetchRestaurantLiveData(18.5, 73.8);
+            viewModel.fetchRestaurantLiveData(userLocationLatitude, userLocationLongitude);
         });
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        /*
-            Currently, using temporary values for testing. Ideally these values should have been
-            taken from the user while first launching the application
-         */
 
         // Clears the existing markers every time a new filter is selected or cleared
         googleMap.clear();
 
-        LatLng location = new LatLng(18.5, 73.8);
-        googleMap.addMarker(new MarkerOptions().position(location).title("Pune"));
+        LatLng location = new LatLng(userLocationLatitude, userLocationLongitude);
+        try {
+            String cityName = LocationHelper.getUserAddressLine(
+                    getActivity(),
+                    userLocationLatitude,
+                    userLocationLongitude,
+                    0);
+            googleMap.addMarker(new MarkerOptions().position(location).title(cityName));
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
 
         // If the mapInfoArrayList has entries, the google maps camera is zoomed to an average of
         // the latitude and longitude coordinates of the locations
@@ -264,7 +286,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latAvg, longAvg),
                     (float) 12));
         } else {
-            Toast.makeText(requireContext(), "No Results Found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.no_results_found, Toast.LENGTH_SHORT).show();
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, (float) 15));
         }
     }

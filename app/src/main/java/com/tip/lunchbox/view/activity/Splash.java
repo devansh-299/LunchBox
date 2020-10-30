@@ -21,7 +21,6 @@ public class Splash extends AppCompatActivity {
 
         // to check first time user
         if (SharedPreferencesUtil.getBooleanPreference(this, Constants.PREF_FIRST_TIME, true)) {
-            SharedPreferencesUtil.setBooleanPreference(this, Constants.PREF_FIRST_TIME, false);
             startActivity(new Intent(this, SetupActivity.class));
         } else {
             startActivity(new Intent(this, MainActivity.class));

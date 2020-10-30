@@ -107,7 +107,7 @@ public class RestaurantDetails extends AppCompatActivity {
                     requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
                             callerPermissionCode);
                 } else {
-                    Toast.makeText(this, R.string.permission_rationale_call,
+                    Toast.makeText(this, R.string.cannot_proceed_permission,
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
