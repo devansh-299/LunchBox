@@ -2,15 +2,12 @@ package com.tip.lunchbox.view.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -19,6 +16,7 @@ import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.ActivityRestaurantDetailsBinding;
 import com.tip.lunchbox.model.Restaurant;
 import com.tip.lunchbox.utilities.Constants;
+import com.tip.lunchbox.utilities.PermissionHelper;
 import com.tip.lunchbox.view.adapter.HighlightsAdapter;
 import com.tip.lunchbox.view.adapter.PhoneNumberAdapter;
 import com.tip.lunchbox.view.listeners.RecyclerTouchListener;
@@ -34,7 +32,6 @@ public class RestaurantDetails extends AppCompatActivity {
     private ActivityRestaurantDetailsBinding binding;
     private PhoneNumberAdapter phoneNumberAdapter;
     private HighlightsAdapter highlightsAdapter;
-    private static final String TAG = "Restaurant Details";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +77,10 @@ public class RestaurantDetails extends AppCompatActivity {
                 true));
         binding.rvHighlights.setAdapter(highlightsAdapter);
 
+        String callPermission = Manifest.permission.CALL_PHONE;
         // Item click listener for phone number's recyclerview
         new RecyclerTouchListener(this, binding.rvPhoneNumber, (view, position) -> {
-            if (checkPermission()) {
+            if (PermissionHelper.checkPermission(this, callPermission)) {
                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
                 callIntent.setData(Uri.parse("tel:" + phoneNumberAdapter.getData().get(position)));
                 if (callIntent.resolveActivity(getPackageManager()) != null) {
@@ -93,28 +91,10 @@ public class RestaurantDetails extends AppCompatActivity {
                             getString(R.string.dialer_app_not_found),
                             Toast.LENGTH_LONG).show();
                 }
+            } else {
+                PermissionHelper.requestPermission(this, callPermission, callerPermissionCode);
             }
         });
-    }
-
-    private boolean checkPermission() {
-        String callPermission = Manifest.permission.CALL_PHONE;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(
-                    this, callPermission) == PackageManager.PERMISSION_DENIED) {
-                boolean showRationale = shouldShowRequestPermissionRationale(callPermission);
-                if (showRationale) {
-                    requestPermissions(new String[]{Manifest.permission.CALL_PHONE},
-                            callerPermissionCode);
-                } else {
-                    Toast.makeText(this, R.string.cannot_proceed_permission,
-                            Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                return true;
-            }
-        }
-        return false;
     }
 
     // This method is used to set data into layout elements

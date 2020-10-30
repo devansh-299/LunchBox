@@ -18,42 +18,50 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
 
-public class LocationHelper implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class LocationHelper {
 
     private static final String TAG = "LocationHelper";
     private static final int permissionCode = 100;
     private static Geocoder geocoder;
 
-
-    public static void getLocation(Context context) {
+    /**
+     *
+     * @param context context using which {@link LocationManager} be instantiated
+     *                and permissions will be asked.
+     * @return used to denote the status of the method call. True for successful
+     * location fetch, false otherwise.
+     */
+    public static boolean getLocation(Context context) {
         LocationManager locationManager =
                 (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, false);
 
-        if (provider == null) {
-            Log.d(TAG, "provider not found");
-            return;
-        }
-
         if (ActivityCompat.checkSelfPermission(
                 context, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        context, Manifest.permission.ACCESS_COARSE_LOCATION)
+                context, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Add permission checks
-            return;
+
+            // request permission
+            PermissionHelper.requestPermission(
+                    context, Manifest.permission.ACCESS_FINE_LOCATION, permissionCode);
+            return false;
+        }
+
+        if (provider == null) {
+            Log.d(TAG, "provider not found");
+            return false;
         }
 
         Location location = locationManager.getLastKnownLocation(provider);
 
         // Initialize the location fields
         if (location != null) {
-            Log.d("TAG", "location fetch successful");
+            Log.d(TAG, "location fetch successful");
             String latitudeString = Double.toString(location.getLatitude());
             String longitudeString = Double.toString(location.getLongitude());
 
@@ -63,18 +71,14 @@ public class LocationHelper implements ActivityCompat.OnRequestPermissionsResult
                         context, Constants.PREF_USER_LATITUDE, latitudeString);
                 SharedPreferencesUtil.setStringPreference(
                         context, Constants.PREF_USER_LONGITUDE, longitudeString);
+                return true;
             }
         } else {
             Toast.makeText(context, R.string.error_location, Toast.LENGTH_SHORT).show();
         }
+        return false;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        Log.d(TAG, "timepass");
-    }
 
     /**
      *

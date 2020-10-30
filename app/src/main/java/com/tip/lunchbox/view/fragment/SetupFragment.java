@@ -4,6 +4,7 @@ import android.Manifest;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,10 @@ public class SetupFragment extends BottomSheetDialogFragment implements View.OnC
         binding.chipProceed.setOnClickListener(this);
         binding.cbLocation.setOnCheckedChangeListener((compoundButton, isChecked) -> {
             if (isChecked && getActivity() != null) {
-                LocationHelper.getLocation(getActivity());
+                boolean success = LocationHelper.getLocation(getActivity());
+                if (!success) {
+                    binding.cbLocation.setChecked(false);
+                }
             }
         });
         return binding.getRoot();
@@ -84,6 +88,9 @@ public class SetupFragment extends BottomSheetDialogFragment implements View.OnC
         }
         if (TextUtils.isEmpty(mobileNumber) || !Patterns.PHONE.matcher(mobileNumber).matches()) {
             binding.etMobileNumber.setError(getString(R.string.invalid_phone));
+            isValid = false;
+        }
+        if (!binding.cbLocation.isChecked()) {
             isValid = false;
         }
         return isValid;
