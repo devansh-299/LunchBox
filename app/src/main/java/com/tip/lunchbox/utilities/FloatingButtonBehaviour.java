@@ -33,7 +33,7 @@ public class FloatingButtonBehaviour extends CoordinatorLayout.Behavior<View> {
     public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child,
                                    @NonNull View dependency) {
         Log.d("CoordinatorLayout", "Drawing Chip");
-        return dependency.getId() == R.id.nsv_restaurant_list;
+        return dependency.getId() == R.id.bs_restaurant_list;
     }
 
     @Override

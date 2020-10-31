@@ -95,7 +95,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             userLocationLongitude = Double.parseDouble(longitudeString);
         }
 
-        BottomSheetBehavior.from(homeBinding.nsvRestaurantList);
+        BottomSheetBehavior.from(homeBinding.bsRestaurantList);
         homeBinding.rvRestaurant.setLayoutManager(new LinearLayoutManager(getActivity()));
         homeBinding.rvRestaurant.setAdapter(adapter);
         supportMapFragment =

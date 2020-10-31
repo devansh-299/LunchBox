@@ -12,12 +12,12 @@ This project is being worked under the Technology Incubator Programme BITS Pilan
 
 |Setup Screen|Home Screen|Restaurant - Gallery|
 |------|------|------|
-|<img src="https://user-images.githubusercontent.com/46667021/97115909-bbf8c580-171f-11eb-84cd-cd24db5284ce.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97115979-4ccfa100-1720-11eb-84f6-a6cb54407b44.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97115999-6670e880-1720-11eb-8bdd-ff078a1435c8.jpg" width="280" height="480" />|
+|<img src="https://user-images.githubusercontent.com/46667021/97773346-e3fb8500-1b74-11eb-8009-1cbfe3264b4b.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97773371-2755f380-1b75-11eb-8b1c-7797792ecb73.jpeg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97773382-42c0fe80-1b75-11eb-8408-f9ec02886b1a.jpg" width="280" height="480" />|
 
 
 |Restaurant - Details|WebView - Menu|Search Screen|
 |------|------|------|
-|<img src="https://user-images.githubusercontent.com/46667021/97115939-17c34e80-1720-11eb-83fa-2df221fd3bda.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97116033-9ae4a480-1720-11eb-99c7-2ee6ca1e329b.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97116085-d41d1480-1720-11eb-9ab1-176a1026eee6.jpg" width="280" height="480" />|
+|<img src="https://user-images.githubusercontent.com/46667021/97773390-59ffec00-1b75-11eb-83cc-832431b89cd0.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97773400-73089d00-1b75-11eb-99fc-9ebb081560a3.jpg" width="280" height="480" />|<img src="https://user-images.githubusercontent.com/46667021/97773422-959ab600-1b75-11eb-945e-09ccd7bc1116.jpg" width="280" height="480" />|
 
 
 ## Building The Code

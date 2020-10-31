@@ -32,7 +32,7 @@ public class LocationHelper {
      * @param context context using which {@link LocationManager} be instantiated
      *                and permissions will be asked.
      * @return used to denote the status of the method call. True for successful
-     * location fetch, false otherwise.
+     *     location fetch, false otherwise.
      */
     public static boolean getLocation(Context context) {
         LocationManager locationManager =
