@@ -23,9 +23,9 @@ public class SearchViewModel extends ViewModel {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     Repository repository = new Repository();
 
-    public LiveData<CollectionsResponse> getCollectionsLiveData() {
+    public LiveData<CollectionsResponse> getCollectionsLiveData(int cityId) {
         if (collectionsResponseLiveData.getValue() == null) {
-            fetchCollectionsLiveData();
+            fetchCollectionsLiveData(cityId);
         }
         return collectionsResponseLiveData;
     }
@@ -34,8 +34,8 @@ public class SearchViewModel extends ViewModel {
         return searchResponseLiveData;
     }
 
-    private void fetchCollectionsLiveData() {
-        repository.getCollectionsResponseObservable(5).subscribeOn(Schedulers.newThread())
+    private void fetchCollectionsLiveData(int cityId) {
+        repository.getCollectionsResponseObservable(cityId).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<CollectionsResponse>() {
                     @Override
@@ -55,9 +55,9 @@ public class SearchViewModel extends ViewModel {
                 });
     }
 
-    public void fetchSearchResponseLiveData(String query) {
+    public void fetchSearchResponseLiveData(String query, int cityId) {
         repository.getSearchResponseObservable(new SearchQuery()
-                .addEntity(new SearchQuery.Entity().city(5)).addQuery(query))
+                .addEntity(new SearchQuery.Entity().city(cityId)).addQuery(query))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SearchResponse>() {

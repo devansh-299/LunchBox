@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.tip.lunchbox.databinding.FragmentSearchBinding;
 import com.tip.lunchbox.utilities.Constants;
+import com.tip.lunchbox.utilities.SharedPreferencesUtil;
 import com.tip.lunchbox.view.activity.CollectionDetails;
 import com.tip.lunchbox.view.activity.RestaurantDetails;
 import com.tip.lunchbox.view.adapter.CollectionsAdapter;
@@ -37,6 +38,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
 
+    private int cityId;
     FragmentSearchBinding binding;
     CollectionsAdapter collectionsAdapter;
     RestaurantAdapter searchAdapter;
@@ -53,8 +55,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         addObservableToSearchView();
         binding.searchView.setOnClickListener(this);
 
+        String cityIdString = SharedPreferencesUtil.getStringPreference(
+                getActivity(), Constants.PREF_USER_CITY_ID);
+        cityId = Integer.parseInt(cityIdString);
+
         // Observing data
-        viewModel.getCollectionsLiveData().observe(
+        viewModel.getCollectionsLiveData(cityId).observe(
                 getViewLifecycleOwner(),
                 collectionsResponse -> collectionsAdapter.setData(
                         collectionsResponse.getCollectionsContainer()));
@@ -111,7 +117,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                         new SearchView.OnQueryTextListener() {
                             @Override
                             public boolean onQueryTextSubmit(String query) {
-                                viewModel.fetchSearchResponseLiveData(query);
+                                viewModel.fetchSearchResponseLiveData(query, cityId);
                                 Log.d("http", "onQueryTextSubmit: " + query);
                                 return false;
                             }
@@ -136,7 +142,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onNext(@NonNull String query) {
                         if (!query.isEmpty()) {
-                            viewModel.fetchSearchResponseLiveData(query);
+                            viewModel.fetchSearchResponseLiveData(query, cityId);
                         }
                     }
 

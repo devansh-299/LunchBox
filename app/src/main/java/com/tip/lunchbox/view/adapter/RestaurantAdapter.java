@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.ItemRestaurantBinding;
 import com.tip.lunchbox.model.Restaurant;
@@ -61,11 +64,17 @@ public class RestaurantAdapter extends
 
         private ItemRestaurantBinding restaurantItemBinding;
         Context context;
+        RequestOptions options;
 
         public RestaurantViewHolder(@NonNull ItemRestaurantBinding binding, Context context) {
             super(binding.getRoot());
             restaurantItemBinding = binding;
             this.context = context;
+            options = new RequestOptions()
+                    .centerCrop()
+                    .error(R.drawable.app_logo)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .priority(Priority.IMMEDIATE);
         }
 
         public void addData(RestaurantContainer restaurantContainer) {
@@ -75,7 +84,7 @@ public class RestaurantAdapter extends
             restaurantItemBinding.itemTvRestaurantName.setText(restaurant.getName());
             Glide.with(restaurantItemBinding.getRoot())
                     .load(restaurant.getThumb())
-                    .centerCrop()
+                    .apply(options)
                     .into(restaurantItemBinding.itemIvRestaurant);
             restaurantItemBinding.itemTvRating.setText(
                     restaurant.getUserRating().getAggregateRating());
@@ -83,7 +92,6 @@ public class RestaurantAdapter extends
                     Color.parseColor("#" + restaurant.getUserRating().getRatingColor()));
             restaurantItemBinding.itemTvLocality.setText(
                     restaurant.getLocation().getLocalityVerbose());
-
 
             try {
                 String cuisines = restaurant.getCuisines();

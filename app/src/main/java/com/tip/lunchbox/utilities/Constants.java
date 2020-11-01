@@ -13,4 +13,5 @@ public class Constants {
     public static final String INTENT_MENU_URL = "intent_menu_url";
     public static final String PREF_USER_LATITUDE = "pref_user_latitude";
     public static final String PREF_USER_LONGITUDE = "pref_user_longitude";
+    public static final String PREF_USER_CITY_ID = "pref_user_city_id";
 }

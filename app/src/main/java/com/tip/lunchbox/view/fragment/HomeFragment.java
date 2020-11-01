@@ -20,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -184,6 +185,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         viewModel.getRestaurantLiveData(userLocationLatitude, userLocationLongitude)
                 .observe(getViewLifecycleOwner(), geoCodeResponse -> {
                     if (geoCodeResponse != null) {
+                        // Save City Id for later use
+                        SharedPreferencesUtil.setStringPreference(
+                                getActivity(),
+                                Constants.PREF_USER_CITY_ID,
+                                geoCodeResponse.getLocality().getCityId());
+
                         adapter.setData(geoCodeResponse.getNearbyRestaurantContainers());
                         showData();
                         homeBinding.appBarTvLocation.setText(
@@ -260,7 +267,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     userLocationLatitude,
                     userLocationLongitude,
                     0);
-            googleMap.addMarker(new MarkerOptions().position(location).title(cityName));
+            googleMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_home_marker))
+                    .position(location).title(cityName));
         } catch (IOException exception) {
             exception.printStackTrace();
         }
@@ -277,6 +286,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 latSum += latLng.getLatLng().latitude;
                 longSum += latLng.getLatLng().longitude;
                 googleMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker))
                         .position(latLng.getLatLng())
                         .title(latLng.getName())
                         .snippet(latLng.getDesc()));

@@ -21,14 +21,14 @@ public class CollectionDetailsViewModel extends ViewModel {
     private Repository repository = new Repository();
     private MutableLiveData<SearchResponse> searchResponseLiveData = new MutableLiveData<>();
 
-    public LiveData<SearchResponse> getSearchResponseLiveData(int categoryId) {
-        fetchSearchResponseLiveData(categoryId);
+    public LiveData<SearchResponse> getSearchResponseLiveData(int categoryId, int cityId) {
+        fetchSearchResponseLiveData(categoryId, cityId);
         return searchResponseLiveData;
     }
 
-    public void fetchSearchResponseLiveData(int categoryId) {
+    public void fetchSearchResponseLiveData(int categoryId, int cityId) {
         repository.getSearchResponseObservable(new SearchQuery()
-                .addEntity(new SearchQuery.Entity().city(5)).addCollection(categoryId))
+                .addEntity(new SearchQuery.Entity().city(cityId)).addCollection(categoryId))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<SearchResponse>() {
@@ -45,7 +45,7 @@ public class CollectionDetailsViewModel extends ViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable throwable) {
-
+                        searchResponseLiveData.setValue(null);
                     }
                 });
     }
