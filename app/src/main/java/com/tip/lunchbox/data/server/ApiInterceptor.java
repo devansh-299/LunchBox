@@ -3,6 +3,7 @@ package com.tip.lunchbox.data.server;
 import android.text.TextUtils;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -14,6 +15,7 @@ public class ApiInterceptor implements Interceptor {
     private static final String AUTHORIZATION = "Authorization";
     private String authorizationToken;
 
+    //TODO Get authtoken from shared preferences instead.
     public ApiInterceptor(String authorizationToken) {
         this.authorizationToken = authorizationToken;
     }
