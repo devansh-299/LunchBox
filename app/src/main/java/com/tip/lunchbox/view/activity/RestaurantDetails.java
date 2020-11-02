@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.ActivityRestaurantDetailsBinding;
-import com.tip.lunchbox.model.Restaurant;
+import com.tip.lunchbox.model.zomato.Restaurant;
 import com.tip.lunchbox.utilities.Constants;
 import com.tip.lunchbox.utilities.PermissionHelper;
 import com.tip.lunchbox.view.adapter.HighlightsAdapter;

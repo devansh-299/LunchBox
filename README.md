@@ -4,7 +4,9 @@
 |------------|
 |![badge](https://action-badges.now.sh/devansh-299/LunchBox)|
 
-LunchBox is a native Android application for exploring eateries. LunchBox provides all the details about restaurants ranging from their location to their menu and what not! The application follows MVVM architecture, written in Java and fetches data from **Zomato** APIs ([_documentation_](https://developers.zomato.com/documentation)). 
+LunchBox is a native Android application for exploring eateries. LunchBox provides all the details about restaurants ranging from their location to their menu and what not! The application follows MVVM architecture, written in Java and uses **two** back-end services:
+* **Zomato APIs**: [_Documentation_](https://developers.zomato.com/documentation)
+* **LunchBox Backend**: [_GitHub Repository_](https://github.com/epicadk/Lunchbox-backend)
 <br />
 This project is being worked under the Technology Incubator Programme BITS Pilani Goa Campus.
 

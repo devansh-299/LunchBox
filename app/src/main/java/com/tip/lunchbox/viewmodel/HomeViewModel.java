@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.tip.lunchbox.data.Repository;
-import com.tip.lunchbox.data.SearchQuery;
-import com.tip.lunchbox.model.CategoryResponse;
-import com.tip.lunchbox.model.GeocodeResponse;
-import com.tip.lunchbox.model.SearchResponse;
+import com.tip.lunchbox.data.zomato.SearchQuery;
+import com.tip.lunchbox.model.zomato.CategoryResponse;
+import com.tip.lunchbox.model.zomato.GeocodeResponse;
+import com.tip.lunchbox.model.zomato.SearchResponse;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Scheduler;

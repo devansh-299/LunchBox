@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.tip.lunchbox.data.Repository;
-import com.tip.lunchbox.data.SearchQuery;
-import com.tip.lunchbox.model.SearchResponse;
+import com.tip.lunchbox.data.zomato.SearchQuery;
+import com.tip.lunchbox.model.zomato.SearchResponse;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;

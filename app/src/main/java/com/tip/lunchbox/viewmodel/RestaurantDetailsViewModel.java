@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.tip.lunchbox.data.Repository;
-import com.tip.lunchbox.model.Restaurant;
+import com.tip.lunchbox.model.zomato.Restaurant;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;

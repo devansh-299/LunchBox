@@ -15,7 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.tip.lunchbox.databinding.ItemCollectionsBinding;
-import com.tip.lunchbox.model.CollectionsContainer;
+import com.tip.lunchbox.model.zomato.CollectionsContainer;
 
 import java.util.List;
 

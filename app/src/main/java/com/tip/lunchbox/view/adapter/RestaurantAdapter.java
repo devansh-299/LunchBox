@@ -2,9 +2,7 @@ package com.tip.lunchbox.view.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,8 +15,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.ItemRestaurantBinding;
-import com.tip.lunchbox.model.Restaurant;
-import com.tip.lunchbox.model.RestaurantContainer;
+import com.tip.lunchbox.model.zomato.Restaurant;
+import com.tip.lunchbox.model.zomato.RestaurantContainer;
 
 import java.util.ArrayList;
 import java.util.List;

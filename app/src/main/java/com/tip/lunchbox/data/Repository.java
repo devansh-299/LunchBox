@@ -1,79 +1,83 @@
 package com.tip.lunchbox.data;
 
-import com.tip.lunchbox.model.CategoryResponse;
-import com.tip.lunchbox.model.CitiesResponse;
-import com.tip.lunchbox.model.CollectionsResponse;
-import com.tip.lunchbox.model.CuisineResponse;
-import com.tip.lunchbox.model.DailyMenuResponse;
-import com.tip.lunchbox.model.EstablishmentResponse;
-import com.tip.lunchbox.model.GeocodeResponse;
-import com.tip.lunchbox.model.Restaurant;
-import com.tip.lunchbox.model.RestaurantContainer;
-import com.tip.lunchbox.model.ReviewResponse;
-import com.tip.lunchbox.model.SearchResponse;
+import com.tip.lunchbox.data.zomato.ZomatoApiManager;
+import com.tip.lunchbox.data.zomato.SearchQuery;
+import com.tip.lunchbox.model.zomato.CategoryResponse;
+import com.tip.lunchbox.model.zomato.CitiesResponse;
+import com.tip.lunchbox.model.zomato.CollectionsResponse;
+import com.tip.lunchbox.model.zomato.CuisineResponse;
+import com.tip.lunchbox.model.zomato.DailyMenuResponse;
+import com.tip.lunchbox.model.zomato.EstablishmentResponse;
+import com.tip.lunchbox.model.zomato.GeocodeResponse;
+import com.tip.lunchbox.model.zomato.Restaurant;
+import com.tip.lunchbox.model.zomato.SearchResponse;
 
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 
+/**
+ * Repository acts as the common point of interaction between 'View Model' layer and both set
+ * of back-ends (Zomato and our own back-end) that this application is consuming.
+ */
 public class Repository {
 
+    // For Zomato's Services
 
     public Single<SearchResponse> getSearchResponseObservable(SearchQuery searchQuery) {
-        return ApiManager.getApiService().getSearchResponse(searchQuery.getParams());
+        return ZomatoApiManager.getZomatoApiService().getSearchResponse(searchQuery.getParams());
     }
 
     public Single<DailyMenuResponse> getDailyMenuResponseObservable(int restaurantId) {
-        return ApiManager.getApiService().getDailyMenuResponse(restaurantId);
-    }
-
-    public Single<ReviewResponse> getReviewsResponseObservable(int restaurantId) {
-        return ApiManager.getApiService().getReviewsResponse(restaurantId);
+        return ZomatoApiManager.getZomatoApiService().getDailyMenuResponse(restaurantId);
     }
 
     public Single<Restaurant> getRestaurantResponseObservable(int restaurantId) {
-        return ApiManager.getApiService().getRestaurantResponse(restaurantId);
+        return ZomatoApiManager.getZomatoApiService().getRestaurantResponse(restaurantId);
     }
 
     public Single<CollectionsResponse> getCollectionsResponseObservable(int cityId) {
-        return ApiManager.getApiService().getCollectionsResponse(cityId);
+        return ZomatoApiManager.getZomatoApiService().getCollectionsResponse(cityId);
     }
 
     public Single<CollectionsResponse> getCollectionsResponseObservable(double lat, double lon) {
-        return ApiManager.getApiService().getCollectionsResponse(lat, lon);
+        return ZomatoApiManager.getZomatoApiService().getCollectionsResponse(lat, lon);
     }
 
     public Single<CategoryResponse> getCategoryResponseObservable() {
-        return ApiManager.getApiService().getCategoriesResponse();
+        return ZomatoApiManager.getZomatoApiService().getCategoriesResponse();
     }
 
     public Single<CuisineResponse> getCuisineResponseObservable(int cityId) {
-        return ApiManager.getApiService().getCuisinesResponse(cityId);
+        return ZomatoApiManager.getZomatoApiService().getCuisinesResponse(cityId);
     }
 
     public Single<CuisineResponse> getCuisineResponseObservable(double lat, double lon) {
-        return ApiManager.getApiService().getCuisinesResponse(lat, lon);
+        return ZomatoApiManager.getZomatoApiService().getCuisinesResponse(lat, lon);
     }
 
     public Single<EstablishmentResponse> getEstablishmentsResponseObservable(int cityId) {
-        return ApiManager.getApiService().getEstablishmentsResponse(cityId);
+        return ZomatoApiManager.getZomatoApiService().getEstablishmentsResponse(cityId);
     }
 
     public Single<EstablishmentResponse> getEstablishmentsResponseObservable(
             double lat, double lon) {
-        return ApiManager.getApiService().getEstablishmentsResponse(lat, lon);
+        return ZomatoApiManager.getZomatoApiService().getEstablishmentsResponse(lat, lon);
     }
 
     public Single<CitiesResponse> getCitiesResponseObservable(String city) {
-        return ApiManager.getApiService().getCitiesResponse(city);
+        return ZomatoApiManager.getZomatoApiService().getCitiesResponse(city);
     }
 
     public Single<CitiesResponse> getCitiesResponseObservable(double lat, double lon) {
-        return ApiManager.getApiService().getCitiesResponse(lat, lon);
+        return ZomatoApiManager.getZomatoApiService().getCitiesResponse(lat, lon);
     }
 
     public Single<GeocodeResponse> getGeocodeResponseObservable(double lat, double lon) {
-        return ApiManager.getApiService().getGeocodeResponse(lat, lon);
+        return ZomatoApiManager.getZomatoApiService().getGeocodeResponse(lat, lon);
     }
+
+    // For our server's services
+
+    // TODO: add getters for our custom server's services
 }
 
 
