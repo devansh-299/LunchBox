@@ -68,6 +68,12 @@ public class Restaurant {
     @SerializedName("thumb")
     @Expose
     private String thumb;
+    @SerializedName("user_rating")
+    @Expose
+    private UserRating userRating;
+    @SerializedName("all_reviews_count")
+    @Expose
+    private long allReviewsCount;
     @SerializedName("photos_url")
     @Expose
     private String photosUrl;
@@ -280,6 +286,22 @@ public class Restaurant {
 
     public void setThumb(String thumb) {
         this.thumb = thumb;
+    }
+
+    public UserRating getUserRating() {
+        return userRating;
+    }
+
+    public void setUserRating(UserRating userRating) {
+        this.userRating = userRating;
+    }
+
+    public long getAllReviewsCount() {
+        return allReviewsCount;
+    }
+
+    public void setAllReviewsCount(long allReviewsCount) {
+        this.allReviewsCount = allReviewsCount;
     }
 
     public String getPhotosUrl() {
