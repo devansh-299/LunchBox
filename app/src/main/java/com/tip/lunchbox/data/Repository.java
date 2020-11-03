@@ -1,7 +1,17 @@
 package com.tip.lunchbox.data;
 
-import com.tip.lunchbox.data.zomato.ZomatoApiManager;
+import com.tip.lunchbox.data.server.ApiManager;
 import com.tip.lunchbox.data.zomato.SearchQuery;
+import com.tip.lunchbox.data.zomato.ZomatoApiManager;
+import com.tip.lunchbox.model.server.request.Comment;
+import com.tip.lunchbox.model.server.request.FavouriteRestaurants;
+import com.tip.lunchbox.model.server.request.Login;
+import com.tip.lunchbox.model.server.request.SignUp;
+import com.tip.lunchbox.model.server.response.CommentsResponse;
+import com.tip.lunchbox.model.server.response.CustomResponse;
+import com.tip.lunchbox.model.server.response.FavouriteRestaurantsResponse;
+import com.tip.lunchbox.model.server.response.RefreshResponse;
+import com.tip.lunchbox.model.server.response.Tokens;
 import com.tip.lunchbox.model.zomato.CategoryResponse;
 import com.tip.lunchbox.model.zomato.CitiesResponse;
 import com.tip.lunchbox.model.zomato.CollectionsResponse;
@@ -77,7 +87,33 @@ public class Repository {
 
     // For our server's services
 
-    // TODO: add getters for our custom server's services
+    public Single<Tokens> loginUser(Login login) {
+        return ApiManager.getApiService().loginUser(login);
+    }
+
+    public Single<Tokens> signUpUser(SignUp signUp) {
+        return ApiManager.getApiService().signUpUser(signUp);
+    }
+
+    public Single<CommentsResponse> getComments(int resId) {
+        return ApiManager.getApiService().getComment(resId);
+    }
+
+    public Single<FavouriteRestaurantsResponse> getFavouriteRestaurants(String username) {
+        return ApiManager.getApiService().getUserFav(username);
+    }
+
+    public Single<CustomResponse> postComment(Comment comment) {
+        return ApiManager.getApiService().postComment(comment);
+    }
+
+    public Single<CustomResponse> postUserFav(FavouriteRestaurants favouriteRestaurants) {
+        return ApiManager.getApiService().postUserFav(favouriteRestaurants);
+    }
+
+    public Single<RefreshResponse> refreshResponseSingle() {
+        return ApiManager.getApiService().refresh();
+    }
 }
 
 
