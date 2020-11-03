@@ -8,6 +8,7 @@ import com.tip.lunchbox.model.server.request.Login;
 import com.tip.lunchbox.model.server.request.SignUp;
 import com.tip.lunchbox.model.server.response.CommentsResponse;
 import com.tip.lunchbox.model.server.response.FavouriteRestaurantsResponse;
+import com.tip.lunchbox.model.server.response.RefreshResponse;
 import com.tip.lunchbox.model.server.response.Tokens;
 
 import retrofit2.http.Body;
@@ -34,4 +35,7 @@ public interface ApiService {
 
     @GET("fav")
     public Observable<FavouriteRestaurantsResponse> getUserFav(@Query("username") String username);
+
+    @GET("refresh")
+    public Observable<RefreshResponse> refresh();
 }
