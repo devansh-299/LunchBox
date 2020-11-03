@@ -8,11 +8,8 @@ public class Login {
     @Expose
     private String password;
 
-    public void setUsername(String username) {
+    public Login(String username, String password) {
         this.username = username;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
     }
 }
