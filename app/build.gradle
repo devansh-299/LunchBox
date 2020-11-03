@@ -73,7 +73,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:$rootProject.navigation_version"
 
     // For testing
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13.1'
+    //Google trust for easy assertions
+    testImplementation "com.google.truth:truth:1.1"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
