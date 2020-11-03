@@ -29,7 +29,7 @@ public class ApiManager {
 
         return new OkHttpClient()
                 .newBuilder()
-                .addInterceptor(new ApiInterceptor("Random Auth Token"))
+                .addInterceptor(new ApiInterceptor())
                 .authenticator(new ApiAuthenticator())
                 .addInterceptor(logging)
                 .build();
