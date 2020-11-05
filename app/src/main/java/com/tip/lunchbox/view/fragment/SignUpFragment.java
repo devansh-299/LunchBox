@@ -69,6 +69,7 @@ public class SignUpFragment extends BottomSheetDialogFragment implements View.On
         }
 
         if (view == binding.tvLogin) {
+            this.dismissAllowingStateLoss();
             ((SetupActivity) getActivity()).launchLoginFragment();
         }
     }

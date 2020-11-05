@@ -77,6 +77,7 @@ public class LoginFragment extends BottomSheetDialogFragment implements View.OnC
             }
         }
         if (view == binding.tvSignUp) {
+            this.dismissAllowingStateLoss();
             ((SetupActivity) getActivity()).launchSignUpFragment();
         }
     }
