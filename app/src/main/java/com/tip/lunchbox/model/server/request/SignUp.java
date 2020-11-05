@@ -16,15 +16,9 @@ public class SignUp {
     @Expose
     private long phone;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPhone(long phone) {
-        this.phone = phone;
-    }
-
-    public void setUsername(String username) {
+    public SignUp(String username, String password, long phone) {
         this.username = username;
+        this.password = password;
+        this.phone = phone;
     }
 }

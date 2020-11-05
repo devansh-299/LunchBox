@@ -34,6 +34,7 @@ public class LoginFragment extends BottomSheetDialogFragment implements View.OnC
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         binding.btLogin.setOnClickListener(this);
+        binding.tvSignUp.setOnClickListener(this);
         viewModel = new ViewModelProvider(this).get(LoginFragmentViewModel.class);
 
         viewModel.loginUserLiveData()
@@ -72,8 +73,11 @@ public class LoginFragment extends BottomSheetDialogFragment implements View.OnC
                 setEnabled(true);
             }
             if (unValid && passValid) {
-                viewModel.loginUser(new Login(username,password));
+                viewModel.loginUser(new Login(username, password));
             }
+        }
+        if (view == binding.tvSignUp) {
+            ((SetupActivity) getActivity()).launchSignUpFragment();
         }
     }
 
