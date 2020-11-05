@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.tip.lunchbox.R;
+import com.tip.lunchbox.view.fragment.LoginFragment;
 import com.tip.lunchbox.view.fragment.SetupFragment;
 
 public class SetupActivity extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class SetupActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             // Launch SetupFragment after 4 seconds
-            SetupFragment setupFragmentModalSheet = SetupFragment.newInstance();
+            LoginFragment setupFragmentModalSheet = LoginFragment.newInstance();
             setupFragmentModalSheet.show(getSupportFragmentManager(), TAG);
         }, 4000);
 

@@ -1,5 +1,7 @@
 package com.tip.lunchbox.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -30,8 +32,7 @@ public class LoginFragmentViewModel extends ViewModel {
     private final Repository repository = new Repository();
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public LiveData<Boolean> loginUserLiveData(Login login) {
-        loginUser(login);
+    public LiveData<Boolean> loginUserLiveData() {
         return isValid;
     }
 
@@ -39,13 +40,14 @@ public class LoginFragmentViewModel extends ViewModel {
         return errorMessage;
     }
 
-    private void loginUser(Login login) {
+    public void loginUser(Login login) {
         repository.loginUser(login).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Tokens>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable disposable) {
                         compositeDisposable.add(disposable);
+                        isValid.setValue(null);
                     }
 
                     @Override
@@ -70,9 +72,16 @@ public class LoginFragmentViewModel extends ViewModel {
                         }
                         if (error instanceof HttpException) {
                             HttpException httpError = (HttpException) error;
-
-                            errorMessage = new Gson().fromJson(httpError.response().toString(),
-                                    CustomResponse.class).getMessage();
+                            try {
+                                errorMessage = new Gson()
+                                        .fromJson(httpError.response()
+                                                .errorBody().string(), CustomResponse.class)
+                                        .getMessage();
+                            } catch (IOException exception) {
+                                errorMessage = "Something went wrong";
+                                exception.printStackTrace();
+                            }
+                            Log.d("http", "onError: " + error);
                         } else {
                             errorMessage = "Something went wrong";
                         }
