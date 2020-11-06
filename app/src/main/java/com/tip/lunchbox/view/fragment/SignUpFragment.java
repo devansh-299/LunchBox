@@ -87,6 +87,7 @@ public class SignUpFragment extends BottomSheetDialogFragment implements View.On
         Boolean unValid = Validator.usernameValidator(username);
         Boolean passValid = Validator.passwordValidator(password);
         Boolean valid = true;
+        dismissError();
         if (!unValid) {
             binding.tiUsername.setError("Invalid Username");
             setEnabled(true);
@@ -97,12 +98,13 @@ public class SignUpFragment extends BottomSheetDialogFragment implements View.On
             setEnabled(true);
             valid = false;
         }
-        if (password.equals(rePassword)) {
+        if (!password.equals(rePassword)) {
             binding.tiConfirmPassword.setError("Passwords do not Match");
             binding.tiConfirmPassword.setError("Passwords do not Match");
             setEnabled(true);
             valid = false;
         }
+        // TODO add better phone number validation (this one is only for searching)
         if (Patterns.PHONE.matcher(String.valueOf(phone)).find()) {
             binding.tiPhone.setError("Invalid Phone Number");
             setEnabled(true);
@@ -111,6 +113,13 @@ public class SignUpFragment extends BottomSheetDialogFragment implements View.On
         if (valid) {
             viewModel.signUpUser(new SignUp(username, password, phone));
         }
+    }
+
+    private void dismissError() {
+        binding.tiPhone.setError(null);
+        binding.tiConfirmPassword.setError(null);
+        binding.tiPassword.setError(null);
+        binding.tiUsername.setError(null);
     }
 
 }

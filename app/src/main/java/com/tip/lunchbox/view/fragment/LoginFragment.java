@@ -87,4 +87,9 @@ public class LoginFragment extends BottomSheetDialogFragment implements View.OnC
         binding.etUsername.setEnabled(bool);
         binding.btLogin.setEnabled(bool);
     }
+
+    private void dismissError() {
+        binding.tiUsername.setError(null);
+        binding.tiPassword.setError(null);
+    }
 }
