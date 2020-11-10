@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.tip.lunchbox.databinding.FragmentSignUpBinding;
 import com.tip.lunchbox.model.server.request.SignUp;
+import com.tip.lunchbox.utilities.Constants;
+import com.tip.lunchbox.utilities.SharedPreferencesUtil;
 import com.tip.lunchbox.utilities.Validator;
 import com.tip.lunchbox.view.activity.SetupActivity;
 import com.tip.lunchbox.viewmodel.SignUpFragmentViewModel;
@@ -70,6 +72,8 @@ public class SignUpFragment extends BottomSheetDialogFragment implements View.On
 
         if (view == binding.tvLogin) {
             this.dismissAllowingStateLoss();
+            SharedPreferencesUtil
+                    .setBooleanPreference(requireContext(), Constants.PREF_FIRST_TIME,false);
             ((SetupActivity) getActivity()).launchLoginFragment();
         }
     }
