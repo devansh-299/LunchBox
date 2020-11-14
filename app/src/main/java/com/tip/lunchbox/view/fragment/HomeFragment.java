@@ -1,14 +1,22 @@
 package com.tip.lunchbox.view.fragment;
 
+import android.Manifest;
 import android.animation.Animator;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
@@ -16,6 +24,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,6 +39,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.FragmentHomeBinding;
 import com.tip.lunchbox.model.zomato.CategoryContainer;
@@ -86,25 +101,96 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             requireActivity().startActivity(intent);
         });
 
-        String latitudeString = SharedPreferencesUtil.getStringPreference(
-                getActivity(), Constants.PREF_USER_LATITUDE);
-        String longitudeString = SharedPreferencesUtil.getStringPreference(
-                getActivity(), Constants.PREF_USER_LONGITUDE);
-
-        if (!TextUtils.isEmpty(latitudeString) && !TextUtils.isEmpty(longitudeString)) {
-            userLocationLatitude = Double.parseDouble(latitudeString);
-            userLocationLongitude = Double.parseDouble(longitudeString);
-        }
-
         BottomSheetBehavior.from(homeBinding.bsRestaurantList);
         homeBinding.rvRestaurant.setLayoutManager(new LinearLayoutManager(getActivity()));
         homeBinding.rvRestaurant.setAdapter(adapter);
         supportMapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_view);
-        addObservableForCategoryFilter();
-        loadData();
-        clearFilterAction();
         return homeBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@androidx.annotation.NonNull View view,
+                              @Nullable Bundle savedInstanceState) {
+        if (checkLocationPermissionsGranted()) {
+            checkLocationSettings();
+        } else {
+            requestLocationPermissions();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        homeBinding = null;
+        compositeDisposable.clear();
+    }
+
+    // Checks if the permissions for accessing coarse and fine locations are granted.
+    private boolean checkLocationPermissionsGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return ContextCompat.checkSelfPermission(getContext(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && ContextCompat.checkSelfPermission(getContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        } else {
+            return true;
+        }
+    }
+
+    // Relays a request to the user for granting the required permissions to access location.
+    private void requestLocationPermissions() {
+        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                        Manifest.permission.ACCESS_FINE_LOCATION},
+                Constants.REQUEST_LOCATION_PERMISSION);
+    }
+
+    /* Checks if required location service settings like GPS/Wifi/Cellular are enabled.
+    If not, a dialog will appear asking for the same to be turned on.
+     */
+    private void checkLocationSettings() {
+        LocationRequest locationRequest = new LocationRequest();
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+        SettingsClient client = LocationServices.getSettingsClient(getContext());
+        client.checkLocationSettings(builder.build())
+                .addOnSuccessListener(getActivity(), locationSettingsResponse ->
+                        getCurrentLocation())
+                .addOnFailureListener(getActivity(), e -> {
+                    if (e instanceof ResolvableApiException) {
+                        try {
+                            ResolvableApiException resolvable = (ResolvableApiException) e;
+                            startIntentSenderForResult(resolvable.getResolution().getIntentSender(),
+                                    Constants.REQUEST_CHECK_SETTINGS, null, 0, 0, 0, null);
+                        } catch (IntentSender.SendIntentException sendEx) {
+                            // Ignore the error.
+                        }
+                    }
+                });
+    }
+
+    /* Requests the current location of the user (all other permission and location service checks
+    should be done before calling this method, which is also why the lint error is suppressed)
+     */
+
+    @SuppressLint("MissingPermission")
+    private void getCurrentLocation() {
+        FusedLocationProviderClient fusedLocationClient = LocationServices
+                .getFusedLocationProviderClient(getContext());
+        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY,
+                null)
+                .addOnSuccessListener(getActivity(), location -> {
+                    if (location != null) {
+                        userLocationLatitude = location.getLatitude();
+                        userLocationLongitude = location.getLongitude();
+                        addObservableForCategoryFilter();
+                        loadData();
+                        clearFilterAction();
+                    } else {
+                        Log.e("Location", "Null");
+                    }
+                });
     }
 
     private void showLoadingView() {
@@ -131,7 +217,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             if (categoryResponse != null) {
                 List<CategoryContainer> categories = categoryResponse.getCategories();
                 for (CategoryContainer categoryContainer : categories) {
-                    Chip categoryChip = (Chip)(getLayoutInflater()
+                    Chip categoryChip = (Chip) (getLayoutInflater()
                             .inflate(R.layout.item_chip_category, homeBinding.filterChipGroup,
                                     false));
                     categoryChip.setText(categoryContainer.getCategories().getName());
@@ -254,6 +340,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         });
     }
 
+    private void setMapMarkers(List<RestaurantContainer> restaurantContainerList) {
+        mapInfoArrayList = new ArrayList<>();
+        for (RestaurantContainer restaurantContainer : restaurantContainerList) {
+            this.mapInfoArrayList.add(restaurantContainer.getRestaurant().getMapInfo());
+        }
+        supportMapFragment.getMapAsync(this);
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -301,18 +395,56 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    private void setMapMarkers(List<RestaurantContainer> restaurantContainerList) {
-        mapInfoArrayList = new ArrayList<>();
-        for (RestaurantContainer restaurantContainer : restaurantContainerList) {
-            this.mapInfoArrayList.add(restaurantContainer.getRestaurant().getMapInfo());
+    // Callback to handle appropriate permission requests
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @androidx.annotation.NonNull String[] permissions,
+                                           @androidx.annotation.NonNull int[] grantResults) {
+        Log.d("GrantResults", "" + grantResults.length);
+        if (requestCode == Constants.REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                checkLocationSettings();
+            } else {
+                new MaterialAlertDialogBuilder(getContext())
+                        .setTitle(getString(R.string.location_permission))
+                        .setMessage(getString(R.string.location_permission_description))
+                        .setPositiveButton(getString(R.string.proceed), (dialog, which) -> {
+                            dialog.dismiss();
+                            requestLocationPermissions();
+                        })
+                        .setNegativeButton(getString(R.string.cancel), ((dialog, which) ->
+                                System.exit(0)))
+                        .setCancelable(false)
+                        .show();
+            }
         }
-        supportMapFragment.getMapAsync(this);
     }
 
+    // Callback to handle results from intent
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        homeBinding = null;
-        compositeDisposable.clear();
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == Constants.REQUEST_CHECK_SETTINGS) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    getCurrentLocation();
+                    break;
+                case Activity.RESULT_CANCELED:
+                    new MaterialAlertDialogBuilder(getContext())
+                            .setTitle(getString(R.string.gps_service))
+                            .setMessage(getString(R.string.gps_service_description))
+                            .setPositiveButton(getString(R.string.proceed), (dialog, which) -> {
+                                dialog.dismiss();
+                                checkLocationSettings();
+                            })
+                            .setNegativeButton(getString(R.string.cancel), ((dialog, which) ->
+                                    System.exit(0)))
+                            .setCancelable(false)
+                            .show();
+                    break;
+                default: break;
+            }
+        }
     }
 }

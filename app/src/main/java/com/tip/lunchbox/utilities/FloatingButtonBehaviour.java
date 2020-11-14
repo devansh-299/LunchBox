@@ -32,14 +32,12 @@ public class FloatingButtonBehaviour extends CoordinatorLayout.Behavior<View> {
     @Override
     public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child,
                                    @NonNull View dependency) {
-        Log.d("CoordinatorLayout", "Drawing Chip");
         return dependency.getId() == R.id.bs_restaurant_list;
     }
 
     @Override
     public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull View child,
                                           @NonNull View dependency) {
-        Log.d("CoordinatorLayout", "Bottom sheet changed");
         if (dependency.getY() < (float) parent.getHeight()
                 - this.restaurantListBottomSheetPeekHeight) {
             child.setY((float) parent.getHeight() - this.restaurantListBottomSheetPeekHeight

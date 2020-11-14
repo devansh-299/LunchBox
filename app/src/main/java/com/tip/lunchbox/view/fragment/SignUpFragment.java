@@ -88,9 +88,9 @@ public class SignUpFragment extends BottomSheetDialogFragment implements View.On
 
     private void validateUserSignUp(String username, String password,
                                     String rePassword, Long phone) {
-        Boolean unValid = Validator.usernameValidator(username);
-        Boolean passValid = Validator.passwordValidator(password);
-        Boolean valid = true;
+        boolean unValid = Validator.usernameValidator(username);
+        boolean passValid = Validator.passwordValidator(password);
+        boolean valid = true;
         dismissError();
         if (!unValid) {
             binding.tiUsername.setError("Invalid Username");
@@ -109,7 +109,7 @@ public class SignUpFragment extends BottomSheetDialogFragment implements View.On
             valid = false;
         }
         // TODO add better phone number validation (this one is only for searching)
-        if (Patterns.PHONE.matcher(String.valueOf(phone)).find()) {
+        if (!Patterns.PHONE.matcher(String.valueOf(phone)).find()) {
             binding.tiPhone.setError("Invalid Phone Number");
             setEnabled(true);
             valid = false;

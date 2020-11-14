@@ -38,5 +38,9 @@
     <string name="no_results_found">No Results Found</string>
     <string name="invalid_email">Invalid email</string>
     <string name="invalid_phone">Invalid phone number</string>
+    <string name="location_permission">Grant Location Permission</string>
+    <string name="location_permission_description">We need access to your device location to be able to show you restaurants, eateries and bars around you.\nPlease grant the location permission for us to be able to serve you. Cancelling will exit the app.</string>
+    <string name="gps_service">Turn on GPS Service</string>
+    <string name="gps_service_description">Accessing your current location requires a change in your Location Settings.\nThis is necessary for us to serve you. Cancelling will exit the app.</string>
 
 </resources>

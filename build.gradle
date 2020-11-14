@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath 'com.android.tools.build:gradle:4.1.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -39,15 +39,15 @@ task clean(type: Delete) {
 
 ext {
     material_library_version = '1.2.1'
-    play_services_version = '12.0.1'
     lifecycle_version = '2.2.0'
     retrofit_version = '2.9.0'
     okhttp_version = '4.9.0'
     rx_android_version = '3.0.0'
     rx_java_version = '3.0.6'
     glide_version = '4.11.0'
-    navigation_version = '2.3.0'
-    google_maps_version = '12.0.1'
+    location_api_version = '17.1.0'
+    navigation_version = '2.3.1'
+    google_maps_version = '17.0.0'
     shimmer_loading_version = 'v1.3'
-    lottie_version = '3.4.4'
+    lottie_version = '3.5.0'
 }

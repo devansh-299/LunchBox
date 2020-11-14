@@ -36,14 +36,14 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
-    // Google Play Services
-    implementation "com.google.android.gms:play-services:$rootProject.play_services_version"
 
     //Google Maps
     implementation "com.google.android.gms:play-services-maps:$rootProject.google_maps_version"
+
+    // Location API
+    implementation "com.google.android.gms:play-services-location:$rootProject.location_api_version"
 
     // Material Library
     implementation "com.google.android.material:material:$rootProject.material_library_version"
@@ -84,7 +84,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
     // Java 8+ API De-sugaring
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.0'
 
     // Shimmer Loading View
     implementation "com.github.sharish:ShimmerRecyclerView:$rootProject.shimmer_loading_version"
