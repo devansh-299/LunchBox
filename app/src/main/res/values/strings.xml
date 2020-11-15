@@ -2,7 +2,7 @@
     <string name="app_name">LunchBox</string>
 
     <string name="search">Search</string>
-    <string name="food">Food</string>
+    <string name="user">User</string>
     <string name="home">Home</string>
     <string name="placeholder_cuisines"><b>Cuisine:</b> %1$s</string>
     <string name="error_occurred">Error Occurred</string>
