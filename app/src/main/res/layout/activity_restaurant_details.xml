@@ -209,6 +209,11 @@
                 android:layout_marginEnd="@dimen/value_5dp"
                 android:background="@color/line_color" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
