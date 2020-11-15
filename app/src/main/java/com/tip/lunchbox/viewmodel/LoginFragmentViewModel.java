@@ -54,12 +54,12 @@ public class LoginFragmentViewModel extends ViewModel {
                     public void onSuccess(@NonNull Tokens tokens) {
 
                         //Using set value because we don't want a delay in logging the user in.
-
-                        isValid.setValue(true);
                         SharedPreferencesUtil.setStringPreference(LunchBoxApplication.getContext(),
                                 Constants.PREF_AUTH_TOKEN, tokens.getAuthToken());
                         SharedPreferencesUtil.setStringPreference(LunchBoxApplication.getContext(),
                                 Constants.PREF_REFRESH_TOKEN, tokens.getRefreshToken());
+                        isValid.setValue(true);
+
                     }
 
                     @Override
