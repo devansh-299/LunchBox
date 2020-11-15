@@ -27,6 +27,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentUserBinding.inflate(inflater, container, false);
+        binding.btLogout.setOnClickListener(this);
         return binding.getRoot();
     }
 

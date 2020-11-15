@@ -21,11 +21,14 @@ public class ApiAuthenticator implements Authenticator {
     public Request authenticate(@Nullable Route route,
                                 @NotNull Response response) throws IOException {
         // Verification can also be done on front if token has expired or not.
-        if (response.code() == 401 && response.request().url().encodedPath().equals("/refresh")) {
-            //TODO setup should be changed to login activity
-            Intent intent = new Intent(LunchBoxApplication.getContext(), SetupActivity.class);
-            intent.putExtra("message","Token Expired Please Sign in again");
-            return null;
+        if (!response.request().url().encodedPath().equals("/login")) {
+            if (response.code() == 401) {
+                //TODO setup should be changed to login activity
+                Intent intent = new Intent(LunchBoxApplication.getContext(), SetupActivity.class);
+                intent.putExtra("message", "Token Expired Please Sign in again");
+                LunchBoxApplication.getInstance().startActivity(intent);
+                return null;
+            }
         }
 
         return response.request();

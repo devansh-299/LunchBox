@@ -1,6 +1,7 @@
 package com.tip.lunchbox.model.server.request;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Comment {
     @Expose
@@ -8,6 +9,7 @@ public class Comment {
     @Expose
     private String title;
     @Expose
+    @SerializedName("zomato_res_id")
     private String zomatoResId;
 
     public String getComment() {
@@ -30,7 +32,7 @@ public class Comment {
         return zomatoResId;
     }
 
-    public void setZomatoResId(int zomatoResId) {
-        this.zomatoResId = Integer.toString(zomatoResId);
+    public void setZomatoResId(String zomatoResId) {
+        this.zomatoResId = zomatoResId;
     }
 }
