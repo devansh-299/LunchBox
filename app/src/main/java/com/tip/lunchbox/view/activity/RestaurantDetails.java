@@ -18,10 +18,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.ActivityRestaurantDetailsBinding;
 import com.tip.lunchbox.model.server.request.Comment;
+import com.tip.lunchbox.model.server.response.CommentsResponse;
 import com.tip.lunchbox.model.server.response.CustomResponse;
 import com.tip.lunchbox.model.zomato.Restaurant;
 import com.tip.lunchbox.utilities.Constants;
 import com.tip.lunchbox.utilities.PermissionHelper;
+import com.tip.lunchbox.view.adapter.CommentAdapter;
 import com.tip.lunchbox.view.adapter.HighlightsAdapter;
 import com.tip.lunchbox.view.adapter.PhoneNumberAdapter;
 import com.tip.lunchbox.view.listeners.RecyclerTouchListener;
@@ -37,6 +39,7 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
     private ActivityRestaurantDetailsBinding binding;
     private PhoneNumberAdapter phoneNumberAdapter;
     private HighlightsAdapter highlightsAdapter;
+    private CommentAdapter commentAdapter;
     private String resId;
 
     @Override
@@ -51,6 +54,7 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
         // creating adapter instances
         phoneNumberAdapter = new PhoneNumberAdapter(this);
         highlightsAdapter = new HighlightsAdapter(this);
+        commentAdapter = new CommentAdapter(this);
         setupRecyclerViews();
 
         binding.appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
@@ -67,11 +71,14 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
             }
         });
         viewModel.getRestaurantLiveData(Integer.parseInt(resId)).observe(this, this::setData);
+        viewModel.getCommentsResponseLiveData(resId).observe(this, commentsResponses -> {
+            commentAdapter.setData(commentsResponses.getComments());
+        });
         viewModel.postCommentLiveData().observe(this, aBoolean -> {
             if (aBoolean != null) {
                 if (aBoolean) {
-                   Toast.makeText(this,"Comment Posted",Toast.LENGTH_SHORT).show();
-                   binding.tiComment.setText("");
+                    Toast.makeText(this, "Comment Posted", Toast.LENGTH_SHORT).show();
+                    binding.tiComment.setText("");
                 } else {
                     Toast.makeText(this,
                             viewModel.getErrorMessage(),
@@ -88,12 +95,13 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
     private void setupRecyclerViews() {
         binding.rvPhoneNumber.setLayoutManager(new LinearLayoutManager(this));
         binding.rvPhoneNumber.setAdapter(phoneNumberAdapter);
-
+        binding.rvComments.setAdapter(commentAdapter);
         binding.rvHighlights.setLayoutManager(new LinearLayoutManager(
                 this,
                 LinearLayoutManager.HORIZONTAL,
                 true));
         binding.rvHighlights.setAdapter(highlightsAdapter);
+        binding.rvComments.setLayoutManager(new LinearLayoutManager(this));
         String callPermission = Manifest.permission.CALL_PHONE;
         // Item click listener for phone number's recyclerview
         new RecyclerTouchListener(this, binding.rvPhoneNumber, (view, position) -> {

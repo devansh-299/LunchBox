@@ -9,10 +9,13 @@ import androidx.lifecycle.ViewModel;
 import com.google.gson.Gson;
 import com.tip.lunchbox.data.Repository;
 import com.tip.lunchbox.model.server.request.Comment;
+import com.tip.lunchbox.model.server.response.CommentsResponse;
+import com.tip.lunchbox.model.server.response.CommentsResponseContainer;
 import com.tip.lunchbox.model.server.response.CustomResponse;
 import com.tip.lunchbox.model.zomato.Restaurant;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -26,7 +29,9 @@ import retrofit2.HttpException;
 
 public class RestaurantDetailsViewModel extends ViewModel {
     private final MutableLiveData<Restaurant> restaurantLiveData = new MutableLiveData<>();
-    MutableLiveData<Boolean> isError = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isError = new MutableLiveData<>();
+    private final MutableLiveData<CommentsResponseContainer> commentsResponseLiveData
+            = new MutableLiveData<>();
     private String errorMessage;
     Repository repository = new Repository();
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -40,8 +45,35 @@ public class RestaurantDetailsViewModel extends ViewModel {
         return restaurantLiveData;
     }
 
+    public LiveData<CommentsResponseContainer> getCommentsResponseLiveData(String resId) {
+        getComments(resId);
+        return commentsResponseLiveData;
+    }
+
     public LiveData<Boolean> postCommentLiveData() {
         return isError;
+    }
+
+    public void getComments(String resId) {
+        repository.getComments(resId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<CommentsResponseContainer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        compositeDisposable.add(disposable);
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull CommentsResponseContainer commentsResponses) {
+                        commentsResponseLiveData.setValue(commentsResponses);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable error) {
+                        Log.d("http", "onError: " + error);
+                    }
+                });
     }
 
     public void postComment(Comment comment) {

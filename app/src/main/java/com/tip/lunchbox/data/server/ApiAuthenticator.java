@@ -3,6 +3,8 @@ package com.tip.lunchbox.data.server;
 import android.content.Intent;
 
 import com.tip.lunchbox.LunchBoxApplication;
+import com.tip.lunchbox.utilities.Constants;
+import com.tip.lunchbox.utilities.SharedPreferencesUtil;
 import com.tip.lunchbox.view.activity.SetupActivity;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +28,13 @@ public class ApiAuthenticator implements Authenticator {
                 //TODO setup should be changed to login activity
                 Intent intent = new Intent(LunchBoxApplication.getContext(), SetupActivity.class);
                 intent.putExtra("message", "Token Expired Please Sign in again");
+                SharedPreferencesUtil
+                        .setStringPreference(LunchBoxApplication.getContext(),
+                                Constants.PREF_AUTH_TOKEN, "");
+                SharedPreferencesUtil
+                        .setStringPreference(LunchBoxApplication.getContext(),
+                                Constants.PREF_REFRESH_TOKEN, "");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 LunchBoxApplication.getInstance().startActivity(intent);
                 return null;
             }

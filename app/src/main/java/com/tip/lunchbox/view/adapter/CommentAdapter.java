@@ -20,12 +20,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comments
         this.context = context;
     }
 
-    public void setData(List<CommentsResponse> commentsResponses){
+    public void setData(List<CommentsResponse> commentsResponses) {
         this.commentsResponses = commentsResponses;
+        notifyDataSetChanged();
     }
+
     @NonNull
     @Override
-    public CommentAdapter.CommentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CommentAdapter.CommentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                                int viewType) {
         return new CommentsViewHolder(
                 ItemCommentsBinding.inflate(LayoutInflater.from(context), parent, false));
     }
