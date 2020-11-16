@@ -197,10 +197,7 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
         if (view == binding.btPostComment) {
             String commentBody = binding.tiComment.getText().toString();
             //TODO do some Validation here
-            Comment comment = new Comment();
-            comment.setComment(commentBody);
-            comment.setZomatoResId(resId);
-            comment.setTitle("Temp title");
+            Comment comment = new Comment(commentBody, "temp title", resId);
             viewModel.postComment(comment);
         }
     }

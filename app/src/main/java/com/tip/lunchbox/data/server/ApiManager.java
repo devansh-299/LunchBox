@@ -1,5 +1,9 @@
 package com.tip.lunchbox.data.server;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -18,7 +22,7 @@ public class ApiManager {
                     .baseUrl(BASE_URL)
                     .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create()).build();
+                    .addConverterFactory(getGson()).build();
         }
         return retrofit;
     }
@@ -33,6 +37,13 @@ public class ApiManager {
                 .authenticator(new ApiAuthenticator())
                 .addInterceptor(logging)
                 .build();
+    }
+
+    private static GsonConverterFactory getGson() {
+        Gson gson = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .create();
+        return GsonConverterFactory.create(gson);
     }
 
     public static ApiService getApiService() {

@@ -12,7 +12,6 @@ public class CommentsResponse {
     @Expose
     private String comment;
     @Expose
-    @SerializedName("zomato_res_id")
     private String zomatoResId;
     @SerializedName("user_name")
     private String author;

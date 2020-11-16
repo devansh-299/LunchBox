@@ -9,30 +9,26 @@ public class Comment {
     @Expose
     private String title;
     @Expose
-    @SerializedName("zomato_res_id")
     private String zomatoResId;
+
+    public Comment(String comment, String title, String zomatoResId) {
+        this.comment = comment;
+        this.title = title;
+        this.zomatoResId = zomatoResId;
+    }
 
     public String getComment() {
         return comment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getZomatoResId() {
         return zomatoResId;
     }
 
-    public void setZomatoResId(String zomatoResId) {
-        this.zomatoResId = zomatoResId;
-    }
 }
