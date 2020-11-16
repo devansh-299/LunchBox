@@ -117,6 +117,10 @@ public class Repository {
     public Single<RefreshResponse> refreshResponseSingle() {
         return ApiManager.getApiService().refresh();
     }
+
+    public Single<CommentsResponseContainer> getUserComments(String username){
+        return ApiManager.getApiService().getUserComments(username);
+    }
 }
 
 

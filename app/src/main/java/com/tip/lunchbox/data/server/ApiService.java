@@ -36,6 +36,9 @@ public interface ApiService {
     @GET("restaurant/comments")
     public Single<CommentsResponseContainer> getComment(@Query("resID") String resId);
 
+    @GET("user/comments")
+    public Single<CommentsResponseContainer> getUserComments(@Query("user") String user);
+
     @GET("fav")
     public Single<FavouriteRestaurantsResponse> getUserFav(@Query("username") String username);
 
