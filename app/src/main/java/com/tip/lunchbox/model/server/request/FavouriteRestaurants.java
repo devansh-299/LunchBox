@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class FavouriteRestaurants {
     @Expose
-    private String zomatoResId;
+    private int zomatoResId;
 
     public String getZomatoResId() {
-        return zomatoResId;
+        return "" + zomatoResId;
     }
 
     public void setZomatoResId(int zomatoResId) {
-        this.zomatoResId = Integer.toString(zomatoResId);
+        this.zomatoResId =zomatoResId;
     }
 }

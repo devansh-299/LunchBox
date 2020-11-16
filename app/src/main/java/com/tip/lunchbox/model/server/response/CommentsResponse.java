@@ -8,11 +8,11 @@ public class CommentsResponse {
     @Expose
     private String id;
     @Expose
-    private String title;
+    private int rating;
     @Expose
     private String comment;
     @Expose
-    private String zomatoResId;
+    private int zomatoResId;
     @SerializedName("user_name")
     private String author;
 
@@ -20,15 +20,15 @@ public class CommentsResponse {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public int getRating() {
+        return rating;
     }
 
     public String getComment() {
         return comment;
     }
 
-    public String getZomatoResId() {
+    public int getZomatoResId() {
         return zomatoResId;
     }
 

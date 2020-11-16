@@ -7,14 +7,14 @@ public class Comment {
     @Expose
     private String comment;
     @Expose
-    private String title;
+    private int rating;
     @Expose
-    private String zomatoResId;
+    private int zomatoResId;
 
-    public Comment(String comment, String title, String zomatoResId) {
+    public Comment(String comment, int rating, String zomatoResId) {
         this.comment = comment;
-        this.title = title;
-        this.zomatoResId = zomatoResId;
+        this.rating = rating;
+        this.zomatoResId = Integer.parseInt(zomatoResId);
     }
 
     public String getComment() {
@@ -22,13 +22,13 @@ public class Comment {
     }
 
 
-    public String getTitle() {
-        return title;
+    public int getRating() {
+        return rating;
     }
 
 
     public String getZomatoResId() {
-        return zomatoResId;
+        return "" + zomatoResId;
     }
 
 }

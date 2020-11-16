@@ -108,7 +108,7 @@ public class RestaurantDetailsViewModel extends ViewModel {
                                         .fromJson(httpError.response()
                                                 .errorBody().string(), CustomResponse.class)
                                         .getMessage();
-                            } catch (IOException exception) {
+                            } catch (Exception exception) {
                                 errorMessage = "Something went wrong";
                                 exception.printStackTrace();
                             }

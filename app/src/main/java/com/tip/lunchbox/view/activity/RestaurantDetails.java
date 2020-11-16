@@ -78,7 +78,9 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
             if (aBoolean != null) {
                 if (aBoolean) {
                     Toast.makeText(this, "Comment Posted", Toast.LENGTH_SHORT).show();
+                    viewModel.getComments(resId);
                     binding.tiComment.setText("");
+
                 } else {
                     Toast.makeText(this,
                             viewModel.getErrorMessage(),
@@ -197,7 +199,7 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
         if (view == binding.btPostComment) {
             String commentBody = binding.tiComment.getText().toString();
             //TODO do some Validation here
-            Comment comment = new Comment(commentBody, "temp title", resId);
+            Comment comment = new Comment(commentBody, 5, resId);
             viewModel.postComment(comment);
         }
     }

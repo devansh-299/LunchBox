@@ -33,7 +33,7 @@ public interface ApiService {
     @POST("comments")
     public Single<CustomResponse> postComment(@Body Comment comment);
 
-    @GET("comments")
+    @GET("restaurant/comments")
     public Single<CommentsResponseContainer> getComment(@Query("resID") String resId);
 
     @GET("fav")
