@@ -12,6 +12,6 @@ public class FavouriteRestaurants {
     }
 
     public void setZomatoResId(int zomatoResId) {
-        this.zomatoResId =zomatoResId;
+        this.zomatoResId = zomatoResId;
     }
 }

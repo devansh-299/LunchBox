@@ -26,7 +26,8 @@ public class UserFragmentViewModel extends ViewModel {
         getUserComments(username);
         return commentsResponseLiveData;
     }
-    public void getUserComments(String username){
+
+    public void getUserComments(String username) {
         repository.getUserComments(username)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

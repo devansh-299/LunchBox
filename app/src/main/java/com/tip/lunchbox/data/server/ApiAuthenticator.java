@@ -34,7 +34,9 @@ public class ApiAuthenticator implements Authenticator {
                 SharedPreferencesUtil
                         .setStringPreference(LunchBoxApplication.getContext(),
                                 Constants.PREF_REFRESH_TOKEN, "");
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 LunchBoxApplication.getInstance().startActivity(intent);
                 return null;
             }

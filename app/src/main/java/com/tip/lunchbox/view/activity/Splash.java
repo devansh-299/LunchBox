@@ -20,5 +20,6 @@ public class Splash extends AppCompatActivity {
                                 | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         startActivity(new Intent(this, SetupActivity.class));
+        finish();
     }
 }
