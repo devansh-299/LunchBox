@@ -80,12 +80,15 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
                     Toast.makeText(this, "Comment Posted", Toast.LENGTH_SHORT).show();
                     viewModel.getComments(resId);
                     binding.tiComment.setText("");
+                    binding.rbRes.setRating(0f);
 
                 } else {
                     Toast.makeText(this,
                             viewModel.getErrorMessage(),
                             Toast.LENGTH_SHORT).show();
                 }
+                binding.rbRes.setEnabled(true);
+                binding.btPostComment.setEnabled(true);
             }
         });
     }
@@ -202,6 +205,8 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
             float rating = binding.rbRes.getRating();
             Comment comment = new Comment(commentBody, (int) rating, resId);
             viewModel.postComment(comment);
+            binding.btPostComment.setEnabled(false);
+            binding.rbRes.setEnabled(false);
         }
     }
 }

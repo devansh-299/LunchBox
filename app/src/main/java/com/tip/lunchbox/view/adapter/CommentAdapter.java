@@ -54,7 +54,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comments
         public void setData(CommentsResponse commentsResponse) {
             commentsBinding.tvCommentAuthor.setText(commentsResponse.getAuthor());
             commentsBinding.tvCommentBody.setText(commentsResponse.getComment());
-            commentsBinding.tvCommentTitle.setText("" + commentsResponse.getRating());
+            commentsBinding.rbCommentRating.setRating(commentsResponse.getRating());
         }
     }
 }
