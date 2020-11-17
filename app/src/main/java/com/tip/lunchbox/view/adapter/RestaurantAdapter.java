@@ -58,6 +58,23 @@ public class RestaurantAdapter extends
         return restaurantsList == null ? 0 : restaurantsList.size();
     }
 
+    public void bringToTop(String title) {
+        RestaurantContainer restaurantContainer = null;
+        int initialPos = 0;
+        for (RestaurantContainer container : restaurantsList) {
+            if (container.getRestaurant().getName().equals(title)) {
+                restaurantContainer = container;
+                initialPos = restaurantsList.indexOf(container);
+                break;
+            }
+        }
+        if (restaurantContainer != null) {
+            restaurantsList.remove(restaurantContainer);
+            restaurantsList.add(0, restaurantContainer);
+            notifyItemMoved(initialPos, 0);
+        }
+    }
+
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
 
         private ItemRestaurantBinding restaurantItemBinding;

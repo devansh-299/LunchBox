@@ -36,6 +36,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.chip.Chip;
@@ -70,7 +71,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
+public class HomeFragment extends Fragment implements OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener {
 
     private double userLocationLatitude;
     private double userLocationLongitude;
@@ -353,7 +355,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         // Clears the existing markers every time a new filter is selected or cleared
         googleMap.clear();
-
+        googleMap.setOnMarkerClickListener(this);
         LatLng location = new LatLng(userLocationLatitude, userLocationLongitude);
         try {
             String cityName = LocationHelper.getUserAddressLine(
@@ -446,5 +448,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 default: break;
             }
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        adapter.bringToTop(marker.getTitle());
+        homeBinding.rvRestaurant.scrollToPosition(0);
+        return false;
     }
 }
