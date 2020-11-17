@@ -214,6 +214,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <RatingBar
+                android:id="@+id/rb_res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1"
+                android:isIndicator="false"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                />
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

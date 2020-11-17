@@ -199,7 +199,8 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
         if (view == binding.btPostComment) {
             String commentBody = binding.tiComment.getText().toString();
             //TODO do some Validation here
-            Comment comment = new Comment(commentBody, 5, resId);
+            float rating = binding.rbRes.getRating();
+            Comment comment = new Comment(commentBody, (int) rating, resId);
             viewModel.postComment(comment);
         }
     }
