@@ -49,4 +49,10 @@ public class CollectionDetailsViewModel extends ViewModel {
                     }
                 });
     }
+
+    @Override
+    protected void onCleared() {
+        compositeDisposable.dispose();
+        super.onCleared();
+    }
 }

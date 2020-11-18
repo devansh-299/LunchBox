@@ -90,4 +90,10 @@ public class SignUpFragmentViewModel extends ViewModel {
                     }
                 });
     }
+
+    @Override
+    protected void onCleared() {
+        compositeDisposable.dispose();
+        super.onCleared();
+    }
 }

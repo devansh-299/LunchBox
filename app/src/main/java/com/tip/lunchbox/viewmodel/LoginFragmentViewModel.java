@@ -89,4 +89,10 @@ public class LoginFragmentViewModel extends ViewModel {
                     }
                 });
     }
+
+    @Override
+    protected void onCleared() {
+        compositeDisposable.dispose();
+        super.onCleared();
+    }
 }
