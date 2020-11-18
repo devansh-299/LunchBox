@@ -27,7 +27,7 @@ public class ApiAuthenticator implements Authenticator {
             if (response.code() == 401) {
                 //TODO setup should be changed to login activity
                 Intent intent = new Intent(LunchBoxApplication.getContext(), SetupActivity.class);
-                intent.putExtra("message", "Token Expired Please Sign in again");
+                intent.putExtra(Constants.LOGOUT_MESSAGE, "Session expired, please log in again.");
                 SharedPreferencesUtil
                         .setStringPreference(LunchBoxApplication.getContext(),
                                 Constants.PREF_AUTH_TOKEN, "");

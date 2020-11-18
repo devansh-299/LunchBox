@@ -1,36 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/value_5dp"
     app:cardCornerRadius="@dimen/value_8dp">
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <RatingBar
             android:id="@+id/rb_comment_rating"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:numStars="5" />
+            android:layout_margin="@dimen/value_10dp"
+            android:numStars="5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_comment_author"
+            app:layout_constraintBottom_toTopOf="@id/rating_divider" />
+
+        <TextView
+            android:id="@+id/rating_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/value_10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rb_comment_rating"
+            app:layout_constraintStart_toEndOf="@+id/rb_comment_rating"
+            app:layout_constraintTop_toTopOf="@+id/rb_comment_rating"
+            tools:text="5.0" />
 
         <TextView
             android:id="@+id/tv_comment_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/value_10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rating_divider"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Nice Restaurant" />
+
+        <View
+            android:id="@+id/rating_divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="@dimen/value_10dp"
+            android:background="@color/line_color"
+            app:layout_constraintBottom_toTopOf="@+id/tv_comment_body"
+            app:layout_constraintTop_toBottomOf="@+id/rb_comment_rating" />
 
         <TextView
             android:id="@+id/tv_comment_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="username" />
+            android:layout_margin="@dimen/value_10dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Username" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

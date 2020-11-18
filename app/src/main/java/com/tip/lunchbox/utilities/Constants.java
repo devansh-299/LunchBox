@@ -16,6 +16,7 @@ public class Constants {
     public static final String PREF_USER_LATITUDE = "pref_user_latitude";
     public static final String PREF_USER_LONGITUDE = "pref_user_longitude";
     public static final String PREF_USER_CITY_ID = "pref_user_city_id";
+    public static final String LOGOUT_MESSAGE = "logout_message";
     public static final int REQUEST_LOCATION_PERMISSION = 101;
     public static final int REQUEST_CHECK_SETTINGS = 102;
 }

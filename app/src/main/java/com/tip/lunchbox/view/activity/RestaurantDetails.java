@@ -1,22 +1,29 @@
 package com.tip.lunchbox.view.activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.ActivityRestaurantDetailsBinding;
+import com.tip.lunchbox.databinding.DialogAddReviewBinding;
 import com.tip.lunchbox.model.server.request.Comment;
 import com.tip.lunchbox.model.server.response.CommentsResponse;
 import com.tip.lunchbox.model.server.response.CustomResponse;
@@ -37,10 +44,12 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
     private final int callerPermissionCode = 29;
     private RestaurantDetailsViewModel viewModel;
     private ActivityRestaurantDetailsBinding binding;
+    private DialogAddReviewBinding addReviewBinding;
     private PhoneNumberAdapter phoneNumberAdapter;
     private HighlightsAdapter highlightsAdapter;
     private CommentAdapter commentAdapter;
     private String resId;
+    private AlertDialog newReviewDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +59,7 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
         viewModel = new ViewModelProvider(this).get(RestaurantDetailsViewModel.class);
         resId = getIntent().getStringExtra(Constants.INTENT_RES_ID);
         assert resId != null;
-        binding.btPostComment.setOnClickListener(this);
+        binding.addReviewButton.setOnClickListener(this);
         // creating adapter instances
         phoneNumberAdapter = new PhoneNumberAdapter(this);
         highlightsAdapter = new HighlightsAdapter(this);
@@ -71,24 +80,21 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
             }
         });
         viewModel.getRestaurantLiveData(Integer.parseInt(resId)).observe(this, this::setData);
-        viewModel.getCommentsResponseLiveData(resId).observe(this, commentsResponses -> {
-            commentAdapter.setData(commentsResponses.getComments());
-        });
+        viewModel.getCommentsResponseLiveData(resId).observe(this, commentsResponses ->
+                commentAdapter.setData(commentsResponses.getComments()));
         viewModel.postCommentLiveData().observe(this, aBoolean -> {
             if (aBoolean != null) {
                 if (aBoolean) {
                     Toast.makeText(this, "Comment Posted", Toast.LENGTH_SHORT).show();
                     viewModel.getComments(resId);
-                    binding.tiComment.setText("");
-                    binding.rbRes.setRating(0f);
-
+                    newReviewDialog.dismiss();
                 } else {
                     Toast.makeText(this,
                             viewModel.getErrorMessage(),
                             Toast.LENGTH_SHORT).show();
+                    addReviewBinding.tiComment.setEnabled(true);
+                    addReviewBinding.rbRes.setEnabled(true);
                 }
-                binding.rbRes.setEnabled(true);
-                binding.btPostComment.setEnabled(true);
             }
         });
     }
@@ -104,7 +110,7 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
         binding.rvHighlights.setLayoutManager(new LinearLayoutManager(
                 this,
                 LinearLayoutManager.HORIZONTAL,
-                true));
+                false));
         binding.rvHighlights.setAdapter(highlightsAdapter);
         binding.rvComments.setLayoutManager(new LinearLayoutManager(this));
         String callPermission = Manifest.permission.CALL_PHONE;
@@ -199,14 +205,21 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        if (view == binding.btPostComment) {
-            String commentBody = binding.tiComment.getText().toString();
-            //TODO do some Validation here
-            float rating = binding.rbRes.getRating();
-            Comment comment = new Comment(commentBody, (int) rating, resId);
-            viewModel.postComment(comment);
-            binding.btPostComment.setEnabled(false);
-            binding.rbRes.setEnabled(false);
+        if (view == binding.addReviewButton) {
+            addReviewBinding = DialogAddReviewBinding.inflate(LayoutInflater
+                    .from(RestaurantDetails.this));
+            newReviewDialog = new MaterialAlertDialogBuilder(this)
+                    .setView(addReviewBinding.getRoot())
+                    .setPositiveButton("Post Review", (dialog, which) -> {
+                        Comment newComment = new Comment(
+                                addReviewBinding.tiComment.getText().toString().trim(),
+                                (int) addReviewBinding.rbRes.getRating(), resId);
+                        viewModel.postComment(newComment);
+                        addReviewBinding.tiComment.setEnabled(false);
+                        addReviewBinding.rbRes.setEnabled(false);
+                    })
+                    .setCancelable(true)
+                    .show();
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.tip.lunchbox.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -55,6 +56,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Comments
             commentsBinding.tvCommentAuthor.setText(commentsResponse.getAuthor());
             commentsBinding.tvCommentBody.setText(commentsResponse.getComment());
             commentsBinding.rbCommentRating.setRating(commentsResponse.getRating());
+            commentsBinding.ratingNumber.setText(String.valueOf(
+                    commentsResponse.getRating().floatValue()));
         }
     }
 }

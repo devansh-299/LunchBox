@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/value_10dp"
-                    android:text="@string/rating"
+                    android:text="@string/zomato_rating"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/value_20sp"
                     android:textStyle="bold" />
@@ -199,7 +199,6 @@
                 android:layout_marginStart="@dimen/value_10dp"
                 android:layout_marginEnd="@dimen/value_10dp"
                 android:layout_marginBottom="@dimen/value_20dp"
-                android:orientation="horizontal"
                 android:overScrollMode="never" />
 
             <View
@@ -209,46 +208,34 @@
                 android:layout_marginEnd="@dimen/value_5dp"
                 android:background="@color/line_color" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/value_10dp"
+                android:text="@string/users_reviews"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/value_20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_review_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:icon="@drawable/ic_add_24px"
+                app:iconTint="@color/colorPrimary"
+                app:iconGravity="textStart"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/add_review"
+                tools:text="Add review" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_comments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <RatingBar
-                android:id="@+id/rb_res"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:stepSize="1"
-                android:isIndicator="false"
-                style="@style/Widget.AppCompat.RatingBar.Indicator"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:padding="@dimen/value_10dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="500"
-                app:counterOverflowTextColor="@color/colorPrimaryDark"
-                app:errorEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/ti_comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/value_10dp"
-                    android:layout_marginRight="@dimen/value_10dp"
-                    android:inputType="textMultiLine"
-                    android:selectAllOnFocus="false"
-                    android:textSize="@dimen/value_20sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/bt_post_comment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/post_comment" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

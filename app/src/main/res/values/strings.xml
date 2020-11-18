@@ -11,7 +11,7 @@
     <string name="discover_restaurants">Discover restaurants</string>
     <string name="proceed">Proceed</string>
     <string name="introduction_message">Discover \u25CF Explore \u25CF Search</string>
-    <string name="rating">Rating</string>
+    <string name="zomato_rating">Zomato Rating</string>
     <string name="our_review_good">Go ahead! We totally recommend this restaurant.\nHave a nice time</string>
     <string name="our_review_average">Decent place!\nSome of our users did have a great time here</string>
     <string name="our_review_bad">Uuh! this is probably not the best restaurant according to our users</string>
@@ -36,5 +36,9 @@
     <string name="gps_service_description">Accessing your current location requires a change in your Location Settings.\nThis is necessary for us to serve you. Cancelling will exit the app.</string>
     <string name="post_comment">Post Comment</string>
     <string name="logout">Logout</string>
+    <string name="users_reviews">Users Reviews</string>
+    <string name="add_review">Add Review</string>
+    <string name="write_review">Write a review…</string>
+    <string name="rate_your_experience">Rate your experience:</string>
 
 </resources>

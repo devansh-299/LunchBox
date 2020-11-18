@@ -8,7 +8,7 @@ public class CommentsResponse {
     @Expose
     private String id;
     @Expose
-    private int rating;
+    private Integer rating;
     @Expose
     private String comment;
     @Expose
@@ -20,7 +20,7 @@ public class CommentsResponse {
         return id;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 

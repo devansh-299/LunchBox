@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.utilities.Constants;
@@ -22,6 +23,11 @@ public class SetupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
+        String logoutMessage = getIntent().getStringExtra("message");
+        if (logoutMessage != null) {
+            Toast.makeText(SetupActivity.this, logoutMessage, Toast.LENGTH_SHORT).show();
+        }
+        
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             // Condition can also be set on refresh token expiry.

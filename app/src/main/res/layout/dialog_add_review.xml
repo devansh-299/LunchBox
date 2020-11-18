@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/value_10dp"
+        android:layout_gravity="center"
+        android:text="@string/rate_your_experience"
+        android:textStyle="bold"
+        android:textSize="@dimen/value_14sp" />
+
+    <RatingBar
+        android:id="@+id/rb_res"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/value_10dp"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:stepSize="1"
+        android:isIndicator="false"
+        style="@style/Widget.AppCompat.RatingBar.Indicator" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/value_10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:counterEnabled="true"
+        app:counterMaxLength="500"
+        app:counterOverflowTextColor="@color/colorPrimaryDark"
+        app:errorEnabled="true"
+        android:overScrollMode="never">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ti_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/write_review"
+            android:inputType="textMultiLine"
+            android:selectAllOnFocus="false"
+            android:textSize="@dimen/value_16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
