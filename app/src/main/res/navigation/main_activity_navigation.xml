@@ -8,19 +8,19 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.tip.lunchbox.view.fragment.HomeFragment"
-        android:label="Home"
+        android:label="@string/home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/serachFragment"
+        android:id="@+id/searchFragment"
         android:name="com.tip.lunchbox.view.fragment.SearchFragment"
-        android:label="Search"
+        android:label="@string/search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/foodFragment"
-        android:name="com.tip.lunchbox.view.fragment.FoodFragment"
-        android:label="Food"
-        tools:layout="@layout/fragment_food"/>
+        android:id="@+id/userFragment"
+        android:name="com.tip.lunchbox.view.fragment.UserFragment"
+        android:label="@string/user"
+        tools:layout="@layout/fragment_user"/>
 
 </navigation>

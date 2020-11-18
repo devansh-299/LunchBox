@@ -8,11 +8,11 @@
 
     <item
         android:title="@string/search"
-        android:id="@+id/serachFragment"
+        android:id="@+id/searchFragment"
         android:icon="@drawable/ic_baseline_search_24"/>
 
-    <item android:title="@string/food"
-        android:id="@+id/foodFragment"
-        android:icon="@drawable/ic_baseline_fastfood_24"/>
+    <item android:title="@string/user"
+        android:id="@+id/userFragment"
+        android:icon="@drawable/ic_baseline_person_24"/>
 
 </menu>

@@ -17,6 +17,7 @@
     <dimen name="value_35sp">35sp</dimen>
     <dimen name="value_300dp">300dp</dimen>
     <dimen name="value_14sp">14sp</dimen>
+    <dimen name="value_16sp">16sp</dimen>
     <dimen name="value_8dp">8dp</dimen>
     <dimen name="value_110dp">110dp</dimen>
 </resources>

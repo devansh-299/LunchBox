@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".view.activity.RestaurantDetails">
-    
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:fitsSystemWindows="true">
-        
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/value_100dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/gradient_black"/>
+                android:background="@drawable/gradient_black" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -65,44 +64,44 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/rating"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
                     android:layout_margin="@dimen/value_10dp"
-                    android:textSize="@dimen/value_20sp" />
+                    android:text="@string/zomato_rating"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/value_20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="@dimen/value_10dp"
                     android:layout_marginStart="@dimen/value_10dp"
                     android:layout_marginEnd="@dimen/value_10dp"
+                    android:layout_marginBottom="@dimen/value_10dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_rating"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/white"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:padding="@dimen/value_2dp"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/value_14sp" />
 
                     <TextView
                         android:id="@+id/tv_our_review"
-                        android:gravity="center_vertical"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/value_10dp"
-                        android:layout_height="wrap_content" />
+                        android:gravity="center_vertical" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginEnd="@dimen/value_5dp"
                     android:layout_marginStart="@dimen/value_5dp"
+                    android:layout_marginEnd="@dimen/value_5dp"
                     android:background="@color/line_color" />
 
             </LinearLayout>
@@ -115,27 +114,27 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/value_10dp"
                     android:text="@string/location"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:layout_margin="@dimen/value_10dp"
-                    android:textSize="@dimen/value_20sp" />
+                    android:textSize="@dimen/value_20sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="@dimen/value_10dp"
                     android:layout_marginStart="@dimen/value_10dp"
                     android:layout_marginEnd="@dimen/value_10dp"
+                    android:layout_marginBottom="@dimen/value_10dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_location"
-                        android:layout_height="wrap_content"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/value_10dp"
+                        android:layout_weight="1"
                         android:textSize="@dimen/value_18sp" />
 
                     <com.google.android.material.chip.Chip
@@ -144,17 +143,17 @@
                         android:layout_height="wrap_content"
                         android:text="@string/get_directions"
                         android:textAppearance="@style/chipText"
-                        app:chipSurfaceColor="@color/colorPrimary"
                         android:textColor="@color/white"
-                        app:chipIcon="@drawable/ic_directions" />
+                        app:chipIcon="@drawable/ic_directions"
+                        app:chipSurfaceColor="@color/colorPrimary" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:layout_marginEnd="@dimen/value_5dp"
                     android:layout_marginStart="@dimen/value_5dp"
+                    android:layout_marginEnd="@dimen/value_5dp"
                     android:background="@color/line_color" />
 
             </LinearLayout>
@@ -162,53 +161,80 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/value_10dp"
                 android:text="@string/contact"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:layout_margin="@dimen/value_10dp"
-                android:textSize="@dimen/value_20sp" />
+                android:textSize="@dimen/value_20sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_phone_number"
-                android:layout_marginStart="@dimen/value_10dp"
-                android:layout_marginBottom="@dimen/value_10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:orientation="vertical" />
+                android:layout_marginStart="@dimen/value_10dp"
+                android:layout_marginBottom="@dimen/value_10dp"
+                android:orientation="vertical"
+                android:overScrollMode="never" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginEnd="@dimen/value_5dp"
                 android:layout_marginStart="@dimen/value_5dp"
+                android:layout_marginEnd="@dimen/value_5dp"
                 android:background="@color/line_color" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/value_10dp"
                 android:text="@string/highlights"
                 android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:layout_margin="@dimen/value_10dp"
-                android:textSize="@dimen/value_20sp" />
+                android:textSize="@dimen/value_20sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_highlights"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/value_10dp"
                 android:layout_marginEnd="@dimen/value_10dp"
                 android:layout_marginBottom="@dimen/value_20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:orientation="horizontal" />
+                android:overScrollMode="never" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginEnd="@dimen/value_5dp"
                 android:layout_marginStart="@dimen/value_5dp"
+                android:layout_marginEnd="@dimen/value_5dp"
                 android:background="@color/line_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/value_10dp"
+                android:text="@string/users_reviews"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/value_20sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_review_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:icon="@drawable/ic_add_24px"
+                app:iconTint="@color/colorPrimary"
+                app:iconGravity="textStart"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/add_review"
+                tools:text="Add review" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -218,14 +244,14 @@
         android:id="@+id/fab_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/value_10dp"
         android:layout_gravity="center_horizontal|bottom"
-        app:icon="@drawable/ic_restaurant_menu"
-        app:iconTint="@color/white"
-        app:rippleColor="@color/colorPrimaryDark"
+        android:layout_marginBottom="@dimen/value_10dp"
+        android:text="@string/menu"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         app:backgroundTint="@color/colorPrimary"
-        android:textAllCaps="false"
-        android:text="@string/menu" />
+        app:icon="@drawable/ic_restaurant_menu"
+        app:iconTint="@color/white"
+        app:rippleColor="@color/colorPrimaryDark" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

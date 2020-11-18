@@ -17,14 +17,9 @@ public class Splash extends AppCompatActivity {
         getWindow().getDecorView()
                 .setSystemUiVisibility(
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+                                | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
-        // to check first time user
-        if (SharedPreferencesUtil.getBooleanPreference(this, Constants.PREF_FIRST_TIME, true)) {
-            startActivity(new Intent(this, SetupActivity.class));
-        } else {
-            startActivity(new Intent(this, MainActivity.class));
-        }
+        startActivity(new Intent(this, SetupActivity.class));
         finish();
     }
 }

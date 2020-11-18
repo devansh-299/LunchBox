@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".LunchBoxApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,7 +20,7 @@
 
         <!-- for google maps -->
         <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
+            android:name="com.google.android.geo.API_KEY"
             android:value="MAP_API_KEY" />
         <meta-data
             android:name="com.google.android.gms.version"

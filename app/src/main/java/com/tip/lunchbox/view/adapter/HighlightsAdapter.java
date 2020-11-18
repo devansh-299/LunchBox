@@ -34,7 +34,7 @@ public class HighlightsAdapter extends
     @Override
     public HighLightViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new HighLightViewHolder(ItemHighlightBinding
-                .inflate(LayoutInflater.from(context), parent, false), context);
+                .inflate(LayoutInflater.from(context), parent, false));
     }
 
     @Override
@@ -54,14 +54,11 @@ public class HighlightsAdapter extends
     public static class HighLightViewHolder extends RecyclerView.ViewHolder {
 
         private ItemHighlightBinding highlightBinding;
-        Context context;
 
         public HighLightViewHolder(
-                @NotNull ItemHighlightBinding binding,
-                Context context) {
+                @NotNull ItemHighlightBinding binding) {
             super(binding.getRoot());
             highlightBinding = binding;
-            this.context = context;
         }
 
         public void addData(String phoneNumber) {

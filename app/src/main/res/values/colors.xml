@@ -12,7 +12,6 @@
     <color name="colorTransparent">#00000000</color>
 
     <!-- for text-->
-    <color name="colorTextPrimary">#322e2e</color>
     <color name="colorTextSecondary">#494647</color>
     <color name="line_color">#c0c0c0</color>
     <color name="gradient_start">#00000000</color>
