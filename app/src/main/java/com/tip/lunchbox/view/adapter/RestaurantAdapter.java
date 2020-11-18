@@ -59,8 +59,15 @@ public class RestaurantAdapter extends
     }
 
     public void bringToTop(String title) {
+
         RestaurantContainer restaurantContainer = null;
         int initialPos = 0;
+
+        /*
+         Searching for Restaurant that has the given title
+         Possible TODO optimize this
+        */
+
         for (RestaurantContainer container : restaurantsList) {
             if (container.getRestaurant().getName().equals(title)) {
                 restaurantContainer = container;
@@ -101,6 +108,9 @@ public class RestaurantAdapter extends
                     .load(restaurant.getThumb())
                     .apply(options)
                     .into(restaurantItemBinding.itemIvRestaurant);
+            restaurantItemBinding.itemRbRating.setRating(
+                    Float.parseFloat(restaurant.getUserRating()
+                            .getAggregateRating()));
             restaurantItemBinding.itemTvRating.setText(
                     restaurant.getUserRating().getAggregateRating());
             restaurantItemBinding.itemTvRating.setBackgroundColor(
