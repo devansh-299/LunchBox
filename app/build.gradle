@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    //Google Maps
+    // Google Maps
     implementation "com.google.android.gms:play-services-maps:$rootProject.google_maps_version"
 
     // Location API
@@ -74,7 +74,7 @@ dependencies {
 
     // For testing
     testImplementation 'junit:junit:4.13.1'
-    //Google trust for easy assertions
+    // Google trust for easy assertions
     testImplementation "com.google.truth:truth:1.1"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

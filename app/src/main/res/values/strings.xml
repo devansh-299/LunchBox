@@ -40,5 +40,10 @@
     <string name="add_review">Add Review</string>
     <string name="write_review">Write a review…</string>
     <string name="rate_your_experience">Rate your experience:</string>
+    <string name="comment_posted">Comment Posted</string>
+    <string name="post_review">Post Review</string>
+    <string name="no_reviews_yet">No Reviews Yet</string>
+    <string name="new_user_sign_up">New User? <b>Sign up</b></string>
+    <string name="have_an_account_login">Have an Account? <b>Login</b></string>
 
 </resources>

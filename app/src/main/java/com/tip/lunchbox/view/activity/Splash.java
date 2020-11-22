@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.tip.lunchbox.utilities.Constants;
-import com.tip.lunchbox.utilities.SharedPreferencesUtil;
 
 public class Splash extends AppCompatActivity {
 

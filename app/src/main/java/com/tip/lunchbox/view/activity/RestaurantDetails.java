@@ -1,32 +1,28 @@
 package com.tip.lunchbox.view.activity;
 
 import android.Manifest;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 import com.tip.lunchbox.R;
 import com.tip.lunchbox.databinding.ActivityRestaurantDetailsBinding;
 import com.tip.lunchbox.databinding.DialogAddReviewBinding;
 import com.tip.lunchbox.model.server.request.Comment;
-import com.tip.lunchbox.model.server.response.CommentsResponse;
-import com.tip.lunchbox.model.server.response.CustomResponse;
 import com.tip.lunchbox.model.zomato.Restaurant;
 import com.tip.lunchbox.utilities.Constants;
 import com.tip.lunchbox.utilities.PermissionHelper;
@@ -72,7 +68,10 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
                 binding.fabMenu.show();
                 binding.toolbar.setBackgroundColor(getColor(R.color.white));
                 binding.toolbar.setTitleTextColor(getColor(R.color.colorPrimary));
-
+                // for vibration
+                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                VibrationEffect effect = VibrationEffect.createOneShot(1, 1);
+                vibrator.vibrate(effect);
             } else {
                 // Expanded State
                 binding.fabMenu.hide();
@@ -80,12 +79,20 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
             }
         });
         viewModel.getRestaurantLiveData(Integer.parseInt(resId)).observe(this, this::setData);
-        viewModel.getCommentsResponseLiveData(resId).observe(this, commentsResponses ->
-                commentAdapter.setData(commentsResponses.getComments()));
+        viewModel.getCommentsResponseLiveData(resId).observe(this, commentsResponses -> {
+            if (commentsResponses.getComments() != null
+                    && !commentsResponses.getComments().isEmpty()) {
+                binding.tvNoReviews.setVisibility(View.GONE);
+                commentAdapter.setData(commentsResponses.getComments());
+            } else {
+                binding.tvNoReviews.setVisibility(View.VISIBLE);
+            }
+        });
+
         viewModel.postCommentLiveData().observe(this, aBoolean -> {
             if (aBoolean != null) {
                 if (aBoolean) {
-                    Toast.makeText(this, "Comment Posted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.comment_posted, Toast.LENGTH_SHORT).show();
                     viewModel.getComments(resId);
                     newReviewDialog.dismiss();
                 } else {
@@ -210,7 +217,7 @@ public class RestaurantDetails extends AppCompatActivity implements View.OnClick
                     .from(RestaurantDetails.this));
             newReviewDialog = new MaterialAlertDialogBuilder(this)
                     .setView(addReviewBinding.getRoot())
-                    .setPositiveButton("Post Review", (dialog, which) -> {
+                    .setPositiveButton(R.string.post_review, (dialog, which) -> {
                         Comment newComment = new Comment(
                                 addReviewBinding.tiComment.getText().toString().trim(),
                                 (int) addReviewBinding.rbRes.getRating(), resId);

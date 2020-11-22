@@ -78,7 +78,7 @@
         android:id="@+id/tv_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New User? Sign up"
+        android:text="@string/new_user_sign_up"
         android:layout_marginTop="@dimen/value_20dp"
         android:layout_marginBottom="@dimen/value_20dp"
         android:layout_gravity="center_horizontal"/>

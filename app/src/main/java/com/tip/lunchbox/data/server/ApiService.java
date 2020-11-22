@@ -4,14 +4,11 @@ import com.tip.lunchbox.model.server.request.Comment;
 import com.tip.lunchbox.model.server.request.FavouriteRestaurants;
 import com.tip.lunchbox.model.server.request.Login;
 import com.tip.lunchbox.model.server.request.SignUp;
-import com.tip.lunchbox.model.server.response.CommentsResponse;
 import com.tip.lunchbox.model.server.response.CommentsResponseContainer;
 import com.tip.lunchbox.model.server.response.CustomResponse;
 import com.tip.lunchbox.model.server.response.FavouriteRestaurantsResponse;
 import com.tip.lunchbox.model.server.response.RefreshResponse;
 import com.tip.lunchbox.model.server.response.Tokens;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.Body;

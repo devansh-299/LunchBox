@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -231,27 +232,48 @@
                 android:text="@string/add_review"
                 tools:text="Add review" />
 
+            <TextView
+                android:id="@+id/tv_no_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/value_10dp"
+                android:text="@string/no_reviews_yet"
+                android:textSize="@dimen/value_20sp"
+                android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_comments"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/value_60dp"/>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_menu"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_extend_fab"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="@dimen/value_10dp"
-        android:text="@string/menu"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/colorPrimary"
-        app:icon="@drawable/ic_restaurant_menu"
-        app:iconTint="@color/white"
-        app:rippleColor="@color/colorPrimaryDark" />
+        android:background="@color/white"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/value_10dp"
+            android:text="@string/menu"
+            android:textAllCaps="false"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/colorPrimary"
+            app:icon="@drawable/ic_restaurant_menu"
+            app:iconTint="@color/white"
+            app:rippleColor="@color/colorPrimaryDark" />
+
+    </LinearLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

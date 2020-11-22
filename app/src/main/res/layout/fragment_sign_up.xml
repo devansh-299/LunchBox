@@ -128,6 +128,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/value_20dp"
         android:layout_marginBottom="@dimen/value_20dp"
-        android:text="Have an Account? Login" />
+        android:text="@string/have_an_account_login" />
 
 </LinearLayout>

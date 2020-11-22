@@ -9,18 +9,15 @@ import androidx.lifecycle.ViewModel;
 import com.google.gson.Gson;
 import com.tip.lunchbox.data.Repository;
 import com.tip.lunchbox.model.server.request.Comment;
-import com.tip.lunchbox.model.server.response.CommentsResponse;
 import com.tip.lunchbox.model.server.response.CommentsResponseContainer;
 import com.tip.lunchbox.model.server.response.CustomResponse;
 import com.tip.lunchbox.model.zomato.Restaurant;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
